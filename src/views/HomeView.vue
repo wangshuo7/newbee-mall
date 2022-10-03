@@ -170,6 +170,22 @@ export default defineComponent({
       this.newGoods = res.data.newGoodses
       this.recommendGoods = res.data.recommendGoodses
     })
+  },
+  methods: {
+    scroll() {
+      window.addEventListener('scroll', () => {
+        let scrollTop =
+          window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop
+        scrollTop > 100
+          ? (this.head.class = 'header-active')
+          : (this.head.class = 'header')
+      })
+    }
+  },
+  mounted() {
+    this.scroll()
   }
 })
 </script>
@@ -231,6 +247,7 @@ a {
   }
 }
 .header-active {
+  width: 93%;
   height: 50px;
   background-color: #1baeae;
   padding: 0 15px;
