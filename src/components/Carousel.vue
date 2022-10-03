@@ -8,6 +8,18 @@
     >
       <el-carousel-item v-for="(item, index) in bannerList" :key="index">
         <img :src="item.carouselUrl" alt="" @click="goTo(item.redirectUrl)" />
+        <!-- <img
+          src="https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-p50-pocket.png"
+          alt=""
+        />
+        <img
+          src="https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-iphone13.png"
+          alt=""
+        />
+        <img
+          src="https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-p50-pocket.png"
+          alt=""
+        /> -->
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -91,5 +103,8 @@ export default defineComponent({
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+}
+.el-carousel-item img {
+  width: 100%;
 }
 </style>

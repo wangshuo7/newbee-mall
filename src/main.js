@@ -9,10 +9,16 @@ import store from '@/store'
 // 引入重置样式
 import 'normalize.css'
 // vant组件
-import { Icon } from 'vant'
+import { Icon, Swipe, SwipeItem } from 'vant'
 import 'vant/lib/index.css'
 // iconfont
 import '@/assets/iconfont/iconfont.css'
 // 移动端适配插件
 import 'lib-flexible/flexible'
-createApp(App).use(router).use(store).use(Icon).mount('#app')
+createApp(App)
+  .use(router)
+  .use(store)
+  .use(Icon)
+  .use(Swipe)
+  .use(SwipeItem)
+  .mount('#app')
