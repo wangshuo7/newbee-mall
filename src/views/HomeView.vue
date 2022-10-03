@@ -1,4 +1,5 @@
 <template>
+  <!-- 头部 -->
   <header v-bind="head">
     <a href="#" class="header-classify">
       <i class="iconfont">&#xe611;</i>
@@ -11,12 +12,14 @@
       <i class="iconfont">&#xe60f;</i>
     </a>
   </header>
-  <!-- 轮播图(走马灯) -->
+
+  <!-- 轮播图 -->
   <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1baeae">
     <van-swipe-item v-for="item in bannerList" :key="item">
       <img :src="item.carouselUrl" alt="" />
     </van-swipe-item>
   </van-swipe>
+
   <!-- 分类 -->
   <div class="categorylist-box">
     <div
@@ -28,6 +31,7 @@
       <span>{{ item.name }}</span>
     </div>
   </div>
+
   <!-- 商品 -->
   <!-- 新品上线 -->
   <div class="goods">
