@@ -30,11 +30,11 @@ axios.interceptors.response.use((response) => {
   }
   // 全局的弹窗
   ElMessage({
-    type: response?.data?.code === '200' ? 'success' : 'error',
+    type: response?.data?.resultCode === '200' ? 'success' : 'error',
     message: response?.data?.message
   })
   // token过期
-  if (response.data?.code === '10119') {
+  if (response.data?.resultCode === '416') {
     localStorage.removeItem('token')
     router.push('/login')
   }
