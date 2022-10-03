@@ -3,6 +3,7 @@
   <div>111</div>
   <router-view></router-view>
   <div>2223</div>
+  <div>5555</div>
 </template>
 
 <script>
