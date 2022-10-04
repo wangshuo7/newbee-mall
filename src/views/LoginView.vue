@@ -1,73 +1,96 @@
 <template>
   <!-- 导航栏 -->
-  <header class="simple-header">
-    <van-icon name="arrow-left" @click="goBack" />
-    <div class="simple-header-name">{{ name }}</div>
-    <van-icon name="weapp-nav" />
-  </header>
-  <div class="login-Container">
-    <!-- logo -->
-    <van-image width="100" height="100" :src="logoURL" />
-    <!-- 登录首页 -->
-    <div v-if="type == 'login'" class="login-body login">
-      <van-form @submit="onSubmit">
-        <van-field
-          v-model="loginForm.username"
-          name="username"
-          label="用户名"
-          placeholder="用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
-        />
-        <van-field
-          v-model="loginForm.password"
-          type="password"
-          name="password"
-          label="密码"
-          placeholder="密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
-        />
-        <div style="margin: 16px">
-          <div class="link-register" @click="toggle('register')">立即注册</div>
-          <van-button
-            round
-            block
-            type="info"
-            color="#1baeae"
-            native-type="submit"
-            >登录</van-button
-          >
-        </div>
-      </van-form>
-    </div>
-    <div v-else class="login-body register">
-      <van-form @submit="onSubmit">
-        <van-field
-          v-model="username1"
-          name="username1"
-          label="用户名"
-          placeholder="用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
-        />
-        <van-field
-          v-model="password1"
-          type="password"
-          name="password1"
-          label="密码"
-          placeholder="密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
-        />
-        <div style="margin: 16px">
-          <div class="link-login" @click="toggle('login')">已有登录账号</div>
-          <van-button
-            round
-            block
-            type="info"
-            color="#1baeae"
-            native-type="submit"
-            >注册</van-button
-          >
-        </div>
-      </van-form>
+  <div class="login-view">
+    <header class="simple-header">
+      <van-icon name="arrow-left" @click="goBack" />
+      <div class="simple-header-name">{{ name }}</div>
+      <van-icon name="weapp-nav" />
+    </header>
+    <div class="login-Container">
+      <!-- logo -->
+      <van-image width="100" height="100" :src="logoURL" />
+      <h1>新蜂商城</h1>
+      <!-- 登录首页 -->
+      <div v-if="type == 'login'" class="login-body login">
+        <van-form @submit="onSubmit">
+          <van-cell-group>
+            <van-field
+              v-model="loginForm.username"
+              name="username"
+              label="用户名"
+              placeholder="用户名"
+              :rules="[{ required: true, message: '请填写用户名' }]"
+            />
+            <van-field
+              v-model="loginForm.password"
+              type="password"
+              name="password"
+              label="密码"
+              placeholder="密码"
+              :rules="[{ required: true, message: '请填写密码' }]"
+            />
+          </van-cell-group>
+          <div style="margin: 16px">
+            <div class="link-register" @click="this.type = 'register'">
+              立即注册
+            </div>
+            <van-checkbox
+              icon-size="16px"
+              v-model="checked"
+              checked-color="#1baeae"
+              >已同意<a href="javascript:;">《用户服务协议》</a></van-checkbox
+            >
+            <van-button
+              round
+              block
+              type="info"
+              color="#1baeae"
+              native-type="submit"
+              >登录</van-button
+            >
+          </div>
+        </van-form>
+      </div>
+      <div v-else class="login-body register">
+        <van-form @submit="onSubmit">
+          <van-cell-group>
+            <van-field
+              v-model="username1"
+              name="username1"
+              label="手机号"
+              placeholder="手机号"
+              :rules="[{ required: true, message: '请填写手机号' }]"
+            />
+            <van-field
+              v-model="password1"
+              type="password"
+              name="password1"
+              label="密码"
+              placeholder="密码"
+              :rules="[{ required: true, message: '请填写密码' }]"
+            />
+            <van-field
+              v-model="password2"
+              type="password"
+              name="password1"
+              label="确认密码"
+              placeholder="确认密码"
+              :rules="[{ required: true, message: '请再次填写密码' }]"
+            />
+          </van-cell-group>
+          <div style="margin: 16px">
+            <div class="link-login" @click="type = 'login'">已有登录账号</div>
+            <van-button
+              round
+              block
+              type="info"
+              color="#1baeae"
+              native-type="submit"
+              >注册</van-button
+            >
+          </div>
+        </van-form>
+      </div>
     </div>
   </div>
 </template>
@@ -75,7 +98,9 @@
 <script>
 import { defineComponent } from 'vue'
 import logoURL from '@/assets/logo.png'
-import { login } from '@/api/user.js'
+import { login, register } from '@/api/user.js'
+import { Toast } from 'vant'
+import 'vant/es/toast/style'
 // 引入md5加密
 import md5 from 'js-md5'
 
@@ -90,9 +115,11 @@ export default defineComponent({
       },
       username1: '',
       password1: '',
+      password2: '',
       type: 'login',
       back: '/home',
-      logoURL
+      logoURL,
+      checked: true
     }
   },
   computed: {
@@ -111,28 +138,31 @@ export default defineComponent({
     },
     async onSubmit(values) {
       // 腾讯云验证码
-      // this.verificationCode()
-      if (this.type == 'login') {
-        const data = await login({
-          loginName: values.username,
-          passwordMd5: md5(values.password)
-        })
-        localStorage.setItem('token', data)
-        // this.$router.push('/')
-      } else {
-        await register({
-          loginName: values.username1,
-          password: values.password1
-        })
-        Toast.success('注册成功')
-        this.type = 'login'
-      }
+      this.verificationCode(values)
     },
-    verificationCode() {
+    verificationCode(values) {
       let captchaId = '197617624'
       // 腾讯滑块验证码appid生成一个滑块验证码对象
-      var captcha = new TencentCaptcha(captchaId, function (res) {
+      var captcha = new TencentCaptcha(captchaId, async (res) => {
         if (res.ret === 0) {
+          if (this.type == 'login') {
+            const data = await login({
+              loginName: values.username,
+              passwordMd5: md5(values.password)
+            })
+            console.log(data)
+            !!data?.data &&
+              (Toast.success('登录成功'),
+              localStorage.setItem('token', data?.data),
+              this.$router.push('/'))
+          } else {
+            const data = await register({
+              loginName: values.username1,
+              password: values.password1
+            })
+            data?.resultCode == 200 &&
+              (Toast.success('注册成功'), (this.type = 'login'))
+          }
           // 页面上滑动正确，请求自己的业务接口
           // 记得把验证成功的票据和随机字符带到自己接口中去腾讯验证票据的真实性
           // _this.searchData.ticket = res.ticket
@@ -150,16 +180,32 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.van-cell-group {
+  border-radius: 10px;
+  box-shadow: 0 0 50px 2px rgba(153, 152, 152, 0.1);
+  overflow: hidden;
+  padding: 10px;
+}
+.login-view {
+  background: #f8f8fa;
+  height: 100%;
+  overflow: hidden;
+}
+:deep(.van-checkbox) {
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  color: #4c4c4c;
+}
 .simple-header {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 40px;
+  height: 50px;
   line-height: 44px;
   padding: 0 10px;
   box-sizing: border-box;
@@ -176,7 +222,15 @@ export default defineComponent({
     width: 100px;
     height: 100px;
     display: block;
-    margin: 130px auto 50px;
+    box-sizing: border-box;
+    margin: 130px auto 0px;
+  }
+  h1 {
+    font-size: 35px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #1baeae;
+    text-align: center;
+    font-weight: 900;
   }
   .login-body {
     padding: 0 20px;
@@ -187,7 +241,7 @@ export default defineComponent({
       margin-bottom: 20px;
       color: #1989fa;
       display: inline-block;
-      margin-bottom: 50px;
+      margin-bottom: 70px;
     }
   }
   .register {
@@ -197,6 +251,9 @@ export default defineComponent({
       color: #1989fa;
       display: inline-block;
     }
+  }
+  .van-button {
+    border: none;
   }
 }
 </style>
