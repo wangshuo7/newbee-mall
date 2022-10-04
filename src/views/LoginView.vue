@@ -19,6 +19,7 @@
               name="username"
               label="用户名"
               placeholder="用户名"
+              right-icon="manager-o"
               :rules="[{ required: true, message: '请填写用户名' }]"
             />
             <van-field
@@ -27,6 +28,7 @@
               name="password"
               label="密码"
               placeholder="密码"
+              right-icon="closed-eye"
               :rules="[{ required: true, message: '请填写密码' }]"
             />
           </van-cell-group>
@@ -59,6 +61,7 @@
               name="username1"
               label="手机号"
               placeholder="手机号"
+              right-icon="phone-o"
               :rules="[{ required: true, message: '请填写手机号' }]"
             />
             <van-field
@@ -67,6 +70,7 @@
               name="password1"
               label="密码"
               placeholder="密码"
+              right-icon="closed-eye"
               :rules="[{ required: true, message: '请填写密码' }]"
             />
             <van-field
@@ -74,8 +78,15 @@
               type="password"
               name="password1"
               label="确认密码"
-              placeholder="确认密码"
-              :rules="[{ required: true, message: '请再次填写密码' }]"
+              right-icon="closed-eye"
+              placeholder="请再次填写密码"
+              :rules="[
+                {
+                  required: true,
+                  message: '请填写确认密码',
+                  validator: validatorMessage
+                }
+              ]"
             />
           </van-cell-group>
           <div style="margin: 16px">
@@ -140,27 +151,33 @@ export default defineComponent({
       // 腾讯云验证码
       this.verificationCode(values)
     },
+    validatorMessage(val) {
+      if (val != this.password1) {
+        return '两次密码不同，请重新输入'
+      }
+    },
     verificationCode(values) {
+      // 验证密钥
       let captchaId = '197617624'
       // 腾讯滑块验证码appid生成一个滑块验证码对象
-      var captcha = new TencentCaptcha(captchaId, async (res) => {
+      let captcha = new TencentCaptcha(captchaId, async (res) => {
+        // 判断验证码是否通过
         if (res.ret === 0) {
           if (this.type == 'login') {
-            const data = await login({
+            const res = await login({
               loginName: values.username,
               passwordMd5: md5(values.password)
             })
-            console.log(data)
-            !!data?.data &&
-              (Toast.success('登录成功'),
-              localStorage.setItem('token', data?.data),
-              this.$router.push('/'))
+            !!res?.data &&
+              (Toast.success('登录成功'), // 轻提示弹框
+              localStorage.setItem('token', res?.data), //本地存储token
+              this.$router.push('/')) // 跳转首页
           } else {
-            const data = await register({
+            const res = await register({
               loginName: values.username1,
               password: values.password1
             })
-            data?.resultCode == 200 &&
+            res?.resultCode == 200 &&
               (Toast.success('注册成功'), (this.type = 'login'))
           }
           // 页面上滑动正确，请求自己的业务接口
@@ -223,10 +240,10 @@ export default defineComponent({
     height: 100px;
     display: block;
     box-sizing: border-box;
-    margin: 130px auto 0px;
+    margin: 100px auto 0px;
   }
   h1 {
-    font-size: 35px;
+    font-size: 30px;
     font-family: 'Times New Roman', Times, serif;
     color: #1baeae;
     text-align: center;
