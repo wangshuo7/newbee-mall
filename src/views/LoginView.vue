@@ -9,7 +9,11 @@
       </header>
       <div class="login-Container">
         <!-- logo -->
-        <van-image width="100" height="100" :src="logoURL" />
+        <van-image
+          width="100"
+          height="100"
+          src="//s.weituibao.com/1582958061265/mlogo.png"
+        />
         <h1>新蜂商城</h1>
         <!-- 登录首页 -->
         <div v-if="type == 'login'" class="login-body login">
@@ -194,13 +198,21 @@ export default defineComponent({
           // _this.searchData.ticket = res.ticket
           // _this.searchData.randStr = res.randstr
           // _this.getSearchResult()
-          console.log(res, '腾讯云验证码')
         }
       })
       captcha.langFun()
       // 滑块显示
       captcha.show()
     }
+  },
+  mounted() {
+    console.clear()
+    console.log(
+      '%c%c当前页面%c登录/注册',
+      'line-height:26px;',
+      'line-height:16px;padding:2px 6px;border-radius: 5px 0px 0px 5px;background:#1f7777;color:#fff;font-size:12px;',
+      'padding:2px 8px;background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%);color:#000;line-height:16px;font-size:12px;border-radius: 0px 5px 5px 0px;'
+    )
   }
 })
 </script>
@@ -259,6 +271,8 @@ export default defineComponent({
     color: #1baeae;
     text-align: center;
     font-weight: 900;
+    position: relative;
+    top: -30px;
   }
   .login-body {
     padding: 0 20px;

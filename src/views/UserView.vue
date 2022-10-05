@@ -92,6 +92,13 @@ export default defineComponent({
     // 状态码416清除token并跳转登录
     res.resultCode === 416 &&
       (localStorage.removeItem('token'), this.$router.push('/login'))
+    console.clear()
+    console.log(
+      '%c%c当前页面%c我的',
+      'line-height:26px;',
+      'line-height:16px;padding:2px 6px;border-radius: 5px 0px 0px 5px;background:#1f7777;color:#fff;font-size:12px;',
+      'padding:2px 8px;background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%);color:#000;line-height:16px;font-size:12px;border-radius: 0px 5px 5px 0px;'
+    )
     // 将用户信息赋值给data
     !!res.data && (this.users = res.data)
   },
