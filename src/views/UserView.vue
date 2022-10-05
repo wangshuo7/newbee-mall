@@ -1,11 +1,7 @@
 <template>
-  <div>User...</div>
+  <div>user...</div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({})
-</script>
+<script></script>
 
 <style lang="scss" scoped></style>

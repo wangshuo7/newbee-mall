@@ -198,7 +198,7 @@ a {
 }
 // 头部样式
 .header {
-  width: 93%;
+  width: 100%;
   height: 50px;
   // background-color: #1baeae;
   padding: 0 15px;
@@ -249,7 +249,7 @@ a {
   }
 }
 .header-active {
-  width: 93%;
+  width: 100%;
   height: 50px;
   background-color: #1baeae;
   padding: 0 15px;
@@ -329,7 +329,7 @@ a {
     .goods-item {
       display: flex;
       flex-direction: column;
-      width: 44.5%;
+      width: 50%;
       padding: 0.26667rem 0.26667rem;
       border-bottom: 1px solid #e9e9e9;
       img {

@@ -29,6 +29,7 @@ export default defineComponent({})
 .bottom-nav {
   width: 100%;
   background-color: #fff;
+  border-top: 1px solid #e9e9e9;
   padding: 5px 0;
   display: flex;
   justify-content: space-around;

@@ -14,6 +14,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
 html,
 body,
 #app {
