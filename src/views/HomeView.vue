@@ -1,16 +1,16 @@
 <template>
   <!-- 头部 -->
   <header v-bind="head">
-    <a href="#" class="header-classify">
+    <router-link to="./category" href="#" class="header-classify">
       <i class="iconfont">&#xe611;</i>
-    </a>
+    </router-link>
     <div class="search">
       <span class="search-name">新蜂商城</span>
       <a href="#" class="search-title">山河无恙，人间皆安</a>
     </div>
-    <a href="#" class="header-user">
+    <router-link to="./user" href="#" class="header-user">
       <i class="iconfont">&#xe60f;</i>
-    </a>
+    </router-link>
   </header>
 
   <!-- 轮播图 -->
