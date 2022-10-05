@@ -14,11 +14,7 @@
   </header>
 
   <!-- 轮播图 -->
-  <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1baeae">
-    <van-swipe-item v-for="item in bannerList" :key="item">
-      <img :src="item.carouselUrl" alt="" />
-    </van-swipe-item>
-  </van-swipe>
+  <Swipe></Swipe>
 
   <!-- 分类 -->
   <div class="categorylist-box">
@@ -68,7 +64,14 @@
     <div class="goods-header">最佳推荐</div>
     <div class="goods-box">
       <a class="goods-item" v-for="item in recommendGoods" :key="item.goodsId">
-        <img :src="item.goodsCoverImg" alt="" />
+        <img
+          :src="
+            item.goodsCoverImg.indexOf('http') >= 0
+              ? item.goodsCoverImg
+              : `http://backend-api-01.newbee.ltd${item.goodsCoverImg}`
+          "
+          alt=""
+        />
         <div class="goods-bottom">
           <div class="good-title">
             {{ item.goodsName }}
@@ -83,13 +86,18 @@
 <script>
 import { defineComponent } from 'vue'
 import { getHomeData } from '@/api/Home.js'
+import Swipe from '@/components/VantSwipe.vue'
 export default defineComponent({
+  components: {
+    Swipe
+  },
   data() {
     return {
       // 动态切换header的class名
       head: {
         class: 'header'
       },
+      bannerList: [],
       // 分类数据
       categoryList: [
         {
@@ -158,14 +166,8 @@ export default defineComponent({
       recommendGoods: []
     }
   },
-  setup() {
-    // 轮播图数据
-    const bannerList = []
-    return { bannerList }
-  },
   created() {
     getHomeData().then((res) => {
-      this.bannerList = res.data.carousels
       this.hotGoods = res.data.hotGoodses
       this.newGoods = res.data.newGoodses
       this.recommendGoods = res.data.recommendGoodses
@@ -289,13 +291,6 @@ a {
       flex: 1;
       text-align: center;
     }
-  }
-}
-// 轮播图样式
-.my-swipe {
-  img {
-    width: 100%;
-    height: 100%;
   }
 }
 // 分类样式
