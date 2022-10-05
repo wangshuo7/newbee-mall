@@ -20,6 +20,7 @@
               label="用户名"
               placeholder="用户名"
               right-icon="manager-o"
+              label-width="50"
               :rules="[{ required: true, message: '请填写用户名' }]"
             />
             <van-field
@@ -28,6 +29,7 @@
               name="password"
               label="密码"
               placeholder="密码"
+              label-width="50"
               right-icon="closed-eye"
               :rules="[{ required: true, message: '请填写密码' }]"
             />
@@ -36,12 +38,7 @@
             <div class="link-register" @click="this.type = 'register'">
               立即注册
             </div>
-            <van-checkbox
-              icon-size="16px"
-              v-model="checked"
-              checked-color="#1baeae"
-              >已同意<a href="javascript:;">《用户服务协议》</a></van-checkbox
-            >
+
             <van-button
               round
               block
@@ -49,6 +46,16 @@
               color="#1baeae"
               native-type="submit"
               >登录</van-button
+            >
+            <van-checkbox
+              icon-size="16px"
+              v-model="checked"
+              checked-color="#1baeae"
+              >您已阅读并同意<a
+                style="color: #3e3e3e; text-decoration: none"
+                href="javascript:;"
+                >《用户服务协议》《隐私权政策》</a
+              ></van-checkbox
             >
           </div>
         </van-form>
@@ -206,12 +213,14 @@ export default defineComponent({
 .login-view {
   background: #f8f8fa;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 :deep(.van-checkbox) {
-  margin-bottom: 10px;
+  margin-top: 10px;
   box-sizing: border-box;
-  color: #4c4c4c;
+  span {
+    color: #8f8f8f;
+  }
 }
 .simple-header {
   position: fixed;

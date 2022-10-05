@@ -15,3 +15,10 @@ export function register(data) {
     data
   })
 }
+// 获取用户信息
+export function getUserInfo() {
+  return request({
+    url: '/api/v1/user/info',
+    method: 'get'
+  })
+}
