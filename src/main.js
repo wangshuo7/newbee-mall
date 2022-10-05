@@ -17,6 +17,4 @@ import '@/assets/iconfont/iconfont.css'
 // 移动端适配插件
 import 'lib-flexible/flexible'
 // 滑块验证码
-import MakeitCaptcha from 'makeit-captcha'
-import 'makeit-captcha/dist/captcha.min.css'
-createApp(App).use(router).use(store).use(Icon).use(MakeitCaptcha).mount('#app')
+createApp(App).use(router).use(store).use(Icon).mount('#app')

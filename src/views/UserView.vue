@@ -89,7 +89,6 @@ export default defineComponent({
       message: '获取用户信息',
       position: 'bottom'
     })
-    console.log(res)
     // 状态码416清除token并跳转登录
     res.resultCode === 416 &&
       (localStorage.removeItem('token'), this.$router.push('/login'))

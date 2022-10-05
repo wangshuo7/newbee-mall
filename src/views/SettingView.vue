@@ -1,24 +1,26 @@
 <template>
-  <header class="simple-header">
-    <van-icon name="arrow-left" @click="goBack" />
-    <div class="simple-header-name">{{ name }}</div>
-    <van-icon name="weapp-nav" />
-  </header>
-  <div class="seting-box">
-    <div class="input-item">
-      <van-field v-model="nickName" label="昵称" />
-      <van-field v-model="introduceSign" label="个性签名" />
-      <van-field v-model="password" type="password" label="修改密码" />
+  <div>
+    <header class="simple-header">
+      <van-icon name="arrow-left" @click="goBack" />
+      <div class="simple-header-name">{{ name }}</div>
+      <van-icon name="weapp-nav" />
+    </header>
+    <div class="seting-box">
+      <div class="input-item">
+        <van-field v-model="nickName" label="昵称" />
+        <van-field v-model="introduceSign" label="个性签名" />
+        <van-field v-model="password" type="password" label="修改密码" />
+      </div>
+      <van-button
+        class="save-btn"
+        color="#1baeae"
+        type="primary"
+        @click="save"
+        block
+        round
+        >保存</van-button
+      >
     </div>
-    <van-button
-      class="save-btn"
-      color="#1baeae"
-      type="primary"
-      @click="save"
-      block
-      round
-      >保存</van-button
-    >
   </div>
 </template>
 
