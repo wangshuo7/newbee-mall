@@ -9,7 +9,7 @@ import store from '@/store'
 // 引入重置样式
 import 'normalize.css'
 // vant组件
-import { Icon, Swipe, SwipeItem } from 'vant'
+import { Icon, Swipe, SwipeItem, Toast } from 'vant'
 import 'vant/lib/index.css'
 // iconfont
 import '@/assets/iconfont/iconfont.css'
@@ -21,4 +21,5 @@ createApp(App)
   .use(Icon)
   .use(Swipe)
   .use(SwipeItem)
+  .use(Toast)
   .mount('#app')

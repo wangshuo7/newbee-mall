@@ -22,6 +22,7 @@
       class="categorylist"
       v-for="item in categoryList"
       :key="item.categoryId"
+      @click="toast"
     >
       <img :src="item.imgUrl" alt="" />
       <span>{{ item.name }}</span>
@@ -87,6 +88,7 @@
 import { defineComponent } from 'vue'
 import { getHomeData } from '@/api/Home.js'
 import Swipe from '@/components/VantSwipe.vue'
+import { Toast } from 'vant'
 export default defineComponent({
   components: {
     Swipe
@@ -174,6 +176,9 @@ export default defineComponent({
     })
   },
   methods: {
+    toast() {
+      Toast('敬请期待')
+    },
     scroll() {
       window.addEventListener('scroll', () => {
         let scrollTop =
