@@ -41,6 +41,12 @@ export const routes = [
     path: '/address',
     name: 'address',
     component: () => import('@/views/AddressView.vue')
+  },
+  // 账户管理
+  {
+    path: '/setting',
+    name: 'setting',
+    component: () => import('@/views/SettingView.vue')
   }
 ]
 

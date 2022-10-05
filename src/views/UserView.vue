@@ -1,5 +1,6 @@
 <template>
   <div class="user-box">
+    <!-- 导航 -->
     <header class="simple-header">
       <van-icon name="arrow-left" @click="goBack" />
       <div class="simple-header-name">{{ name }}</div>
@@ -7,11 +8,11 @@
     </header>
     <div class="user-info">
       <div class="info">
-        <img src="//s.weituibao.com/1583583975067/user-graduate%20(1).png" />
+        <img src="@/assets/WechatIMG23.jpeg" />
         <div class="user-desc">
-          <span>昵称：{{ user.nickName }}</span>
-          <span>登录名：{{ user.loginName }}</span>
-          <span class="name">个性签名：{{ user.introduceSign }}</span>
+          <span>昵称：{{ users.nickName }}</span>
+          <span>登录名：{{ users.loginName }}</span>
+          <span class="name">个性签名：{{ users.introduceSign }}</span>
         </div>
       </div>
     </div>
@@ -29,46 +30,71 @@
         <van-icon name="arrow" />
       </li>
     </ul>
+    <div class="button">
+      <van-button
+        round
+        block
+        type="info"
+        color="linear-gradient(to right, #4bb0ff, #6149f6)"
+        @click="dialog"
+        >退出登录</van-button
+      >
+    </div>
     <!-- nav -->
-    <!-- <div class="nav-bar">
-    <ul class="nav-list">
-      <router-link class="nav-list-item active" to="home">
-        <i class="nbicon nblvsefenkaicankaoxianban-1"></i>
-        <span>首页</span>
-      </router-link>
-      <router-link class="nav-list-item" to="category">
-        <i class="nbicon nbfenlei"></i>
-        <span>分类</span>
-      </router-link>
-      <router-link class="nav-list-item" to="cart">
-        <van-icon name="shopping-cart-o" :info="!count ? '' : count" />
-        <span>购物车</span>
-      </router-link>
-      <router-link class="nav-list-item" to="user">
-        <i class="nbicon nblvsefenkaicankaoxianban-"></i>
-        <span>我的</span>
-      </router-link>
-    </ul>
-  </div> -->
+    <div class="nav-bar">
+      <ul class="nav-list">
+        <router-link class="nav-list-item active" to="/">
+          <i class="iconfont">&#xea9a;</i>
+          <span>首页</span>
+        </router-link>
+        <router-link class="nav-list-item" to="category">
+          <i class="iconfont">&#xe811;</i>
+          <span>分类</span>
+        </router-link>
+        <router-link class="nav-list-item" to="cart">
+          <i class="iconfont">&#xeab2;</i>
+          <span>购物车</span>
+        </router-link>
+        <router-link class="nav-list-item" to="user">
+          <i class="iconfont">&#xeab3;</i>
+          <span>我的</span>
+        </router-link>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import { getUserInfo } from '../api/user'
-import { Toast } from 'vant'
+import { getUserInfo, loginOut } from '../api/user'
+import { Toast, Dialog } from 'vant'
+import 'vant/es/dialog/style'
 
 export default defineComponent({
   data() {
     return {
+      show: false,
       name: '我的',
-      user: {}
+      users: {
+        nickName: '',
+        loginName: '',
+        introduceSign: ''
+      }
     }
   },
   async mounted() {
+    // 获取用户信息
     const res = await getUserInfo()
-    Toast.success('获取用户信息')
-    this.user = res.data
+    Toast({
+      message: '获取用户信息',
+      position: 'bottom'
+    })
+    console.log(res)
+    // 状态码416清除token并跳转登录
+    res.resultCode === 416 &&
+      (localStorage.removeItem('token'), this.$router.push('/login'))
+    // 将用户信息赋值给data
+    !!res.data && (this.users = res.data)
   },
   methods: {
     // 后退
@@ -77,20 +103,28 @@ export default defineComponent({
     },
     goTo(val) {
       this.$router.push({ path: val })
+    },
+    async loginOutbtn() {
+      await loginOut()
+      Toast.success('退出登录')
+      localStorage.removeItem('token')
+      this.$router.push('/login')
+    },
+    // 弹窗确认
+    dialog() {
+      Dialog.confirm({
+        title: '退出登录',
+        message: '确定要退出吗？'
+      })
+        .then(() => {
+          // on confirm
+          this.loginOutbtn()
+        })
+        .catch(() => {
+          // on cancel
+        })
     }
   }
-  // mounted() {
-  //   const token = getLocal('token')
-  //   const path = this.$route.path
-  //   if (token && path != '/home') {
-  //     this.$store.dispatch('updateCart')
-  //   }
-  // },
-  // computed: {
-  //   count() {
-  //     return this.$store.state.cartCount
-  //   }
-  // }
 })
 </script>
 
@@ -117,6 +151,8 @@ export default defineComponent({
 }
 // 主页面
 .user-box {
+  height: 100%;
+  overflow: auto;
   .user-header {
     position: fixed;
     top: 0;
@@ -200,7 +236,15 @@ export default defineComponent({
     }
   }
 }
-
+// 退出登录
+.button {
+  display: flex;
+  justify-content: center;
+  margin-top: 190px;
+  .van-button {
+    width: 80%;
+  }
+}
 // nav
 .nav-bar {
   position: fixed;

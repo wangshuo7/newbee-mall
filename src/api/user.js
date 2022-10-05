@@ -22,3 +22,18 @@ export function getUserInfo() {
     method: 'get'
   })
 }
+// 登出
+export function loginOut() {
+  return request({
+    url: '/api/v1/user/logout',
+    method: 'post'
+  })
+}
+// 修改用户信息
+export function EditUserInfo(data) {
+  return request({
+    url: '/api/v1/user/info',
+    method: 'put',
+    data
+  })
+}
