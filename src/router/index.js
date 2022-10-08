@@ -41,6 +41,12 @@ export const routes = [
     path: '/address',
     name: 'address',
     component: () => import('@/views/AddressView.vue')
+  },
+  //商品列表
+  {
+    path: '/cates/:id',
+    name: 'cates',
+    component: () => import('@/views/CateContView.vue')
   }
 ]
 
