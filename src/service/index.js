@@ -1,5 +1,7 @@
 import axios from 'axios'
 import router from '@/router'
+import { Toast } from 'vant'
+import 'vant/es/toast/style'
 // 给axios设置一些默认行为
 switch (process.env.NODE_ENV) {
   case 'production':
@@ -29,10 +31,7 @@ axios.interceptors.response.use((response) => {
     localStorage.setItem('token', response.data.data.token)
   }
   // 全局的弹窗
-  ElMessage({
-    type: response?.data?.code === '200' ? 'success' : 'error',
-    message: response?.data?.message
-  })
+  response?.data?.resultCode === 200 ? '' : Toast.fail(response?.data?.message)
   // token过期
   if (response.data?.code === '10119') {
     localStorage.removeItem('token')

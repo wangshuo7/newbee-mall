@@ -8,4 +8,19 @@ import store from '@/store'
 // import 'element-plus/dist/index.css'
 // 引入重置样式
 import 'normalize.css'
-createApp(App).use(router).use(store).mount('#app')
+// vant组件
+import { Icon, Swipe, SwipeItem, Toast } from 'vant'
+import 'vant/lib/index.css'
+
+// iconfont
+import '@/assets/iconfont/iconfont.css'
+// 移动端适配插件
+import 'lib-flexible/flexible'
+createApp(App)
+  .use(router)
+  .use(store)
+  .use(Icon)
+  .use(Swipe)
+  .use(SwipeItem)
+  .use(Toast)
+  .mount('#app')
