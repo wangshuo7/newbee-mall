@@ -13,12 +13,12 @@
             :key="item.categoryId"
             @click="selectedType(item.categoryId)"
           >
-            <el-icon><icon-menu /></el-icon>
-            <span>{{ item.categoryName }}</span>
+            {{ item.categoryName }}
+            <!-- <span>{{ item.categoryName }}</span> -->
           </el-menu-item>
         </el-menu>
       </div>
-      <el-scrollbar height="400px">
+      <el-scrollbar height="500px">
         <div class="right">
           <div
             class="thing"
@@ -43,7 +43,7 @@
                       <PriceTag />
                     </el-icon>
                   </div>
-                  <div>
+                  <div style="min-width: 30px">
                     {{ newItem.categoryName }}
                   </div>
                 </div>
@@ -52,12 +52,8 @@
           </div>
         </div>
       </el-scrollbar>
-      <footer>
-        <router-link to="/">首页</router-link>
-        <router-link to="/category">分类</router-link>
-        <router-link to="/cart">购物车</router-link>
-        <router-link to="/user">我的</router-link>
-      </footer>
+
+      <BottomNav></BottomNav>
     </div>
   </div>
 </template>
@@ -103,66 +99,76 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.el-menu-vertical-demo {
+  width: 110px;
+}
 #bigbox {
   height: 100%;
   position: relative;
 }
 header {
   padding-left: 15px;
-  height: 70px;
-  background-color: rgb(56, 54, 54);
+  height: 60px;
+  background-color: #1baeae;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: 10;
   input {
-    width: 700px;
-    margin-left: 200px;
-    margin-top: 20px;
-    padding: 8px;
-    border-radius: 18px;
+    margin: 15px;
+    padding: 7px;
+    width: 250px;
+    border-radius: 17px;
     border: none;
   }
+}
+:deep(.el-menu-item) {
+  padding: 8px !important;
+  color: #000;
 }
 .content {
   width: 100%;
   display: flex;
   .left {
-    width: 200px;
-    span {
-      font-size: 18px;
-    }
+    width: 110px;
+    margin-top: 60px;
   }
   .right {
     width: 100%;
+    margin-top: 80px;
     h2 {
       margin-left: 20px;
     }
   }
 }
 
-footer {
-  height: 70px;
-  width: 100%;
-  background-color: rgb(56, 54, 54);
-  position: fixed;
-  bottom: 0px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 22px;
-  a {
-    color: #fff;
-    text-decoration: none;
-  }
-}
+// footer {
+//   height: 70px;
+//   width: 100%;
+//   background-color: rgb(56, 54, 54);
+//   position: fixed;
+//   bottom: 0px;
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   font-size: 22px;
+//   a {
+//     color: #fff;
+//     text-decoration: none;
+//   }
+// }
 .list {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  padding-left: 18px;
   .every {
-    margin: 10px 12px;
     width: 30%;
     height: 100px;
-    font-size: 20px;
-    justify-content: center;
+    font-size: 14px;
+
     display: flex;
     align-items: center;
     flex-direction: column;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="box">
     <header>
       <el-icon
         color="#fff"
@@ -12,30 +12,33 @@
       :default-active="activeIndex2"
       class="el-menu-demo"
       mode="horizontal"
-      background-color="#545c64"
+      background-color="#1baeae"
       text-color="#fff"
-      active-text-color="#ffd04b"
+      active-text-color="rgb(32 118 198);"
       @select="handleSelect"
     >
       <el-menu-item index="1" @click="qiehuan">推荐</el-menu-item>
       <el-menu-item index="3" @click="qiehuan2">新品</el-menu-item>
       <el-menu-item index="4">价格</el-menu-item>
     </el-menu>
-    <div
-      class="content"
-      v-for="item in hotGoodses"
-      :key="item.goodsId"
-      @click="getdatail(item.goodsId)"
-    >
-      <div class="pic">
-        <img :src="item.goodsCoverImg" alt="" />
-      </div>
-      <div class="pro">
-        <p class="one">{{ item.goodsName }}</p>
-        <p class="two">{{ item.goodsIntro }}</p>
-        <p class="three">￥{{ item.sellingPrice }}</p>
+    <div id="all">
+      <div
+        class="content"
+        v-for="item in hotGoodses"
+        :key="item.goodsId"
+        @click="getdatail(item.goodsId)"
+      >
+        <div class="pic">
+          <img :src="item.goodsCoverImg" alt="" />
+        </div>
+        <div class="pro">
+          <p class="one">{{ item.goodsName }}</p>
+          <p class="two">{{ item.goodsIntro }}</p>
+          <p class="three">￥{{ item.sellingPrice }}</p>
+        </div>
       </div>
     </div>
+    <BottomNav></BottomNav>
   </div>
 </template>
 
@@ -84,46 +87,65 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+#box {
+  position: relative;
+}
 .el-menu--horizontal {
   justify-content: space-around;
+  position: fixed;
+  top: 60px;
+  width: 100%;
 }
+.el-menu-item {
+  border-radius: 35px;
+}
+
 .el-menu--horizontal > .el-menu-item {
   font-size: 20px;
 }
+#all {
+  padding: 130px 0 50px 0;
+}
 header {
   padding-left: 15px;
-  height: 70px;
-  background-color: rgb(56, 54, 54);
+  height: 60px;
+  background-color: #1baeae;
+  position: fixed;
+  display: flex;
+  align-items: center;
+
+  width: 100%;
   input {
-    width: 700px;
-    margin-left: 200px;
-    margin-top: 20px;
-    padding: 8px;
-    border-radius: 18px;
+    margin: 15px;
+    padding: 7px;
+    width: 250px;
+    border-radius: 17px;
     border: none;
   }
 }
 .content {
   display: flex;
+  margin: 22px;
+  border-bottom: 1px solid #ccc;
+
   img {
-    margin-left: 30px;
-    width: 260px;
-    height: 250px;
+    width: 140px;
+    height: 120px;
   }
   .pro {
-    margin-left: 300px;
+    margin-left: 30px;
     .one {
-      font-size: 22px;
+      font-size: 14px;
       font-weight: 800;
     }
     .two {
-      font-size: 22px;
+      font-size: 14px;
       font-weight: 500;
       color: #666;
     }
     .three {
       color: rgb(47, 83, 201);
-      font-size: 22px;
+      font-size: 14px;
       font-weight: 800;
     }
   }
