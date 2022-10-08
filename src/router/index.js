@@ -47,7 +47,8 @@ export const routes = [
     path: '/orders',
     name: 'orders',
     component: () => import('@/views/OrdersView.vue')
-  // 账户管理
+    // 账户管理
+  },
   {
     path: '/setting',
     name: 'setting',
