@@ -41,6 +41,12 @@ export const routes = [
     path: '/address',
     name: 'address',
     component: () => import('@/views/AddressView.vue')
+  },
+  // 生成订单
+  {
+    path: '/orders',
+    name: 'orders',
+    component: () => import('@/views/OrdersView.vue')
   }
 ]
 

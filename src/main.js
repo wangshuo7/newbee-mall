@@ -11,8 +11,25 @@ import 'normalize.css'
 // vant组件
 import { Icon } from 'vant'
 import 'vant/lib/index.css'
+import 'vant/es/toast/style'
 // iconfont
 import '@/assets/iconfont/iconfont.css'
 // 移动端适配插件
 import 'lib-flexible/flexible'
-createApp(App).use(router).use(store).use(Icon).mount('#app')
+
+// vant按需引入
+import { Checkbox, CheckboxGroup } from 'vant'
+import { Stepper, Card, Button, SwipeCell, SubmitBar, Popup } from 'vant'
+createApp(App)
+  .use(Checkbox)
+  .use(CheckboxGroup)
+  .use(Card)
+  .use(Popup)
+  .use(SubmitBar)
+  .use(SwipeCell)
+  .use(Button)
+  .use(Stepper)
+  .use(router)
+  .use(store)
+  .use(Icon)
+  .mount('#app')

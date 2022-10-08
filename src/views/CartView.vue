@@ -2,49 +2,194 @@
   <div class="cart-container">
     <!-- 头部导航 -->
     <header>
-      <el-icon size="16px" color="#373737">
-        <ArrowLeftBold />
-      </el-icon>
+      <i class="iconfont" @click="toHome">&#xe608;</i>
       <h3>购物车</h3>
-      <el-icon size="16px" color="#373737">
-        <MoreFilled />
-      </el-icon>
+      <i class="iconfont">&#xf0141;</i>
     </header>
-
-    <!-- content -->
-    <div class="cart-content">
-      <!-- <div v-for="item in cartData"> -->
-      <div>
-        <div class="radiobtn">
-          <input type="radio" />
-        </div>
-        <div class="goods-img">
-          <a href="">
-            <img src="" alt="" />
-          </a>
-        </div>
-        <div class="goods-detail">
-          <div class="goods-title">
-            <span></span>
-            <span></span>
-          </div>
-          <div class="goods-btn">
-            <div class="price"></div>
-            <div class="goods-num"></div>
-          </div>
-        </div>
-      </div>
+    <!-- list -->
+    <div class="goods-list" v-if="listData.length !== 0">
+      <!-- 复选框 -->
+      <van-checkbox-group v-model="checked" @change="handelGroupAll">
+        <van-swipe-cell
+          style="width: 100%"
+          v-for="item in listData"
+          :key="item"
+        >
+          <van-checkbox :name="item.cartItemId" checked-color="#1baeae">
+            <div class="box-content">
+              <div class="goods-img">
+                <img :src="item.goodsCoverImg" alt="" />
+              </div>
+              <div class="content-text">
+                <div class="goods-title">
+                  <span>{{ item.goodsName }}</span>
+                  <span class="num">x{{ item.goodsCount }}</span>
+                </div>
+                <div class="goods-btn">
+                  <div class="price">
+                    ￥{{ item.sellingPrice * item.goodsCount }}
+                  </div>
+                  <van-stepper
+                    v-model="item.goodsCount"
+                    disable-input
+                    :min="1"
+                    input-width="35px"
+                    button-size="28px"
+                    theme="15px"
+                    @click.stop="changeNum(item.goodsCount, item.cartItemId)"
+                  />
+                </div>
+              </div>
+            </div>
+          </van-checkbox>
+          <template #right>
+            <van-button
+              square
+              icon="delete"
+              type="danger"
+              class="delete-button"
+              stop-propagation
+              @click="deleteItem(item.cartItemId)"
+            />
+          </template>
+        </van-swipe-cell>
+      </van-checkbox-group>
+    </div>
+    <!-- 结算 -->
+    <div class="settlement" v-if="listData.length !== 0">
+      <van-checkbox
+        v-model="checkedValue"
+        @click="checkAll"
+        checked-color="#1baeae"
+        >全选</van-checkbox
+      >
+      <van-submit-bar
+        :price="totalPrice * 100"
+        button-color="#1baeae"
+        button-text="提交订单"
+        @submit="onSubmit"
+      />
+    </div>
+    <!-- 没有商品 -->
+    <div class="listnull" v-else>
+      <van-icon name="smile-o" />
+      <div>购物车空空如也</div>
+      <van-button color="#1baeae" type="primary" @click="toHome" block
+        >前往首页</van-button
+      >
     </div>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import { ArrowLeftBold, MoreFilled } from '@element-plus/icons-vue'
+import { getShopCart, putShopCart, deleteShopCart } from '@/api/cart'
+import { Toast } from 'vant'
 export default defineComponent({
-  components: {
-    ArrowLeftBold,
-    MoreFilled
+  data() {
+    return {
+      value: 1,
+      checked: [], // 选择购买
+      listData: [], // 商品列表
+      checkedValue: false // 全选标识
+    }
+  },
+  computed: {
+    totalPrice() {
+      let sum = 0
+      let arr = this.listData.filter((item) => {
+        return this.checked.find((prop) => {
+          return prop === item.cartItemId
+        })
+      })
+      arr.forEach((item) => {
+        sum += item.goodsCount * item.sellingPrice
+      })
+      return sum
+    }
+  },
+  created() {
+    this.getShopCartFunc()
+  },
+  methods: {
+    onSubmit() {
+      let cartItemIds = ''
+      console.log(JSON.stringify(this.checked))
+      this.checked.forEach((item) => {
+        cartItemIds += item + ','
+      })
+      cartItemIds = cartItemIds.substring(0, cartItemIds.length - 1)
+      console.log(cartItemIds)
+      if (this.checked.length !== 0) {
+        this.$router.push('/orders?cartItemIds=' + cartItemIds)
+      } else {
+        Toast('请选择商品')
+      }
+    },
+    toHome() {
+      this.$router.push('/')
+    },
+    deleteItem(cartItemId) {
+      deleteShopCart(cartItemId).then((res) => {
+        if (res.resultCode === 200) {
+          this.getShopCartFunc()
+        } else {
+          Toast(res.message)
+        }
+      })
+    },
+
+    /**
+     * checkboxGroup全选判断
+     * @param {*} value 被选中的值
+     */
+    handelGroupAll(value) {
+      // 判断此时数据是否满足全选条件
+      if (value.length === this.listData.length) {
+        this.checkedValue = true
+      } else {
+        this.checkedValue = false
+      }
+    },
+    /**
+     * 点击全选
+     */
+    checkAll() {
+      // 判断点击的是全选还是取消全选
+      if (this.checkedValue) {
+        this.checked = []
+        this.listData.forEach((item) => {
+          this.checked.push(item.cartItemId)
+        })
+      } else {
+        this.checked = []
+      }
+    },
+    /**
+     * 购物车修改数量
+     * @param {*} goodsCount 商品数量
+     * @param {*} cartItemId 商品的itemId
+     */
+    changeNum(goodsCount, cartItemId) {
+      let sub_data = {
+        goodsCount: Number(goodsCount),
+        cartItemId
+      }
+      putShopCart(sub_data).then((res) => {
+        if (res.resultCode !== 200) {
+          Toast(res.message)
+        }
+        this.getShopCartFunc()
+      })
+    },
+    /**
+     * 请求购物车商品列表
+     */
+    getShopCartFunc() {
+      getShopCart().then((res) => {
+        this.listData = res.data
+      })
+    }
   }
 })
 </script>
@@ -61,11 +206,12 @@ export default defineComponent({
     justify-content: space-between;
     align-content: center;
     height: 44px;
+    background: #fff;
     border-bottom: 1px solid #ccc;
-    .el-icon {
-      display: block;
-      margin-top: 15px;
+    z-index: 10000;
+    .iconfont {
       padding: 0 3%;
+      line-height: 44px;
     }
 
     h3 {
@@ -73,13 +219,88 @@ export default defineComponent({
       font-weight: 500;
     }
   }
-  .cart-content {
-    position: relative;
-    top: 50px;
-    height: 134px;
-    display: flex;
-    align-items: center;
+}
+
+.goods-list {
+  position: relative;
+  top: 60px;
+  min-height: 40px;
+  width: 100%;
+
+  .van-checkbox {
     padding-left: 14px;
+    .box-content {
+      display: flex;
+      width: 100%;
+      .goods-img {
+        width: 100px;
+        height: 100px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .content-text {
+        box-sizing: border-box;
+        padding: 20px;
+        width: 240px;
+        .goods-title {
+          display: flex;
+          justify-content: space-between;
+          font-size: 12px;
+          color: #2c3e50;
+          .num {
+            margin-left: 10px;
+          }
+        }
+        .goods-btn {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 5px;
+          .price {
+            font-size: 16px;
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}
+
+.delete-button {
+  height: 100%;
+}
+
+// 结算
+.settlement {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  bottom: 60px;
+  padding: 14px;
+  background-color: #fff;
+  border-top: 1px solid rgb(27, 174, 174);
+}
+::v-deep .van-submit-bar__bar {
+  position: fixed;
+  bottom: 60px;
+  right: 14px;
+}
+.listnull {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 200px;
+  div {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .van-icon-smile-o {
+    font-size: 50px;
+  }
+  .title {
+    font-size: 16px;
+    margin-bottom: 20px;
   }
 }
 </style>
