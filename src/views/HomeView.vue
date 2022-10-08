@@ -1,88 +1,94 @@
 <template>
-  <!-- 头部 -->
-  <header v-bind="head">
-    <router-link to="./category" href="#" class="header-classify">
-      <i class="iconfont">&#xe611;</i>
-    </router-link>
-    <div class="search">
-      <span class="search-name">新蜂商城</span>
-      <a href="#" class="search-title">山河无恙，人间皆安</a>
-    </div>
-    <router-link to="./user" href="#" class="header-user">
-      <i class="iconfont">&#xe60f;</i>
-    </router-link>
-  </header>
+  <div>
+    <!-- 头部 -->
+    <header v-bind="head">
+      <router-link to="./category" href="#" class="header-classify">
+        <i class="iconfont">&#xe611;</i>
+      </router-link>
+      <div class="search">
+        <span class="search-name">新蜂商城</span>
+        <a href="#" class="search-title">山河无恙，人间皆安</a>
+      </div>
+      <router-link to="./user" href="#" class="header-user">
+        <i class="iconfont">&#xe60f;</i>
+      </router-link>
+    </header>
 
-  <!-- 轮播图 -->
-  <Swipe></Swipe>
+    <!-- 轮播图 -->
+    <Swipe></Swipe>
 
-  <!-- 分类 -->
-  <div class="categorylist-box">
-    <div
-      class="categorylist"
-      v-for="item in categoryList"
-      :key="item.categoryId"
-      @click="toast"
-    >
-      <img :src="item.imgUrl" alt="" />
-      <span>{{ item.name }}</span>
+    <!-- 分类 -->
+    <div class="categorylist-box">
+      <div
+        class="categorylist"
+        v-for="item in categoryList"
+        :key="item.categoryId"
+        @click="toast"
+      >
+        <img :src="item.imgUrl" alt="" />
+        <span>{{ item.name }}</span>
+      </div>
     </div>
-  </div>
 
-  <!-- 商品 -->
-  <!-- 新品上线 -->
-  <div class="goods">
-    <div class="goods-header">新品上线</div>
-    <div class="goods-box">
-      <a class="goods-item" v-for="item in newGoods" :key="item.goodsId">
-        <img :src="item.goodsCoverImg" alt="" />
-        <div class="goods-bottom">
-          <div class="good-title">
-            {{ item.goodsIntro }}
+    <!-- 商品 -->
+    <!-- 新品上线 -->
+    <div class="goods">
+      <div class="goods-header">新品上线</div>
+      <div class="goods-box">
+        <a class="goods-item" v-for="item in newGoods" :key="item.goodsId">
+          <img :src="item.goodsCoverImg" alt="" />
+          <div class="goods-bottom">
+            <div class="good-title">
+              {{ item.goodsIntro }}
+            </div>
+            <div class="good-price">￥{{ item.sellingPrice }}</div>
           </div>
-          <div class="good-price">￥{{ item.sellingPrice }}</div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
-  </div>
-  <!-- 热门商品 -->
-  <div class="goods">
-    <div class="goods-header">热门商品</div>
-    <div class="goods-box">
-      <a class="goods-item" v-for="item in hotGoods" :key="item.goodsId">
-        <img :src="item.goodsCoverImg" alt="" />
-        <div class="goods-bottom">
-          <div class="good-title">
-            {{ item.goodsName }}
+    <!-- 热门商品 -->
+    <div class="goods">
+      <div class="goods-header">热门商品</div>
+      <div class="goods-box">
+        <a class="goods-item" v-for="item in hotGoods" :key="item.goodsId">
+          <img :src="item.goodsCoverImg" alt="" />
+          <div class="goods-bottom">
+            <div class="good-title">
+              {{ item.goodsName }}
+            </div>
+            <div class="good-price">￥{{ item.sellingPrice }}</div>
           </div>
-          <div class="good-price">￥{{ item.sellingPrice }}</div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
-  </div>
-  <!-- 最佳推荐 -->
-  <div class="goods">
-    <div class="goods-header">最佳推荐</div>
-    <div class="goods-box">
-      <a class="goods-item" v-for="item in recommendGoods" :key="item.goodsId">
-        <img
-          :src="
-            item.goodsCoverImg.indexOf('http') >= 0
-              ? item.goodsCoverImg
-              : `http://backend-api-01.newbee.ltd${item.goodsCoverImg}`
-          "
-          alt=""
-        />
-        <div class="goods-bottom">
-          <div class="good-title">
-            {{ item.goodsName }}
+    <!-- 最佳推荐 -->
+    <div class="goods">
+      <div class="goods-header">最佳推荐</div>
+      <div class="goods-box">
+        <a
+          class="goods-item"
+          v-for="item in recommendGoods"
+          :key="item.goodsId"
+        >
+          <img
+            :src="
+              item.goodsCoverImg.indexOf('http') >= 0
+                ? item.goodsCoverImg
+                : `http://backend-api-01.newbee.ltd${item.goodsCoverImg}`
+            "
+            alt=""
+          />
+          <div class="goods-bottom">
+            <div class="good-title">
+              {{ item.goodsName }}
+            </div>
+            <div class="good-price">￥{{ item.sellingPrice }}</div>
           </div>
-          <div class="good-price">￥{{ item.sellingPrice }}</div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
+    <BottomNav></BottomNav>
   </div>
-  <BottomNav></BottomNav>
 </template>
 
 <script>
@@ -171,6 +177,10 @@ export default defineComponent({
   },
   created() {
     getHomeData().then((res) => {
+      Toast({
+        message: '首页',
+        position: 'bottom'
+      })
       this.hotGoods = res.data.hotGoodses
       this.newGoods = res.data.newGoodses
       this.recommendGoods = res.data.recommendGoodses

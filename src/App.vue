@@ -1,6 +1,4 @@
 <template>
-  <router-view></router-view>
-
   <!-- 页面过渡动画 -->
   <router-view v-slot="{ Component }">
     <transition name="slide">
