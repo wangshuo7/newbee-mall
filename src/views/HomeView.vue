@@ -82,6 +82,7 @@
       </a>
     </div>
   </div>
+  <BottomNav></BottomNav>
 </template>
 
 <script>

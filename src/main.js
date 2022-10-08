@@ -11,6 +11,7 @@ import 'normalize.css'
 // vant组件
 import { Icon, Swipe, SwipeItem, Toast } from 'vant'
 import 'vant/lib/index.css'
+
 // iconfont
 import '@/assets/iconfont/iconfont.css'
 // 移动端适配插件
