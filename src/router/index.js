@@ -41,6 +41,11 @@ export const routes = [
     path: '/address',
     name: 'address',
     component: () => import('@/views/AddressView.vue')
+  },
+  {
+    path: '/addresslist/:id',
+    name: 'addresslist',
+    component: () => import('@/views/AddressListView.vue')
   }
 ]
 
