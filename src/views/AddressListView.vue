@@ -101,7 +101,7 @@ export default defineComponent({
     },
     toaddressList() {
       this.$route.params.id == 0 ? this.add() : this.edit()
-      this.$router.push('/address')
+      this.$router.go(-1)
     },
     add() {
       addAddressList({
