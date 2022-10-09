@@ -13,7 +13,6 @@
     "js-md5": "^0.7.3",
     "lib-flexible": "^0.3.2",
     "lodash": "^4.17.21",
-    "makeit-captcha": "^2.0.3",
     "normalize.css": "^8.0.1",
     "postcss-pxtorem": "^6.0.0",
     "sass": "^1.55.0",

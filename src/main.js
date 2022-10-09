@@ -9,13 +9,30 @@ import store from '@/store'
 // 引入重置样式
 import 'normalize.css'
 // vant组件
-import { Icon } from 'vant'
+import { Icon, Swipe, SwipeItem, Toast } from 'vant'
 import 'vant/lib/index.css'
+import 'vant/es/toast/style'
 // iconfont
 import '@/assets/iconfont/iconfont.css'
 // 移动端适配插件
 import 'lib-flexible/flexible'
-// 滑块验证码
-import MakeitCaptcha from 'makeit-captcha'
-import 'makeit-captcha/dist/captcha.min.css'
-createApp(App).use(router).use(store).use(Icon).use(MakeitCaptcha).mount('#app')
+
+// vant按需引入
+import { Checkbox, CheckboxGroup } from 'vant'
+import { Stepper, Card, Button, SwipeCell, SubmitBar, Popup } from 'vant'
+createApp(App)
+  .use(Checkbox)
+  .use(CheckboxGroup)
+  .use(Card)
+  .use(Popup)
+  .use(SubmitBar)
+  .use(SwipeCell)
+  .use(Button)
+  .use(Stepper)
+  .use(router)
+  .use(store)
+  .use(Icon)
+  .use(Swipe)
+  .use(SwipeItem)
+  .use(Toast)
+  .mount('#app')

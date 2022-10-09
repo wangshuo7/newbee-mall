@@ -1,109 +1,122 @@
 <template>
   <!-- 导航栏 -->
-  <div class="login-view">
-    <header class="simple-header">
-      <van-icon name="arrow-left" @click="goBack" />
-      <div class="simple-header-name">{{ name }}</div>
-      <van-icon name="weapp-nav" />
-    </header>
-    <div class="login-Container">
-      <!-- logo -->
-      <van-image width="100" height="100" :src="logoURL" />
-      <h1>新蜂商城</h1>
-      <!-- 登录首页 -->
-      <div v-if="type == 'login'" class="login-body login">
-        <van-form @submit="onSubmit">
-          <van-cell-group>
-            <van-field
-              v-model="loginForm.username"
-              name="username"
-              label="用户名"
-              placeholder="用户名"
-              right-icon="manager-o"
-              :rules="[{ required: true, message: '请填写用户名' }]"
-            />
-            <van-field
-              v-model="loginForm.password"
-              type="password"
-              name="password"
-              label="密码"
-              placeholder="密码"
-              right-icon="closed-eye"
-              :rules="[{ required: true, message: '请填写密码' }]"
-            />
-          </van-cell-group>
-          <div style="margin: 16px">
-            <div class="link-register" @click="this.type = 'register'">
-              立即注册
+  <transition name="slide-left">
+    <div class="login-view">
+      <header class="simple-header">
+        <van-icon name="arrow-left" @click="goBack" />
+        <div class="simple-header-name">{{ name }}</div>
+        <van-icon name="weapp-nav" />
+      </header>
+      <div class="login-Container">
+        <!-- logo -->
+        <van-image
+          width="100"
+          height="100"
+          src="//s.weituibao.com/1582958061265/mlogo.png"
+        />
+        <h1>新蜂商城</h1>
+        <!-- 登录首页 -->
+        <div v-if="type == 'login'" class="login-body login">
+          <van-form @submit="onSubmit">
+            <van-cell-group>
+              <van-field
+                v-model="loginForm.username"
+                name="username"
+                label="用户名"
+                placeholder="用户名"
+                right-icon="manager-o"
+                label-width="50"
+                :rules="[{ required: true, message: '请填写用户名' }]"
+              />
+              <van-field
+                v-model="loginForm.password"
+                type="password"
+                name="password"
+                label="密码"
+                placeholder="密码"
+                label-width="50"
+                right-icon="closed-eye"
+                :rules="[{ required: true, message: '请填写密码' }]"
+              />
+            </van-cell-group>
+            <div style="margin: 16px">
+              <div class="link-register" @click="this.type = 'register'">
+                立即注册
+              </div>
+
+              <van-button
+                round
+                block
+                type="info"
+                color="#1baeae"
+                native-type="submit"
+                >登录</van-button
+              >
+              <van-checkbox
+                icon-size="16px"
+                v-model="checked"
+                checked-color="#1baeae"
+                >您已阅读并同意<a
+                  style="color: #3e3e3e; text-decoration: none"
+                  href="javascript:;"
+                  >《用户服务协议》《隐私权政策》</a
+                ></van-checkbox
+              >
             </div>
-            <van-checkbox
-              icon-size="16px"
-              v-model="checked"
-              checked-color="#1baeae"
-              >已同意<a href="javascript:;">《用户服务协议》</a></van-checkbox
-            >
-            <van-button
-              round
-              block
-              type="info"
-              color="#1baeae"
-              native-type="submit"
-              >登录</van-button
-            >
-          </div>
-        </van-form>
-      </div>
-      <div v-else class="login-body register">
-        <van-form @submit="onSubmit">
-          <van-cell-group>
-            <van-field
-              v-model="username1"
-              name="username1"
-              label="手机号"
-              placeholder="手机号"
-              right-icon="phone-o"
-              :rules="[{ required: true, message: '请填写手机号' }]"
-            />
-            <van-field
-              v-model="password1"
-              type="password"
-              name="password1"
-              label="密码"
-              placeholder="密码"
-              right-icon="closed-eye"
-              :rules="[{ required: true, message: '请填写密码' }]"
-            />
-            <van-field
-              v-model="password2"
-              type="password"
-              name="password1"
-              label="确认密码"
-              right-icon="closed-eye"
-              placeholder="请再次填写密码"
-              :rules="[
-                {
-                  required: true,
-                  message: '请填写确认密码',
-                  validator: validatorMessage
-                }
-              ]"
-            />
-          </van-cell-group>
-          <div style="margin: 16px">
-            <div class="link-login" @click="type = 'login'">已有登录账号</div>
-            <van-button
-              round
-              block
-              type="info"
-              color="#1baeae"
-              native-type="submit"
-              >注册</van-button
-            >
-          </div>
-        </van-form>
+          </van-form>
+        </div>
+        <div v-else class="login-body register">
+          <van-form @submit="onSubmit">
+            <van-cell-group>
+              <van-field
+                v-model="username1"
+                name="username1"
+                label="手机号"
+                placeholder="手机号"
+                right-icon="phone-o"
+                :rules="[{ required: true, message: '请填写手机号' }]"
+              />
+              <van-field
+                v-model="password1"
+                type="password"
+                name="password1"
+                label="密码"
+                placeholder="密码"
+                right-icon="closed-eye"
+                :rules="[{ required: true, message: '请填写密码' }]"
+              />
+              <van-field
+                v-model="password2"
+                type="password"
+                name="password1"
+                label="确认密码"
+                right-icon="closed-eye"
+                placeholder="请再次填写密码"
+                :rules="[
+                  {
+                    required: true,
+                    message: '请填写确认密码',
+                    validator: validatorMessage
+                  }
+                ]"
+              />
+            </van-cell-group>
+            <div style="margin: 16px">
+              <div class="link-login" @click="type = 'login'">已有登录账号</div>
+              <van-button
+                round
+                block
+                type="info"
+                color="#1baeae"
+                native-type="submit"
+                >注册</van-button
+              >
+            </div>
+          </van-form>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -185,13 +198,21 @@ export default defineComponent({
           // _this.searchData.ticket = res.ticket
           // _this.searchData.randStr = res.randstr
           // _this.getSearchResult()
-          console.log(res, '腾讯云验证码')
         }
       })
       captcha.langFun()
       // 滑块显示
       captcha.show()
     }
+  },
+  mounted() {
+    console.clear()
+    console.log(
+      '%c%c当前页面%c登录/注册',
+      'line-height:26px;',
+      'line-height:16px;padding:2px 6px;border-radius: 5px 0px 0px 5px;background:#1f7777;color:#fff;font-size:12px;',
+      'padding:2px 8px;background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%);color:#000;line-height:16px;font-size:12px;border-radius: 0px 5px 5px 0px;'
+    )
   }
 })
 </script>
@@ -206,12 +227,14 @@ export default defineComponent({
 .login-view {
   background: #f8f8fa;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 :deep(.van-checkbox) {
-  margin-bottom: 10px;
+  margin-top: 10px;
   box-sizing: border-box;
-  color: #4c4c4c;
+  span {
+    color: #8f8f8f;
+  }
 }
 .simple-header {
   position: fixed;
@@ -248,6 +271,8 @@ export default defineComponent({
     color: #1baeae;
     text-align: center;
     font-weight: 900;
+    position: relative;
+    top: -30px;
   }
   .login-body {
     padding: 0 20px;
@@ -272,5 +297,15 @@ export default defineComponent({
   .van-button {
     border: none;
   }
+}
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  height: 100%;
+  will-change: transform;
+  transition: all 1s;
+  position: absolute;
+  backface-visibility: hidden;
 }
 </style>
