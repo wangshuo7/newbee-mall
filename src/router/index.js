@@ -54,6 +54,12 @@ export const routes = [
     name: 'order',
     component: () => import('@/views/OrderView.vue')
   },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: () => import('@/views/OrdersView.vue')
+    // 账户管理
+  },
   // 地址
   {
     path: '/address',

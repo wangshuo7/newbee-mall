@@ -78,6 +78,7 @@
         button-text="提交订单"
         @submit="onSubmit"
       />
+      <BottomNav></BottomNav>
     </div>
     <!-- 没有商品 -->
     <div class="listnull" v-else>
@@ -94,6 +95,7 @@
 import { defineComponent } from 'vue'
 import { getShopCart, putShopCart, deleteShopCart } from '@/api/cart'
 import { Toast } from 'vant'
+import BottomNav from '@/components/BottomNav.vue'
 export default defineComponent({
   data() {
     return {
@@ -103,6 +105,7 @@ export default defineComponent({
       checkedValue: false // 全选标识
     }
   },
+  components: { BottomNav },
   computed: {
     totalPrice() {
       let sum = 0
@@ -288,7 +291,7 @@ export default defineComponent({
   bottom: 60px;
   padding: 14px;
   background-color: #fff;
-  border-top: 1px solid rgb(27, 174, 174);
+  // border-top: 1px solid rgb(27, 174, 174);
 }
 :deep(.van-submit-bar__bar) {
   position: fixed;

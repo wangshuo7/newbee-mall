@@ -24,7 +24,13 @@
           :num="item.goodsCount"
           :price="item.sellingPrice"
           :title="item.goodsName"
-          :thumb="item.goodsCoverImg"
+          :thumb="
+            item.goodsCoverImg.indexOf(
+              'newbee-mall.oss-cn-beijing.aliyuncs.com'
+            ) != -1
+              ? item.goodsCoverImg
+              : 'http://backend-api-01.newbee.ltd' + item.goodsCoverImg
+          "
         />
       </div>
       <div class="kong"></div>
@@ -44,7 +50,17 @@
       >
     </div>
     <div>
-      <van-popup v-model="show" position="top" :style="{ height: '30%' }" />
+      <van-popup
+        v-model:show="show"
+        position="bottom"
+        round
+        :style="{ height: '30%' }"
+      >
+        <van-button type="primary" block color="rgba(7,193,96,1)"
+          >微信支付</van-button
+        >
+        <van-button type="primary" block>支付宝支付</van-button>
+      </van-popup>
     </div>
   </div>
 </template>
@@ -94,6 +110,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+:deep(.van-popup) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  .van-button {
+    margin-bottom: 15px;
+    border-radius: 10px;
+  }
+}
 .cart-container {
   width: 100%;
   height: 100%;
