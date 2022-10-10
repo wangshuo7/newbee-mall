@@ -67,7 +67,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getShopCartOrders, getAddressDefault, postsaveOrder } from '@/api/cart'
+import { getShopCartOrders, getAddressDefault } from '@/api/cart'
 
 export default defineComponent({
   mounted() {
