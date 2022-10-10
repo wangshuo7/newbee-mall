@@ -5,8 +5,9 @@
         color="#fff"
         size="20px"
         @click="$router.push({ name: 'category' })"
-        ><ArrowLeftBold /></el-icon
-      ><input
+        ><ArrowLeftBold
+      /></el-icon>
+      <input
         type="text"
         v-model="keyword"
         ref="inputdata"
