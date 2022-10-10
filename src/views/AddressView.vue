@@ -6,15 +6,22 @@
       <el-icon><More /></el-icon>
     </el-header>
     <el-main>
-      <div v-for="item in addressList" :key="item">
-        <span>{{ item.userName }} {{ item.userPhone }}</span>
+      <div v-for="item in addressList" :key="item" class="div1">
+        <div>
+          <span class="span1">{{ item.userName }} {{ item.userPhone }}</span>
 
-        <br />
-        <span
-          >{{ item.cityName }} {{ item.provinceName }}
-          {{ item.regionName }}</span
-        >
-        <el-button @click="getaddresslist(item.addressId)">修改</el-button>
+          <br />
+          <span class="span2"
+            >{{ item.cityName }} {{ item.provinceName }}
+            {{ item.regionName }}</span
+          >
+        </div>
+        <div class="div2">
+          <van-tag round color="#7232dd" v-show="!!item.defaultFlag"
+            >默认</van-tag
+          >
+          <el-button @click="getaddresslist(item.addressId)">修改</el-button>
+        </div>
       </div>
     </el-main>
     <el-footer>
@@ -60,35 +67,14 @@ export default defineComponent({
       resultCode: 0
     }
   },
-  // created() {
-  //   myAddressList({
-  //     data: [
-  //       {
-  //         addressId: this.data.addressId,
-  //         cityName: this.data.cityName,
-  //         defaultFlag: user.defaultFlag,
-  //         detailAddress: this.data.detailAddress,
-  //         provinceName: this.data.provinceName,
-  //         regionName: this.data.regionName,
-  //         userId: this.data.userId,
-  //         userName: this.data.userName,
-  //         userPhone: this.data.userPhone
-  //       }
-  //     ],
-  //     message: this.message,
-  //     resultCode: this.resultCode
-  //   }).then((res) => {
-  //     console.log(res)
-  //   })
-  // },
-  created() {
+
+  mounted() {
     myAddressList(this.data.addressId).then((res) => {
       this.addressList = res.data
       Toast({
         message: '地址列表',
         position: 'bottom'
       })
-      // console.log(this.addressList)
     })
   },
   methods: {
@@ -120,24 +106,23 @@ export default defineComponent({
     }
   }
   .el-main {
-    div {
-      position: relative;
-      margin-bottom: 30px;
-      span:nth-of-type(1) {
+    .div1 {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 50px;
+      .span1 {
         font-size: 18px;
-        margin-left: 20px;
+        display: block;
       }
 
-      span:nth-of-type(2) {
-        display: block;
-        margin-top: 8px;
+      .span2 {
         font-size: 14px;
-        margin-left: 20px;
+        display: block;
       }
-      .el-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
+    }
+    .div2 {
+      .van-tag {
+        margin-right: 65px;
       }
     }
   }
@@ -146,7 +131,6 @@ export default defineComponent({
   position: relative;
   .el-button {
     position: absolute;
-
     width: 330px;
     height: 50px;
   }

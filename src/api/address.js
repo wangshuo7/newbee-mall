@@ -45,3 +45,9 @@ export function deleteAddressList(data) {
     method: 'delete'
   })
 }
+export function defaultAddressList() {
+  return request({
+    url: '/api/v1/address/default',
+    method: 'get'
+  })
+}
