@@ -33,7 +33,7 @@
           "
         />
       </div>
-      <div class="kong"></div>
+      <div class="kong" v-if="flag"></div>
     </div>
     <!-- 结算 -->
     <div class="pay-wrap">
@@ -67,9 +67,16 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getShopCartOrders, getAddressDefault } from '@/api/cart'
+import { getShopCartOrders, getAddressDefault, postsaveOrder } from '@/api/cart'
 
 export default defineComponent({
+  mounted() {
+    let topScroll = document.documentElement.scrollTop
+    console.log(topScroll)
+    if (topScroll !== 0) {
+      this.flag = true
+    }
+  },
   computed: {
     ordersPrice() {
       let sum = 0
@@ -82,7 +89,7 @@ export default defineComponent({
   methods: {
     showPopup() {
       this.show = true
-      console.log(this.show)
+      // console.log(this.show)
     },
     toBack() {
       this.$router.go(-1)
@@ -90,6 +97,7 @@ export default defineComponent({
   },
   data() {
     return {
+      flag: false, // 空元素得到显示隐藏
       show: false,
       ordersList: [], // 产品列表
       userInfo: [] // 收件人信息

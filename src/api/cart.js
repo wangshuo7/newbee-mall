@@ -42,3 +42,12 @@ export function getAddressDefault() {
     method: 'get'
   })
 }
+
+// 点击生成订单接口
+export function postsaveOrder(data) {
+  return request({
+    url: '/api/v1/saveOrder',
+    method: 'post',
+    data
+  })
+}

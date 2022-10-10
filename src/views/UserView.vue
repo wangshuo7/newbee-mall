@@ -42,24 +42,7 @@
     </div>
     <!-- nav -->
     <div class="nav-bar">
-      <ul class="nav-list">
-        <router-link class="nav-list-item active" to="/">
-          <i class="iconfont">&#xea9a;</i>
-          <span>首页</span>
-        </router-link>
-        <router-link class="nav-list-item" to="category">
-          <i class="iconfont">&#xe811;</i>
-          <span>分类</span>
-        </router-link>
-        <router-link class="nav-list-item" to="cart">
-          <i class="iconfont">&#xeab2;</i>
-          <span>购物车</span>
-        </router-link>
-        <router-link class="nav-list-item" to="user">
-          <i class="iconfont">&#xeab3;</i>
-          <span>我的</span>
-        </router-link>
-      </ul>
+      <BottomNav></BottomNav>
     </div>
   </div>
 </template>
@@ -68,9 +51,11 @@
 import { defineComponent } from 'vue'
 import { getUserInfo, loginOut } from '../api/user'
 import { Toast, Dialog } from 'vant'
+import BottomNav from '@/components/BottomNav.vue'
 import 'vant/es/dialog/style'
 
 export default defineComponent({
+  components: { BottomNav },
   data() {
     return {
       show: false,

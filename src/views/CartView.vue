@@ -78,7 +78,7 @@
         button-text="提交订单"
         @submit="onSubmit"
       />
-      <BottomNav></BottomNav>
+      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
     <!-- 没有商品 -->
     <div class="listnull" v-else>
@@ -87,7 +87,9 @@
       <van-button color="#1baeae" type="primary" @click="toHome" block
         >前往首页</van-button
       >
+      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
+    <BottomNav :num="listData.length"></BottomNav>
   </div>
 </template>
 
@@ -182,17 +184,16 @@ export default defineComponent({
      * @param {*} goodsCount 商品数量
      * @param {*} cartItemId 商品的itemId
      */
-    changeNum(goodsCount, cartItemId) {
+    async changeNum(goodsCount, cartItemId) {
       let sub_data = {
         goodsCount: Number(goodsCount),
         cartItemId
       }
-      putShopCart(sub_data).then((res) => {
-        if (res.resultCode !== 200) {
-          Toast(res.message)
-        }
-        this.getShopCartFunc()
-      })
+      let res = await putShopCart(sub_data)
+      if (res.resultCode !== 200) {
+        Toast(res.message)
+      }
+      this.getShopCartFunc()
     },
     /**
      * 请求购物车商品列表
@@ -200,6 +201,7 @@ export default defineComponent({
     getShopCartFunc() {
       getShopCart().then((res) => {
         this.listData = res.data
+        console.log(res)
       })
     }
   }
@@ -302,7 +304,7 @@ export default defineComponent({
   width: 50%;
   margin: 0 auto;
   text-align: center;
-  margin-top: 200px;
+  padding-top: 200px;
   div {
     font-size: 16px;
     margin-bottom: 20px;
