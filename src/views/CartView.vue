@@ -18,7 +18,16 @@
           <van-checkbox :name="item.cartItemId" checked-color="#1baeae">
             <div class="box-content">
               <div class="goods-img">
-                <img :src="item.goodsCoverImg" alt="" />
+                <img
+                  :src="
+                    item.goodsCoverImg.indexOf(
+                      'newbee-mall.oss-cn-beijing.aliyuncs.com'
+                    ) != -1
+                      ? item.goodsCoverImg
+                      : 'http://backend-api-01.newbee.ltd' + item.goodsCoverImg
+                  "
+                  alt=""
+                />
               </div>
               <div class="content-text">
                 <div class="goods-title">
@@ -281,7 +290,7 @@ export default defineComponent({
   background-color: #fff;
   border-top: 1px solid rgb(27, 174, 174);
 }
-::v-deep .van-submit-bar__bar {
+:deep(.van-submit-bar__bar) {
   position: fixed;
   bottom: 60px;
   right: 14px;
