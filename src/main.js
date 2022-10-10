@@ -17,6 +17,8 @@ import '@/assets/iconfont/iconfont.css'
 // 移动端适配插件
 import 'lib-flexible/flexible'
 
+import 'animate.css'
+
 // vant按需引入
 import { Checkbox, CheckboxGroup } from 'vant'
 import { Stepper, Card, Button, SwipeCell, SubmitBar, Popup } from 'vant'

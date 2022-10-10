@@ -179,10 +179,10 @@ export default defineComponent({
   },
   created() {
     getHomeData().then((res) => {
-      Toast({
-        message: '首页',
-        position: 'bottom'
-      })
+      // Toast({
+      //   message: '首页',
+      //   position: 'bottom'
+      // })
       this.hotGoods = res.data.hotGoodses
       this.newGoods = res.data.newGoodses
       this.recommendGoods = res.data.recommendGoodses
