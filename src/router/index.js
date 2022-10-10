@@ -6,6 +6,12 @@ export const routes = [
     name: 'home',
     component: () => import('@/views/HomeView.vue')
   },
+  // 搜索
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/SearchView.vue')
+  },
   // 登录、注册
   {
     path: '/login',
