@@ -14,9 +14,9 @@
     </Header>
     <!-- main -->
     <van-tabs v-model:active="active" type="card" color="rgb(27,174,174)">
-      <van-tab title="推荐" name="">1</van-tab>
-      <van-tab title="新品" name="new">2</van-tab>
-      <van-tab title="价格" name="price">3</van-tab>
+      <van-tab title="推荐" name=""></van-tab>
+      <van-tab title="新品" name="new"></van-tab>
+      <van-tab title="价格" name="price"></van-tab>
     </van-tabs>
     <!-- 空 -->
     <div class="temp" v-if="flag">
