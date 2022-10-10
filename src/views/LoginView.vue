@@ -207,12 +207,12 @@ export default defineComponent({
   },
   mounted() {
     console.clear()
-    console.log(
+    /* console.log(
       '%c%c当前页面%c登录/注册',
       'line-height:26px;',
       'line-height:16px;padding:2px 6px;border-radius: 5px 0px 0px 5px;background:#1f7777;color:#fff;font-size:12px;',
       'padding:2px 8px;background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%);color:#000;line-height:16px;font-size:12px;border-radius: 0px 5px 5px 0px;'
-    )
+    ) */
   }
 })
 </script>

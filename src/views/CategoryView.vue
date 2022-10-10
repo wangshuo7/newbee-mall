@@ -82,13 +82,13 @@ export default defineComponent({
     //获取商品分类列表
     getcate() {
       getcategoryList().then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         this.catelist = res.data
       })
     },
     //隐藏切换分类
     selectedType(item) {
-      console.log(item)
+      // console.log(item)
       this.flag = item
     },
     //跳转分类商品页面

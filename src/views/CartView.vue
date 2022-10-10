@@ -128,12 +128,12 @@ export default defineComponent({
   methods: {
     onSubmit() {
       let cartItemIds = ''
-      console.log(JSON.stringify(this.checked))
+      // console.log(JSON.stringify(this.checked))
       this.checked.forEach((item) => {
         cartItemIds += item + ','
       })
       cartItemIds = cartItemIds.substring(0, cartItemIds.length - 1)
-      console.log(cartItemIds)
+      // console.log(cartItemIds)
       if (this.checked.length !== 0) {
         this.$router.push('/orders?cartItemIds=' + cartItemIds)
       } else {

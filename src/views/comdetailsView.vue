@@ -56,7 +56,7 @@ export default defineComponent({
   },
 
   created() {
-    console.log(this.$route)
+    // console.log(this.$route)
     getcategorys(this.$route.params.id).then((res) => {
       console.table(res.data)
       this.detailsList = res.data
