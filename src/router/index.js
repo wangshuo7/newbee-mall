@@ -18,6 +18,24 @@ export const routes = [
     name: 'category',
     component: () => import('@/views/CategoryView.vue')
   },
+  //搜索页面
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/SearchView.vue')
+  },
+  //商品列表
+  {
+    path: '/cates/:id',
+    name: 'cates',
+    component: () => import('@/views/CateContView.vue')
+  },
+  //商品详情
+  {
+    path: '/details/:id',
+    name: 'details',
+    component: () => import('@/views/comdetailsView.vue')
+  },
   // 购物车
   {
     path: '/cart',

@@ -6,16 +6,18 @@
         size="20px"
         @click="$router.push({ name: 'category' })"
         ><ArrowLeftBold /></el-icon
-      ><input type="text" />
+      ><input
+        type="text"
+        v-model="keyword"
+        @focus="$router.push({ name: 'search' })"
+      />
     </header>
     <el-menu
-      :default-active="activeIndex2"
       class="el-menu-demo"
       mode="horizontal"
       background-color="#1baeae"
       text-color="#fff"
       active-text-color="rgb(32 118 198);"
-      @select="handleSelect"
     >
       <el-menu-item index="1" @click="qiehuan">推荐</el-menu-item>
       <el-menu-item index="3" @click="qiehuan2">新品</el-menu-item>
@@ -54,21 +56,33 @@ export default defineComponent({
   data() {
     return {
       hotGoodses: [],
-      flag: true
+      flag: true,
+      keyword: ''
     }
   },
   methods: {
+    // //搜索
+    // find() {
+    //   console.log(this.keyword)
+    //   tosearch({ keyword: this.keyword, orderBy: '', pageNumber: 1 }).then(
+    //     (res) => {
+    //       console.log(res)
+    //     }
+    //   )
+    // },
+
     getcatecon() {
       //首页数据
       getindex().then((res) => {
         console.log(res.data)
         this.hotGoodses = this.flag ? res.data.hotGoodses : res.data.newGoodses
+        console.clear()
       })
     },
     //商品详情
     getdatail(id) {
-      getcategorys(id).then((res) => {
-        console.log(res, '1111111')
+      getcategorys(id).then(() => {
+        this.$router.push('/details/' + id)
       })
     },
     qiehuan() {
@@ -129,8 +143,7 @@ header {
   border-bottom: 1px solid #ccc;
 
   img {
-    width: 140px;
-    height: 120px;
+    width: 110px;
   }
   .pro {
     margin-left: 30px;
