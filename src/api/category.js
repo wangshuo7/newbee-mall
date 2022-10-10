@@ -42,3 +42,20 @@ export function toregister(data) {
     data
   })
 }
+//添加商品到购物车接口
+export function topush(data) {
+  return axios1({
+    url: '/api/v1/shop-cart',
+    method: 'post',
+
+    data
+  })
+}
+//搜索接口
+export function tosearch(data) {
+  return axios1({
+    url: '/api/v1/search',
+    method: 'get',
+    params: { ...data }
+  })
+}

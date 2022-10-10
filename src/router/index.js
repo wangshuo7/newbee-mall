@@ -6,6 +6,12 @@ export const routes = [
     name: 'home',
     component: () => import('@/views/HomeView.vue')
   },
+  // 搜索
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/SearchView.vue')
+  },
   // 登录、注册
   {
     path: '/login',
@@ -17,6 +23,24 @@ export const routes = [
     path: '/category',
     name: 'category',
     component: () => import('@/views/CategoryView.vue')
+  },
+  //搜索页面
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/SearchView.vue')
+  },
+  //商品列表
+  {
+    path: '/cates/:id',
+    name: 'cates',
+    component: () => import('@/views/CateContView.vue')
+  },
+  //商品详情
+  {
+    path: '/details/:id',
+    name: 'details',
+    component: () => import('@/views/comdetailsView.vue')
   },
   // 购物车
   {
@@ -35,6 +59,12 @@ export const routes = [
     path: '/order',
     name: 'order',
     component: () => import('@/views/OrderView.vue')
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: () => import('@/views/OrdersView.vue')
+    // 账户管理
   },
   // 地址
   {

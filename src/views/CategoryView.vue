@@ -3,7 +3,11 @@
     <header>
       <el-icon color="#fff" size="20px" @click="$router.push({ name: 'home' })"
         ><ArrowLeftBold /></el-icon
-      ><input type="text" />
+      ><input
+        type="text"
+        v-model="keyword"
+        @focus="$router.push({ name: 'search' })"
+      />
     </header>
     <div class="content">
       <div class="left">

@@ -7,7 +7,9 @@
       </router-link>
       <div class="search">
         <span class="search-name">新蜂商城</span>
-        <a href="#" class="search-title">山河无恙，人间皆安</a>
+        <router-link to="./search" href="#" class="search-title"
+          >山河无恙，人间皆安</router-link
+        >
       </div>
       <router-link to="./user" href="#" class="header-user">
         <i class="iconfont">&#xe60f;</i>
@@ -177,10 +179,10 @@ export default defineComponent({
   },
   created() {
     getHomeData().then((res) => {
-      Toast({
-        message: '首页',
-        position: 'bottom'
-      })
+      // Toast({
+      //   message: '首页',
+      //   position: 'bottom'
+      // })
       this.hotGoods = res.data.hotGoodses
       this.newGoods = res.data.newGoodses
       this.recommendGoods = res.data.recommendGoodses

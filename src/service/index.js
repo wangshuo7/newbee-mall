@@ -19,6 +19,10 @@ axios.defaults.withCredentials = false
 
 // 设置请求之前的拦截器
 axios.interceptors.request.use((config) => {
+  Toast.loading({
+    message: '加载中...',
+    forbidClick: true
+  })
   // 后端返回token令牌，前端需要将token存入本地存储
   let token = localStorage.getItem('token')
   token && (config.headers.token = token)
@@ -32,6 +36,7 @@ axios.interceptors.response.use((response) => {
   }
 
   // 全局的弹窗
+  Toast.clear()
   response?.data?.resultCode === 200 ? '' : Toast.fail(response?.data?.message)
 
   // token过期
