@@ -7,7 +7,7 @@
       <i class="iconfont">&#xf0141;</i>
     </header>
     <!-- 地址信息栏 -->
-    <div class="address">
+    <div class="address" @click="goAddress">
       <div>
         <p>{{ userInfo.userName }} {{ userInfo.userPhone }}</p>
         <p>
@@ -86,6 +86,9 @@ export default defineComponent({
     },
     toBack() {
       this.$router.go(-1)
+    },
+    goAddress() {
+      this.$router.push('/address')
     }
   },
   data() {
@@ -105,6 +108,14 @@ export default defineComponent({
       getAddressDefault().then((res) => {
         this.userInfo = res.data
       })
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      if (from.path == '/address') {
+        console.log(vm.$route)
+        // this.$router.push(from.fullPath)
+      }
+    })
   }
 })
 </script>

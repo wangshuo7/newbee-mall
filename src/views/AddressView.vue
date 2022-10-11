@@ -6,21 +6,37 @@
       <el-icon><More /></el-icon>
     </el-header>
     <el-main>
-      <div v-for="item in addressList" :key="item" class="div1">
-        <div>
-          <span class="span1">{{ item.userName }} {{ item.userPhone }}</span>
+      <div
+        v-for="item in addressList"
+        :key="item"
+        class="div1"
+        @click="chooseAddress"
+        :_id="item.addressId"
+      >
+        <div :_id="item.addressId">
+          <span class="span1" :_id="item.addressId"
+            >{{ item.userName }} {{ item.userPhone }}</span
+          >
 
           <br />
-          <span class="span2"
+          <span class="span2" :_id="item.addressId"
             >{{ item.cityName }} {{ item.provinceName }}
             {{ item.regionName }}</span
           >
         </div>
-        <div class="div2">
-          <van-tag round color="#7232dd" v-show="!!item.defaultFlag"
+        <div class="div2" :_id="item.addressId">
+          <van-tag
+            :_id="item.addressId"
+            round
+            color="#7232dd"
+            v-show="!!item.defaultFlag"
             >默认</van-tag
           >
-          <el-button @click="getaddresslist(item.addressId)">修改</el-button>
+          <el-button
+            :_id="item.addressId"
+            @click="getaddresslist(item.addressId)"
+            >修改</el-button
+          >
         </div>
       </div>
     </el-main>
@@ -63,6 +79,7 @@ export default defineComponent({
           userPhone: 'string'
         }
       ],
+      fullPath: '',
       message: 'string',
       resultCode: 0
     }
@@ -83,7 +100,22 @@ export default defineComponent({
     },
     toaddressList() {
       this.$router.push(`addresslist/0`)
+    },
+    chooseAddress(event) {
+      console.log(event.target.getAttribute('_id'))
+      this.$router.push(
+        this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
+      )
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      if (from.path == '/orders') {
+        vm.fullPath = `${from.path}?cartItemIds=${from.query.cartItemIds}`
+        console.log(from)
+        // this.$router.push(from.fullPath)
+      }
+    })
   }
 })
 </script>

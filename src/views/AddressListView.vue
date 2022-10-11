@@ -80,11 +80,12 @@ export default defineComponent({
     return {
       rules: {
         userName: [
-          { required: true, message: '必须输入姓名', trigger: 'blur' }
+          {
+            validator: this.validateuserName,
+            trigger: 'blur'
+          }
         ],
-        userPhone: [
-          { required: true, message: '必须输入电话', trigger: 'blur' }
-        ],
+        userPhone: [{ validator: this.validateuserPhone, trigger: 'blur' }],
         provinceName: [
           { required: true, message: '必须输入省份', trigger: 'blur' }
         ],
@@ -120,9 +121,32 @@ export default defineComponent({
     More
   },
   methods: {
+    validateuserName(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('必须输入姓名 '))
+      } else {
+        if (value.length > 3) {
+          callback(new Error('请输入正确的姓名，你个卵货'))
+        }
+        callback()
+      }
+    },
+    validateuserPhone(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('必须输入电话 '))
+      } else {
+        if (
+          !/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/.test(
+            value
+          )
+        ) {
+          callback(new Error('请输入正确的电话，你个卵货'))
+        }
+        callback()
+      }
+    },
     becomedefaultaddress() {
       defaultAddressList(this.$route.params.id)
-      // this.add()
     },
     // 删除
     deleteaddresslist() {
@@ -186,7 +210,7 @@ export default defineComponent({
       ((this.addressForm = res.data),
       (this.addressForm.defaultFlag =
         res.data?.defaultFlag == 1 ? true : false))
-    console.log(this.addressForm)
+
     Toast({
       message: '修改地址',
       position: 'bottom'
