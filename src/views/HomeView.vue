@@ -7,7 +7,9 @@
       </router-link>
       <div class="search">
         <span class="search-name">新蜂商城</span>
-        <a href="#" class="search-title">山河无恙，人间皆安</a>
+        <router-link to="./search" href="#" class="search-title"
+          >山河无恙，人间皆安</router-link
+        >
       </div>
       <router-link to="./user" href="#" class="header-user">
         <i class="iconfont">&#xe60f;</i>
@@ -35,7 +37,12 @@
     <div class="goods">
       <div class="goods-header">新品上线</div>
       <div class="goods-box">
-        <a class="goods-item" v-for="item in newGoods" :key="item.goodsId">
+        <a
+          class="goods-item"
+          v-for="item in newGoods"
+          :key="item.goodsId"
+          @click="goToDetail(item)"
+        >
           <img :src="item.goodsCoverImg" alt="" />
           <div class="goods-bottom">
             <div class="good-title">
@@ -50,7 +57,12 @@
     <div class="goods">
       <div class="goods-header">热门商品</div>
       <div class="goods-box">
-        <a class="goods-item" v-for="item in hotGoods" :key="item.goodsId">
+        <a
+          class="goods-item"
+          v-for="item in hotGoods"
+          :key="item.goodsId"
+          @click="goToDetail(item)"
+        >
           <img :src="item.goodsCoverImg" alt="" />
           <div class="goods-bottom">
             <div class="good-title">
@@ -69,6 +81,7 @@
           class="goods-item"
           v-for="item in recommendGoods"
           :key="item.goodsId"
+          @click="goToDetail(item)"
         >
           <img
             :src="
@@ -87,7 +100,6 @@
         </a>
       </div>
     </div>
-    <BottomNav></BottomNav>
   </div>
 </template>
 
@@ -175,18 +187,25 @@ export default defineComponent({
       recommendGoods: []
     }
   },
-  created() {
+  mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     getHomeData().then((res) => {
-      Toast({
-        message: '首页',
-        position: 'bottom'
-      })
+      // Toast({
+      //   message: '首页',
+      //   position: 'bottom'
+      // })
       this.hotGoods = res.data.hotGoodses
       this.newGoods = res.data.newGoodses
       this.recommendGoods = res.data.recommendGoodses
-    })
+      Toast.clear()
+    }),
+      this.scroll()
   },
   methods: {
+    goToDetail(item) {
+      // console.log(item)
+      this.$router.push({ path: `good/${item.goodsId}` })
+    },
     toast() {
       Toast('敬请期待')
     },
@@ -201,9 +220,6 @@ export default defineComponent({
           : (this.head.class = 'header')
       })
     }
-  },
-  mounted() {
-    this.scroll()
   }
 })
 </script>
@@ -212,6 +228,7 @@ export default defineComponent({
 a {
   text-decoration: none;
 }
+
 // 头部样式
 .header {
   width: 100%;
@@ -264,6 +281,7 @@ a {
     }
   }
 }
+
 .header-active {
   width: 100%;
   height: 50px;
@@ -275,18 +293,22 @@ a {
   top: 0;
   left: 0;
   z-index: 9999;
+
   .header-classify,
   .header-user {
     color: #fff;
   }
+
   .header-classify .iconfont {
     font-size: 20px;
     line-height: 50px;
   }
+
   .header-user .iconfont {
     font-size: 27px;
     line-height: 50px;
   }
+
   .search {
     width: 74%;
     background: #bbe7e7;
@@ -294,6 +316,7 @@ a {
     margin: 10px 0;
     display: flex;
     align-items: center;
+
     .search-name {
       color: #1baeae;
       font-size: 20px;
@@ -301,6 +324,7 @@ a {
       border-right: 1px solid #666;
       padding: 0 10px;
     }
+
     .search-title {
       color: #666;
       font-size: 10px;
@@ -309,16 +333,19 @@ a {
     }
   }
 }
+
 // 分类样式
 .categorylist-box {
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 0.34667rem;
+
   .categorylist {
     width: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     img {
       width: 0.96rem;
       height: 0.96rem;
@@ -326,10 +353,12 @@ a {
     }
   }
 }
+
 // 商品样式
 .goods {
   display: flex;
   flex-direction: column;
+
   .goods-header {
     height: 1.333333rem;
     background-color: #f9f9f9;
@@ -339,35 +368,42 @@ a {
     font-size: 0.42667rem;
     font-weight: 500;
   }
+
   .goods-box {
     display: flex;
     flex-wrap: wrap;
+
     .goods-item {
       display: flex;
       flex-direction: column;
       width: 50%;
       padding: 0.26667rem 0.26667rem;
       border-bottom: 1px solid #e9e9e9;
+
       img {
         display: block;
         width: 3.2rem;
         margin: 0 auto;
       }
+
       .goods-bottom {
         flex: 1;
         display: flex;
         flex-direction: column;
       }
+
       .good-title {
         font-size: 0.37333rem;
         text-align: center;
       }
+
       .good-price {
         color: #1baeae;
         text-align: center;
         font-size: 0.37333rem;
       }
     }
+
     .goods-item:nth-child(2n - 1) {
       border-right: 1px solid #e9e9e9;
     }

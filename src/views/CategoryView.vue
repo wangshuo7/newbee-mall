@@ -3,7 +3,7 @@
     <header>
       <el-icon color="#fff" size="20px" @click="$router.push({ name: 'home' })"
         ><ArrowLeftBold /></el-icon
-      ><input type="text" />
+      ><input type="text" @focus="$router.push({ name: 'search' })" />
     </header>
     <div class="content">
       <div class="left">
@@ -52,8 +52,6 @@
           </div>
         </div>
       </el-scrollbar>
-
-      <BottomNav></BottomNav>
     </div>
   </div>
 </template>
@@ -62,6 +60,7 @@
 import { defineComponent } from 'vue'
 import { getcategoryList } from '@/api/category'
 import { PriceTag, ArrowLeftBold } from '@element-plus/icons-vue'
+import { Toast } from 'vant'
 
 export default defineComponent({
   components: {
@@ -78,13 +77,14 @@ export default defineComponent({
     //获取商品分类列表
     getcate() {
       getcategoryList().then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         this.catelist = res.data
+        Toast.clear()
       })
     },
     //隐藏切换分类
     selectedType(item) {
-      console.log(item)
+      // console.log(item)
       this.flag = item
     },
     //跳转分类商品页面
@@ -93,6 +93,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     this.getcate()
   }
 })

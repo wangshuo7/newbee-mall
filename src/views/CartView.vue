@@ -7,7 +7,7 @@
       <i class="iconfont">&#xf0141;</i>
     </header>
     <!-- list -->
-    <div class="goods-list" v-if="listData.length !== 0">
+    <div class="goods-list" v-if="listData?.length !== 0">
       <!-- 复选框 -->
       <van-checkbox-group v-model="checked" @change="handelGroupAll">
         <van-swipe-cell
@@ -18,7 +18,16 @@
           <van-checkbox :name="item.cartItemId" checked-color="#1baeae">
             <div class="box-content">
               <div class="goods-img">
-                <img :src="item.goodsCoverImg" alt="" />
+                <img
+                  :src="
+                    item.goodsCoverImg.indexOf(
+                      'newbee-mall.oss-cn-beijing.aliyuncs.com'
+                    ) != -1
+                      ? item.goodsCoverImg
+                      : 'http://backend-api-01.newbee.ltd' + item.goodsCoverImg
+                  "
+                  alt=""
+                />
               </div>
               <div class="content-text">
                 <div class="goods-title">
@@ -56,7 +65,7 @@
       </van-checkbox-group>
     </div>
     <!-- 结算 -->
-    <div class="settlement" v-if="listData.length !== 0">
+    <div class="settlement" v-if="listData?.length !== 0">
       <van-checkbox
         v-model="checkedValue"
         @click="checkAll"
@@ -85,6 +94,7 @@
 import { defineComponent } from 'vue'
 import { getShopCart, putShopCart, deleteShopCart } from '@/api/cart'
 import { Toast } from 'vant'
+import { mapState, mapMutations } from 'vuex'
 export default defineComponent({
   data() {
     return {
@@ -95,32 +105,35 @@ export default defineComponent({
     }
   },
   computed: {
+    ...mapState(['iconNum']),
     totalPrice() {
       let sum = 0
-      let arr = this.listData.filter((item) => {
+      let arr = this.listData?.filter((item) => {
         return this.checked.find((prop) => {
           return prop === item.cartItemId
         })
       })
-      arr.forEach((item) => {
+      arr?.forEach((item) => {
         sum += item.goodsCount * item.sellingPrice
       })
       return sum
     }
   },
-  created() {
+  mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     this.getShopCartFunc()
   },
   methods: {
+    ...mapMutations(['changeIconNum']),
     onSubmit() {
       let cartItemIds = ''
-      console.log(JSON.stringify(this.checked))
+      // console.log(JSON.stringify(this.checked))
       this.checked.forEach((item) => {
         cartItemIds += item + ','
       })
-      cartItemIds = cartItemIds.substring(0, cartItemIds.length - 1)
-      console.log(cartItemIds)
-      if (this.checked.length !== 0) {
+      cartItemIds = cartItemIds.substring(0, cartItemIds?.length - 1)
+      // console.log(cartItemIds)
+      if (this.checked?.length !== 0) {
         this.$router.push('/orders?cartItemIds=' + cartItemIds)
       } else {
         Toast('请选择商品')
@@ -145,7 +158,7 @@ export default defineComponent({
      */
     handelGroupAll(value) {
       // 判断此时数据是否满足全选条件
-      if (value.length === this.listData.length) {
+      if (!!value.length && value.length === this.listData.length) {
         this.checkedValue = true
       } else {
         this.checkedValue = false
@@ -170,17 +183,16 @@ export default defineComponent({
      * @param {*} goodsCount 商品数量
      * @param {*} cartItemId 商品的itemId
      */
-    changeNum(goodsCount, cartItemId) {
+    async changeNum(goodsCount, cartItemId) {
       let sub_data = {
         goodsCount: Number(goodsCount),
         cartItemId
       }
-      putShopCart(sub_data).then((res) => {
-        if (res.resultCode !== 200) {
-          Toast(res.message)
-        }
-        this.getShopCartFunc()
-      })
+      let res = await putShopCart(sub_data)
+      if (res.resultCode !== 200) {
+        Toast(res.message)
+      }
+      this.getShopCartFunc()
     },
     /**
      * 请求购物车商品列表
@@ -188,6 +200,9 @@ export default defineComponent({
     getShopCartFunc() {
       getShopCart().then((res) => {
         this.listData = res.data
+        this.changeIconNum(res.data?.length)
+        Toast.clear()
+        // console.log(res)
       })
     }
   }
@@ -226,6 +241,7 @@ export default defineComponent({
   top: 60px;
   min-height: 40px;
   width: 100%;
+  padding-bottom: 100px;
 
   .van-checkbox {
     padding-left: 14px;
@@ -276,21 +292,21 @@ export default defineComponent({
   display: flex;
   position: fixed;
   width: 100%;
-  bottom: 60px;
+  bottom: 50px;
   padding: 14px;
   background-color: #fff;
-  border-top: 1px solid rgb(27, 174, 174);
+  // border-top: 1px solid rgb(27, 174, 174);
 }
-::v-deep .van-submit-bar__bar {
+:deep(.van-submit-bar__bar) {
   position: fixed;
-  bottom: 60px;
+  bottom: 52px;
   right: 14px;
 }
 .listnull {
   width: 50%;
   margin: 0 auto;
   text-align: center;
-  margin-top: 200px;
+  padding-top: 200px;
   div {
     font-size: 16px;
     margin-bottom: 20px;

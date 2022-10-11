@@ -2,7 +2,14 @@ import { createStore } from 'vuex'
 
 import createPersistedState from 'vuex-persistedstate'
 const store = createStore({
-  state() {},
+  state: {
+    iconNum: 0
+  },
+  mutations: {
+    changeIconNum(state, payload) {
+      state.iconNum = payload
+    }
+  },
   actions: {},
   plugins: [
     createPersistedState({
