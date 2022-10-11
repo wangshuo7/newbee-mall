@@ -201,7 +201,7 @@ export default defineComponent({
     getShopCartFunc() {
       getShopCart().then((res) => {
         this.listData = res.data
-        console.log(res)
+        // console.log(res)
       })
     }
   }
@@ -240,6 +240,7 @@ export default defineComponent({
   top: 60px;
   min-height: 40px;
   width: 100%;
+  padding-bottom: 100px;
 
   .van-checkbox {
     padding-left: 14px;
@@ -290,14 +291,14 @@ export default defineComponent({
   display: flex;
   position: fixed;
   width: 100%;
-  bottom: 60px;
+  bottom: 50px;
   padding: 14px;
   background-color: #fff;
   // border-top: 1px solid rgb(27, 174, 174);
 }
 :deep(.van-submit-bar__bar) {
   position: fixed;
-  bottom: 60px;
+  bottom: 52px;
   right: 14px;
 }
 .listnull {

@@ -34,7 +34,7 @@ export default defineComponent({
   created() {
     getShopCart().then((res) => {
       this.cartList = res.data
-      console.log(res.data)
+      // console.log(res.data)
     })
   },
   computed: {

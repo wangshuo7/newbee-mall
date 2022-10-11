@@ -101,7 +101,7 @@ export default defineComponent({
         this.pageNumber++
         this.search()
         this.lock = false
-        console.log(this.pageNumber)
+        // console.log(this.pageNumber)
       }
     })
   }

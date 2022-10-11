@@ -73,7 +73,7 @@ export default defineComponent({
         orderBy: '',
         pageNumber: this.pagemun
       }).then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         //因为需要多次获取渲染 所以需要push
         this.searchList.push(...res.data.list)
         //数据请求回来后再开锁

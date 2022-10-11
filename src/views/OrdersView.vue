@@ -33,7 +33,7 @@
           "
         />
       </div>
-      <div class="kong" v-if="flag"></div>
+      <div class="kong"></div>
     </div>
     <!-- 结算 -->
     <div class="pay-wrap">
@@ -55,11 +55,18 @@
         position="bottom"
         round
         :style="{ height: '30%' }"
+        @click-overlay="overlay"
       >
-        <van-button type="primary" block color="rgba(7,193,96,1)"
+        <van-button
+          type="primary"
+          block
+          color="rgba(7,193,96,1)"
+          @click="payType1"
           >微信支付</van-button
         >
-        <van-button type="primary" block>支付宝支付</van-button>
+        <van-button type="primary" block @click="payType2"
+          >支付宝支付</van-button
+        >
       </van-popup>
     </div>
   </div>
@@ -67,16 +74,15 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getShopCartOrders, getAddressDefault } from '@/api/cart'
+import {
+  getShopCartOrders,
+  getAddressDefault,
+  postsaveOrder,
+  paySuccess
+} from '@/api/cart'
+import { Toast } from 'vant'
 
 export default defineComponent({
-  mounted() {
-    let topScroll = document.documentElement.scrollTop
-    console.log(topScroll)
-    if (topScroll !== 0) {
-      this.flag = true
-    }
-  },
   computed: {
     ordersPrice() {
       let sum = 0
@@ -86,10 +92,55 @@ export default defineComponent({
       return sum
     }
   },
+
   methods: {
+    /**
+     * 点击微信支付支付宝支付
+     * 发送请求
+     */
+    payType1() {
+      paySuccess({
+        payType: 1,
+        orderNo: this.orderNo
+      }).then(() => {
+        // console.log(res)
+        this.$router.push({ name: 'order' })
+        Toast('微信支付成功')
+      })
+    },
+    payType2() {
+      paySuccess({
+        payType: 2,
+        orderNo: this.orderNo
+      }).then(() => {
+        // console.log(res, this.orderNo)
+        this.$router.push({ name: 'order' })
+        Toast('支付宝支付成功')
+      })
+    },
+    /**
+     * 点击遮罩层 触发事件页面跳转到我的订单
+     */
+    overlay() {
+      this.$router.push({ name: 'order' })
+    },
     showPopup() {
       this.show = true
-      // console.log(this.show)
+      let cartIdList = []
+      this.ordersList.forEach((item) => {
+        cartIdList.push(item.cartItemId)
+      })
+      // console.log(cartIdList)
+      /**
+       * 生成订单 发送请求
+       * */
+      postsaveOrder({
+        addressId: this.userInfo.addressId,
+        cartItemIds: cartIdList
+      }).then((res) => {
+        // console.log(res)
+        this.orderNo = res.data
+      })
     },
     toBack() {
       this.$router.go(-1)
@@ -97,6 +148,7 @@ export default defineComponent({
   },
   data() {
     return {
+      orderNo: null, // 订单号数据
       flag: false, // 空元素得到显示隐藏
       show: false,
       ordersList: [], // 产品列表
@@ -107,7 +159,6 @@ export default defineComponent({
     getShopCartOrders({
       cartItemIds: this.$route.query.cartItemIds
     }).then((res) => {
-      console.log(res)
       this.ordersList = res.data
     }),
       getAddressDefault().then((res) => {
@@ -177,27 +228,31 @@ export default defineComponent({
   background: #fff;
   .list-item {
     height: 120px;
-    margin-bottom: 15px;
     .van-card {
       background: #fff;
     }
   }
 }
-::v-deep .van-card__header {
+:deep(.van-card__header) {
+  height: 100px;
+  .van-card__content {
+    justify-content: space-around;
+  }
+}
+:deep(.van-image__img) {
   height: 100px;
 }
-::v-deep .van-image__img {
-  height: 100px;
-}
-::v-deep .van-card__price-integer {
+:deep(.van-card__price-integer) {
   color: red;
 }
-::v-deep .van-card__content {
+:deep(.van-card__content) {
   height: 88px;
 }
+
 .kong {
   width: 100%;
   height: 100px;
+  background: rgb(249, 249, 249);
 }
 // 结算
 .pay-wrap {
