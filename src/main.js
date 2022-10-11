@@ -7,6 +7,7 @@ import store from '@/store'
 // 引入element-plus的默认的css样式文件
 // import 'element-plus/dist/index.css'
 // 引入重置样式
+
 import 'normalize.css'
 // vant组件
 import { Icon, Swipe, SwipeItem, Toast } from 'vant'
