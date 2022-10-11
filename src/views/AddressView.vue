@@ -76,7 +76,8 @@ export default defineComponent({
           regionName: 'string',
           userId: 1,
           userName: 'string',
-          userPhone: 'string'
+          userPhone: 'string',
+          flag: false
         }
       ],
       fullPath: '',
@@ -102,18 +103,21 @@ export default defineComponent({
       this.$router.push(`addresslist/0`)
     },
     chooseAddress(event) {
-      console.log(event.target.getAttribute('_id'))
-      this.$router.replace(
-        this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
-      )
+      this.flag &&
+        this.$router.replace(
+          this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
+        )
     }
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       if (from.path == '/orders') {
+        vm.flag = true
         vm.fullPath = `${from.path}?cartItemIds=${from.query.cartItemIds}`
         // console.log(from)
         // this.$router.push(from.fullPath)
+      } else {
+        vm.flag = false
       }
     })
   }

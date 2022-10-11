@@ -144,7 +144,7 @@ export default defineComponent({
       })
     },
     toBack() {
-      this.$router.go(-1)
+      this.$router.push('/cart')
     },
     goAddress() {
       this.$router.push('/address')

@@ -40,7 +40,6 @@
         </div>
       </div>
     </div>
-    <BottomNav></BottomNav>
   </div>
 </template>
 
@@ -48,6 +47,7 @@
 import { defineComponent } from 'vue'
 import { getindex, getcategorys } from '@/api/category'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
+import { Toast } from 'vant'
 
 export default defineComponent({
   components: {
@@ -77,6 +77,7 @@ export default defineComponent({
         // console.log(res.data)
         this.hotGoodses = this.flag ? res.data.hotGoodses : res.data.newGoodses
         console.clear()
+        Toast.clear()
       })
     },
     //商品详情
@@ -94,7 +95,8 @@ export default defineComponent({
       this.getcatecon()
     }
   },
-  created() {
+  mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     this.getcatecon()
   }
 })

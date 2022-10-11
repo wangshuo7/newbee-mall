@@ -6,11 +6,17 @@
     </transition>
   </router-view> -->
   <router-view></router-view>
+  <BottomNav></BottomNav>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-export default defineComponent({})
+import BottomNav from '@/components/BottomNav.vue'
+export default defineComponent({
+  components: {
+    BottomNav
+  }
+})
 </script>
 
 <style lang="scss">

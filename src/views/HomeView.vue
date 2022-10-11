@@ -89,7 +89,6 @@
         </a>
       </div>
     </div>
-    <BottomNav></BottomNav>
   </div>
 </template>
 
@@ -177,7 +176,8 @@ export default defineComponent({
       recommendGoods: []
     }
   },
-  created() {
+  mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     getHomeData().then((res) => {
       // Toast({
       //   message: '首页',
@@ -186,7 +186,9 @@ export default defineComponent({
       this.hotGoods = res.data.hotGoodses
       this.newGoods = res.data.newGoodses
       this.recommendGoods = res.data.recommendGoodses
-    })
+      Toast.clear()
+    }),
+      this.scroll()
   },
   methods: {
     toast() {
@@ -203,9 +205,6 @@ export default defineComponent({
           : (this.head.class = 'header')
       })
     }
-  },
-  mounted() {
-    this.scroll()
   }
 })
 </script>

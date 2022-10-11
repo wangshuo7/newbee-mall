@@ -41,9 +41,7 @@
       >
     </div>
     <!-- nav -->
-    <div class="nav-bar">
-      <BottomNav></BottomNav>
-    </div>
+    <div class="nav-bar"></div>
   </div>
 </template>
 
@@ -51,11 +49,9 @@
 import { defineComponent } from 'vue'
 import { getUserInfo, loginOut } from '../api/user'
 import { Toast, Dialog } from 'vant'
-import BottomNav from '@/components/BottomNav.vue'
 import 'vant/es/dialog/style'
 
 export default defineComponent({
-  components: { BottomNav },
   data() {
     return {
       show: false,

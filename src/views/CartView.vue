@@ -78,7 +78,6 @@
         button-text="提交订单"
         @submit="onSubmit"
       />
-      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
     <!-- 没有商品 -->
     <div class="listnull" v-else>
@@ -87,9 +86,7 @@
       <van-button color="#1baeae" type="primary" @click="toHome" block
         >前往首页</van-button
       >
-      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
-    <BottomNav :num="listData.length"></BottomNav>
   </div>
 </template>
 
@@ -97,7 +94,7 @@
 import { defineComponent } from 'vue'
 import { getShopCart, putShopCart, deleteShopCart } from '@/api/cart'
 import { Toast } from 'vant'
-import BottomNav from '@/components/BottomNav.vue'
+import { mapState, mapMutations } from 'vuex'
 export default defineComponent({
   data() {
     return {
@@ -107,8 +104,8 @@ export default defineComponent({
       checkedValue: false // 全选标识
     }
   },
-  components: { BottomNav },
   computed: {
+    ...mapState(['iconNum']),
     totalPrice() {
       let sum = 0
       let arr = this.listData.filter((item) => {
@@ -122,10 +119,12 @@ export default defineComponent({
       return sum
     }
   },
-  created() {
+  mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     this.getShopCartFunc()
   },
   methods: {
+    ...mapMutations(['changeIconNum']),
     onSubmit() {
       let cartItemIds = ''
       // console.log(JSON.stringify(this.checked))
@@ -201,6 +200,9 @@ export default defineComponent({
     getShopCartFunc() {
       getShopCart().then((res) => {
         this.listData = res.data
+        this.changeIconNum(res.data.length)
+        console.log(this.iconNum)
+        Toast.clear()
         // console.log(res)
       })
     }
