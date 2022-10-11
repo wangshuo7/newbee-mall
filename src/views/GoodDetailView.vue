@@ -5,12 +5,11 @@
         <div class="detail-content">
             <div class="imagepreview">
                 <img :src="
-                  detail.goodsCoverImg.indexOf('http') >= 0
+                  !!detail.goodsCoverImg &&
+                  (detail.goodsCoverImg.indexOf('http') >= 0
                     ? detail.goodsCoverImg
-                    : `http://backend-api-01.newbee.ltd${detail.goodsCoverImg}`
+                    : `http://backend-api-01.newbee.ltd/${detail.goodsCoverImg}`)
                 " alt="" />
-
-                <!-- <img :src="detail.goodsCoverImg" alt="" /> -->
             </div>
 
             <div class="good-info">
@@ -36,7 +35,7 @@
         </div>
         <van-action-bar>
             <van-action-bar-icon icon="chat-o" text="客服" dot />
-            <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" :badge="!count ? '' : count" />
+            <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" :badge="!iconNum ? '' : iconNum" />
             <!-- <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" /> -->
             <van-action-bar-button color="#be99ff" type="warning" @click="handleAddCart" text="加入购物车" />
             <van-action-bar-button color="#7232dd" type="danger" @click="goToCart" text="立即购买" />
@@ -48,37 +47,43 @@
 import { defineComponent } from 'vue'
 import { getDetail } from '@/api/good.js'
 import { addCart, getShopCart } from '@/api/cart.js'
-// import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { Toast } from 'vant'
 
 export default defineComponent({
     data() {
         return {
-            count: null,
+            //   count: null,
             detail: []
         }
     },
 
     computed: {
-        // ...mapState(['count']),
+        ...mapState(['iconNum'])
     },
     created() {
         getDetail(this.$route.params.id).then((res) => {
             this.detail = res.data
+            console.log(this.detail)
         })
     },
     mounted() {
-        getShopCart().then((res) => {
-            // console.log(res)
-            // console.log(res.data.length)
-            // this.$store.count = res.data.length
-            // console.log(this.$store.count)
-            this.count = res.data.length
-        })
+        this.getCartList()
     },
     methods: {
-        // ...mapMutations(['updateCount']),
+        ...mapMutations(['changeIconNum']),
         // 去购物车
+
+        getCartList() {
+            getShopCart().then((res) => {
+                // console.log(res)
+                // console.log(res.data.length)
+                // this.$store.count = res.data.length
+                // console.log(this.$store.count)
+                //   this.count = res.data.length
+                this.changeIconNum(res.data.length)
+            })
+        },
         goToCart() {
             addCart({ goodsCount: 1, goodsId: this.detail.goodsId }).then((res) => {
                 console.log(res)
@@ -94,7 +99,8 @@ export default defineComponent({
                 // console.log(res)
                 if (res.resultCode == 200) {
                     Toast.success('添加成功')
-                    this.count++
+                    // this.count++
+                    this.getCartList()
                 }
             })
         },
@@ -125,6 +131,7 @@ export default defineComponent({
 
     .detail-content {
         width: 94%;
+        margin-top: 50px;
         align-self: center;
 
         .imagepreview {
