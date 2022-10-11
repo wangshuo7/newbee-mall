@@ -112,7 +112,7 @@ export default defineComponent({
     next((vm) => {
       if (from.path == '/orders') {
         vm.fullPath = `${from.path}?cartItemIds=${from.query.cartItemIds}`
-        console.log(from)
+        // console.log(from)
         // this.$router.push(from.fullPath)
       }
     })

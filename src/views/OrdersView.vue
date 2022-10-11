@@ -80,6 +80,7 @@ import {
   postsaveOrder,
   paySuccess
 } from '@/api/cart'
+import { getAddressList } from '@/api/address'
 import { Toast } from 'vant'
 
 export default defineComponent({
@@ -164,14 +165,23 @@ export default defineComponent({
     }).then((res) => {
       this.ordersList = res.data
     }),
-      getAddressDefault().then((res) => {
-        this.userInfo = res.data
-      })
+      !this.$route.query.addressId &&
+        getAddressDefault().then((res) => {
+          if (!res.data) {
+            this.$router.replace('/address')
+          } else {
+            this.userInfo = res.data
+          }
+        })
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       if (from.path == '/address') {
-        console.log(vm.$route)
+        // console.log(vm.$route.query.addressId)
+        getAddressList(vm.$route.query.addressId).then((res) => {
+          vm.userInfo = res.data
+          // console.log(res.data)
+        })
         // this.$router.push(from.fullPath)
       }
     })
