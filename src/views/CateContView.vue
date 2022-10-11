@@ -74,7 +74,7 @@ export default defineComponent({
     getcatecon() {
       //首页数据
       getindex().then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         this.hotGoodses = this.flag ? res.data.hotGoodses : res.data.newGoodses
         console.clear()
       })

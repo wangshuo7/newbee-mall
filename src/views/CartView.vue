@@ -78,7 +78,7 @@
         button-text="提交订单"
         @submit="onSubmit"
       />
-      <BottomNav></BottomNav>
+      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
     <!-- 没有商品 -->
     <div class="listnull" v-else>
@@ -87,7 +87,9 @@
       <van-button color="#1baeae" type="primary" @click="toHome" block
         >前往首页</van-button
       >
+      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
+    <BottomNav :num="listData.length"></BottomNav>
   </div>
 </template>
 
@@ -126,12 +128,12 @@ export default defineComponent({
   methods: {
     onSubmit() {
       let cartItemIds = ''
-      console.log(JSON.stringify(this.checked))
+      // console.log(JSON.stringify(this.checked))
       this.checked.forEach((item) => {
         cartItemIds += item + ','
       })
       cartItemIds = cartItemIds.substring(0, cartItemIds.length - 1)
-      console.log(cartItemIds)
+      // console.log(cartItemIds)
       if (this.checked.length !== 0) {
         this.$router.push('/orders?cartItemIds=' + cartItemIds)
       } else {
@@ -182,17 +184,16 @@ export default defineComponent({
      * @param {*} goodsCount 商品数量
      * @param {*} cartItemId 商品的itemId
      */
-    changeNum(goodsCount, cartItemId) {
+    async changeNum(goodsCount, cartItemId) {
       let sub_data = {
         goodsCount: Number(goodsCount),
         cartItemId
       }
-      putShopCart(sub_data).then((res) => {
-        if (res.resultCode !== 200) {
-          Toast(res.message)
-        }
-        this.getShopCartFunc()
-      })
+      let res = await putShopCart(sub_data)
+      if (res.resultCode !== 200) {
+        Toast(res.message)
+      }
+      this.getShopCartFunc()
     },
     /**
      * 请求购物车商品列表
@@ -200,6 +201,7 @@ export default defineComponent({
     getShopCartFunc() {
       getShopCart().then((res) => {
         this.listData = res.data
+        // console.log(res)
       })
     }
   }
@@ -238,6 +240,7 @@ export default defineComponent({
   top: 60px;
   min-height: 40px;
   width: 100%;
+  padding-bottom: 100px;
 
   .van-checkbox {
     padding-left: 14px;
@@ -288,21 +291,21 @@ export default defineComponent({
   display: flex;
   position: fixed;
   width: 100%;
-  bottom: 60px;
+  bottom: 50px;
   padding: 14px;
   background-color: #fff;
   // border-top: 1px solid rgb(27, 174, 174);
 }
 :deep(.van-submit-bar__bar) {
   position: fixed;
-  bottom: 60px;
+  bottom: 52px;
   right: 14px;
 }
 .listnull {
   width: 50%;
   margin: 0 auto;
   text-align: center;
-  margin-top: 200px;
+  padding-top: 200px;
   div {
     font-size: 16px;
     margin-bottom: 20px;

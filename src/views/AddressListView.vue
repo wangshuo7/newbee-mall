@@ -211,6 +211,7 @@ export default defineComponent({
       (this.addressForm.defaultFlag =
         res.data?.defaultFlag == 1 ? true : false))
 
+    // console.log(this.addressForm)
     Toast({
       message: '修改地址',
       position: 'bottom'

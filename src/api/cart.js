@@ -35,10 +35,30 @@ export function getShopCartOrders(data) {
   })
 }
 
+// 模拟支付成功回调的接口
+export function paySuccess(data) {
+  return request({
+    url: '/api/v1/paySuccess',
+    method: 'get',
+    params: {
+      ...data
+    }
+  })
+}
+
 // 生成订单地址接口
 export function getAddressDefault() {
   return request({
     url: '/api/v1/address/default',
     method: 'get'
+  })
+}
+
+// 点击生成订单接口
+export function postsaveOrder(data) {
+  return request({
+    url: '/api/v1/saveOrder',
+    method: 'post',
+    data
   })
 }

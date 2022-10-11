@@ -9,8 +9,11 @@
       <span>分类</span>
     </router-link>
     <router-link class="nav-list-item" :to="{ name: 'cart' }">
-      <i class="iconfont">&#xeab2;</i>
-      <span>购物车</span>
+      <van-action-bar-icon
+        icon="cart-o"
+        text="购物车"
+        :badge="cartNum ? cartNum : ''"
+      />
     </router-link>
     <router-link class="nav-list-item" :to="{ name: 'user' }">
       <i class="iconfont">&#xeab3;</i>
@@ -21,10 +24,26 @@
 
 <script>
 import { defineComponent } from 'vue'
-
-export default defineComponent({})
+import { getShopCart } from '@/api/cart.js'
+export default defineComponent({
+  data() {
+    return {
+      cartList: []
+    }
+  },
+  created() {
+    getShopCart().then((res) => {
+      this.cartList = res.data
+      // console.log(res.data)
+    })
+  },
+  computed: {
+    cartNum() {
+      return this.cartList.length
+    }
+  }
+})
 </script>
-
 <style lang="scss" scoped>
 .bottom-nav {
   width: 100%;
