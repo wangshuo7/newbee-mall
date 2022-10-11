@@ -95,7 +95,7 @@ router.beforeEach((to) => {
       ElMessage('登录状态有效，不需要重复登录了')
       return { name: 'home' }
     }
-  } else if (to.name === 'home') {
+  } else if (to.name == 'user') {
     if (!isLogin()) {
       // 如果用户登录了，清空了token，需要回到登录页面了
       return { name: 'login' }
