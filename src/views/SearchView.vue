@@ -1,10 +1,7 @@
 <template>
   <div class="out">
     <header>
-      <el-icon
-        color="#fff"
-        size="20px"
-        @click="$router.push({ name: 'category' })"
+      <el-icon color="#fff" size="20px" @click="$router.go(-1)"
         ><ArrowLeftBold
       /></el-icon>
       <input
