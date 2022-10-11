@@ -7,7 +7,9 @@
       </router-link>
       <div class="search">
         <span class="search-name">新蜂商城</span>
-        <router-link to="./search" href="#" class="search-title">山河无恙，人间皆安</router-link>
+        <router-link to="./search" href="#" class="search-title"
+          >山河无恙，人间皆安</router-link
+        >
       </div>
       <router-link to="./user" href="#" class="header-user">
         <i class="iconfont">&#xe60f;</i>
@@ -19,7 +21,12 @@
 
     <!-- 分类 -->
     <div class="categorylist-box">
-      <div class="categorylist" v-for="item in categoryList" :key="item.categoryId" @click="toast">
+      <div
+        class="categorylist"
+        v-for="item in categoryList"
+        :key="item.categoryId"
+        @click="toast"
+      >
         <img :src="item.imgUrl" alt="" />
         <span>{{ item.name }}</span>
       </div>
@@ -30,7 +37,12 @@
     <div class="goods">
       <div class="goods-header">新品上线</div>
       <div class="goods-box">
-        <a class="goods-item" v-for="item in newGoods" :key="item.goodsId" @click="goToDetail(item)">
+        <a
+          class="goods-item"
+          v-for="item in newGoods"
+          :key="item.goodsId"
+          @click="goToDetail(item)"
+        >
           <img :src="item.goodsCoverImg" alt="" />
           <div class="goods-bottom">
             <div class="good-title">
@@ -45,7 +57,12 @@
     <div class="goods">
       <div class="goods-header">热门商品</div>
       <div class="goods-box">
-        <a class="goods-item" v-for="item in hotGoods" :key="item.goodsId" @click="goToDetail(item)">
+        <a
+          class="goods-item"
+          v-for="item in hotGoods"
+          :key="item.goodsId"
+          @click="goToDetail(item)"
+        >
           <img :src="item.goodsCoverImg" alt="" />
           <div class="goods-bottom">
             <div class="good-title">
@@ -60,12 +77,20 @@
     <div class="goods">
       <div class="goods-header">最佳推荐</div>
       <div class="goods-box">
-        <a class="goods-item" v-for="item in recommendGoods" :key="item.goodsId" @click="goToDetail(item)">
-          <img :src="
-            item.goodsCoverImg.indexOf('http') >= 0
-              ? item.goodsCoverImg
-              : `http://backend-api-01.newbee.ltd${item.goodsCoverImg}`
-          " alt="" />
+        <a
+          class="goods-item"
+          v-for="item in recommendGoods"
+          :key="item.goodsId"
+          @click="goToDetail(item)"
+        >
+          <img
+            :src="
+              item.goodsCoverImg.indexOf('http') >= 0
+                ? item.goodsCoverImg
+                : `http://backend-api-01.newbee.ltd${item.goodsCoverImg}`
+            "
+            alt=""
+          />
           <div class="goods-bottom">
             <div class="good-title">
               {{ item.goodsName }}
