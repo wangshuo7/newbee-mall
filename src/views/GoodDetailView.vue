@@ -1,4 +1,47 @@
 <template>
+<<<<<<< HEAD
+    <!-- <van-notice-bar left-icon="volume-o" :text="detail.goodsIntro" /> -->
+    <div class="good-detail">
+        <van-nav-bar title="商品详情" left-text="返回" left-arrow @click-left="onClickLeft" />
+        <div class="detail-content">
+            <div class="imagepreview">
+                <img :src="
+                  !!detail.goodsCoverImg &&
+                  (detail.goodsCoverImg.indexOf('http') >= 0
+                    ? detail.goodsCoverImg
+                    : `http://backend-api-01.newbee.ltd/${detail.goodsCoverImg}`)
+                " alt="" />
+            </div>
+
+            <div class="good-info">
+                <div class="good-title">
+                    {{ detail.goodsName }}
+                </div>
+                <div class="good-desc">免邮费 顺丰快递</div>
+                <div class="good-price">
+                    <span><s>原价¥{{ detail.originalPrice }}</s></span>
+                    <span>现价¥{{ detail.sellingPrice }}</span>
+                </div>
+            </div>
+
+            <div class="good-intro">
+                <ul>
+                    <li>概述</li>
+                    <li>参数</li>
+                    <li>安装服务</li>
+                    <li>常见问题</li>
+                </ul>
+                <div class="good-content" v-html="detail.goodsDetailContent"></div>
+            </div>
+        </div>
+        <van-action-bar>
+            <van-action-bar-icon icon="chat-o" text="客服" dot />
+            <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" :badge="!iconNum ? '' : iconNum" />
+            <!-- <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" /> -->
+            <van-action-bar-button color="#be99ff" type="warning" @click="handleAddCart" text="加入购物车" />
+            <van-action-bar-button color="#7232dd" type="danger" @click="goToCart" text="立即购买" />
+        </van-action-bar>
+=======
   <!-- <van-notice-bar left-icon="volume-o" :text="detail.goodsIntro" /> -->
   <div class="good-detail">
     <van-nav-bar
@@ -43,6 +86,7 @@
         </ul>
         <div class="good-content" v-html="detail.goodsDetailContent"></div>
       </div>
+>>>>>>> 17fca259e0b3f4d3d6775ded753b0dbc9f7383d1
     </div>
     <van-action-bar>
       <van-action-bar-icon icon="chat-o" text="客服" dot />
@@ -73,10 +117,16 @@
 import { defineComponent } from 'vue'
 import { getDetail } from '@/api/good.js'
 import { addCart, getShopCart } from '@/api/cart.js'
-// import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { Toast } from 'vant'
 
 export default defineComponent({
+<<<<<<< HEAD
+    data() {
+        return {
+            //   count: null,
+            detail: []
+=======
   data() {
     return {
       count: null,
@@ -109,10 +159,66 @@ export default defineComponent({
         console.log(res)
         if (res.resultCode == 500) {
           Toast.success('已经添加到购物车')
+>>>>>>> 17fca259e0b3f4d3d6775ded753b0dbc9f7383d1
         }
       })
       this.$router.push({ path: '/cart' })
     },
+<<<<<<< HEAD
+
+    computed: {
+        ...mapState(['iconNum'])
+    },
+    created() {
+        getDetail(this.$route.params.id).then((res) => {
+            this.detail = res.data
+            console.log(this.detail)
+        })
+    },
+    mounted() {
+        this.getCartList()
+    },
+    methods: {
+        ...mapMutations(['changeIconNum']),
+        // 去购物车
+
+        getCartList() {
+            getShopCart().then((res) => {
+                // console.log(res)
+                // console.log(res.data.length)
+                // this.$store.count = res.data.length
+                // console.log(this.$store.count)
+                //   this.count = res.data.length
+                this.changeIconNum(res.data.length)
+            })
+        },
+        goToCart() {
+            addCart({ goodsCount: 1, goodsId: this.detail.goodsId }).then((res) => {
+                console.log(res)
+                if (res.resultCode == 500) {
+                    Toast.success('已经添加到购物车')
+                }
+            })
+            this.$router.push({ path: '/cart' })
+        },
+        // 添加购物车
+        handleAddCart() {
+            addCart({ goodsCount: 1, goodsId: this.detail.goodsId }).then((res) => {
+                // console.log(res)
+                if (res.resultCode == 200) {
+                    Toast.success('添加成功')
+                    // this.count++
+                    this.getCartList()
+                }
+            })
+        },
+        goTo() {
+            this.$router.push({ path: '/cart' })
+        },
+        onClickLeft() {
+            this.$router.go(-1)
+        }
+=======
     // 添加购物车
     handleAddCart() {
       addCart({ goodsCount: 1, goodsId: this.detail.goodsId }).then((res) => {
@@ -128,6 +234,7 @@ export default defineComponent({
     },
     onClickLeft() {
       this.$router.go(-1)
+>>>>>>> 17fca259e0b3f4d3d6775ded753b0dbc9f7383d1
     }
   }
 })
@@ -159,6 +266,12 @@ export default defineComponent({
       }
     }
 
+<<<<<<< HEAD
+    .detail-content {
+        width: 94%;
+        margin-top: 50px;
+        align-self: center;
+=======
     .good-info {
       .good-title {
         font-size: 18px;
@@ -184,6 +297,7 @@ export default defineComponent({
           color: #999;
           font-size: 16px;
         }
+>>>>>>> 17fca259e0b3f4d3d6775ded753b0dbc9f7383d1
 
         span:nth-child(2) {
           color: #f63515;
