@@ -12,7 +12,7 @@
         ref="inputdata"
         placeholder="请输入搜索内容"
       />
-      <button @click="find">搜索</button>
+      <button @click="click1">搜索</button>
     </header>
     <div class="img" v-show="isshow">
       <img src="../img/search.webp" alt="" />
@@ -50,7 +50,7 @@ export default defineComponent({
   },
   data() {
     return {
-      flag: false,
+      flag: true,
       searchList: [],
       pagemun: 1,
       isshow: true,
@@ -63,10 +63,19 @@ export default defineComponent({
     })
   },
   methods: {
+    //点击搜索按钮
+    click1() {
+      this.clear()
+      this.find()
+    },
     //搜索
+    //因为push的原因导致再次搜索的东西会在之前商品的下面，所以再次搜索清空数组，再请求回来后的得到新的数据，并清空滚动值
+    clear() {
+      this.searchList = []
+      document.documentElement.scrollTop = 0
+    },
     find() {
       this.isshow = false
-      this.flag = true
       tosearch({
         keyword: this.keyword,
         orderBy: '',
@@ -89,7 +98,7 @@ export default defineComponent({
     }
   },
   //懒加载
-  //当页面滚动值大于元素高度并且开锁 页码加一 发请求 再关锁
+  //当页面滚动值大于元素高度并且开锁状态 页码加一 发请求 再关锁
   mounted() {
     window.addEventListener('scroll', () => {
       let scroll = document.documentElement.scrollTop

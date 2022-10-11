@@ -15,6 +15,7 @@
       <p>（商品详情获取中......)</p>
     </div>
     <el-button type="primary" round @click="pushcar">加入购物车</el-button>
+    <BottomNav></BottomNav>
   </div>
 </template>
 
@@ -41,7 +42,6 @@ export default defineComponent({
   },
   computed: {
     imgurl() {
-      // console.log('222', this.detailsList)
       return (
         //判断地址里是否已携带一部分请求头
         !!this.detailsList.goodsCarouselList &&
@@ -56,6 +56,7 @@ export default defineComponent({
   },
 
   created() {
+    //请求商品详情
     console.log(this.$route)
     getcategorys(this.$route.params.id).then((res) => {
       console.table(res.data)
