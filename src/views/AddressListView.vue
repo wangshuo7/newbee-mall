@@ -126,7 +126,7 @@ export default defineComponent({
         callback(new Error('必须输入姓名 '))
       } else {
         if (value.length > 3) {
-          callback(new Error('请输入正确的姓名，你个卵货'))
+          callback(new Error('请输入正确的姓名'))
         }
         callback()
       }
@@ -140,7 +140,7 @@ export default defineComponent({
             value
           )
         ) {
-          callback(new Error('请输入正确的电话，你个卵货'))
+          callback(new Error('请输入正确的电话'))
         }
         callback()
       }

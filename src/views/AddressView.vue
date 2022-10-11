@@ -103,7 +103,7 @@ export default defineComponent({
     },
     chooseAddress(event) {
       console.log(event.target.getAttribute('_id'))
-      this.$router.push(
+      this.$router.replace(
         this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
       )
     }
