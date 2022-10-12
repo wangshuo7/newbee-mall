@@ -134,8 +134,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.out {
-}
 header {
   padding-left: 15px;
   height: 60px;
