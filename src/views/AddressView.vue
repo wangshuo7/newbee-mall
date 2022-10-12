@@ -110,7 +110,9 @@ export default defineComponent({
     next((vm) => {
       if (from.path == '/orders') {
         vm.fullPath = `${from.path}?cartItemIds=${from.query.cartItemIds}`
-      } else {
+      } else if (vm.$route.query.cartItemIds) {
+        vm.fullPath = `/orders?cartItemIds=${vm.$route.query.cartItemIds}`
+      }else {
         vm.fullPath = ''
       }
     })

@@ -147,7 +147,7 @@ export default defineComponent({
       this.$router.push('/cart')
     },
     goAddress() {
-      this.$router.push('/address')
+      this.$router.push('/address?cartItemIds='+ this.$route.query.cartItemIds)
     }
   },
   data() {
@@ -179,6 +179,7 @@ export default defineComponent({
     next((vm) => {
       if (from.path == '/address') {
         // console.log(vm.$route.query.addressId)
+        !!vm.$route.query.addressId &&
         getAddressList(vm.$route.query.addressId).then((res) => {
           vm.userInfo = res.data
           // console.log(res.data)
