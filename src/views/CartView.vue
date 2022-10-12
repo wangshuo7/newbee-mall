@@ -7,7 +7,7 @@
       <i class="iconfont">&#xf0141;</i>
     </header>
     <!-- list -->
-    <div class="goods-list" v-if="listData.length !== 0">
+    <div class="goods-list" v-if="listData?.length !== 0">
       <!-- 复选框 -->
       <van-checkbox-group v-model="checked" @change="handelGroupAll">
         <van-swipe-cell
@@ -65,7 +65,7 @@
       </van-checkbox-group>
     </div>
     <!-- 结算 -->
-    <div class="settlement" v-if="listData.length !== 0">
+    <div class="settlement" v-if="listData?.length !== 0">
       <van-checkbox
         v-model="checkedValue"
         @click="checkAll"
@@ -78,7 +78,6 @@
         button-text="提交订单"
         @submit="onSubmit"
       />
-      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
     <!-- 没有商品 -->
     <div class="listnull" v-else>
@@ -87,9 +86,7 @@
       <van-button color="#1baeae" type="primary" @click="toHome" block
         >前往首页</van-button
       >
-      <!-- <BottomNav :num="listData.length"></BottomNav> -->
     </div>
-    <BottomNav :num="listData.length"></BottomNav>
   </div>
 </template>
 
@@ -97,7 +94,7 @@
 import { defineComponent } from 'vue'
 import { getShopCart, putShopCart, deleteShopCart } from '@/api/cart'
 import { Toast } from 'vant'
-import BottomNav from '@/components/BottomNav.vue'
+import { mapState, mapMutations } from 'vuex'
 export default defineComponent({
   data() {
     return {
@@ -107,34 +104,36 @@ export default defineComponent({
       checkedValue: false // 全选标识
     }
   },
-  components: { BottomNav },
   computed: {
+    ...mapState(['iconNum']),
     totalPrice() {
       let sum = 0
-      let arr = this.listData.filter((item) => {
+      let arr = this.listData?.filter((item) => {
         return this.checked.find((prop) => {
           return prop === item.cartItemId
         })
       })
-      arr.forEach((item) => {
+      arr?.forEach((item) => {
         sum += item.goodsCount * item.sellingPrice
       })
       return sum
     }
   },
-  created() {
+  mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     this.getShopCartFunc()
   },
   methods: {
+    ...mapMutations(['changeIconNum']),
     onSubmit() {
       let cartItemIds = ''
       // console.log(JSON.stringify(this.checked))
       this.checked.forEach((item) => {
         cartItemIds += item + ','
       })
-      cartItemIds = cartItemIds.substring(0, cartItemIds.length - 1)
+      cartItemIds = cartItemIds.substring(0, cartItemIds?.length - 1)
       // console.log(cartItemIds)
-      if (this.checked.length !== 0) {
+      if (this.checked?.length !== 0) {
         this.$router.push('/orders?cartItemIds=' + cartItemIds)
       } else {
         Toast('请选择商品')
@@ -159,7 +158,7 @@ export default defineComponent({
      */
     handelGroupAll(value) {
       // 判断此时数据是否满足全选条件
-      if (value.length === this.listData.length) {
+      if (!!value.length && value.length === this.listData.length) {
         this.checkedValue = true
       } else {
         this.checkedValue = false
@@ -201,6 +200,8 @@ export default defineComponent({
     getShopCartFunc() {
       getShopCart().then((res) => {
         this.listData = res.data
+        this.changeIconNum(res.data?.length)
+        Toast.clear()
         // console.log(res)
       })
     }

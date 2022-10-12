@@ -72,7 +72,8 @@ export default defineComponent({
           regionName: 'string',
           userId: 1,
           userName: 'string',
-          userPhone: 'string'
+          userPhone: 'string',
+          flag: false
         }
       ],
       fullPath: '',
@@ -100,8 +101,7 @@ export default defineComponent({
     },
     chooseAddress(event) {
       !!this.fullPath &&
-        !!event.target.getAttribute('_id') &&
-        this.$router.replace(
+        !!event.target.getAttribute('_id') && this.$router.replace(
           this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
         )
     }

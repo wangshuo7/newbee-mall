@@ -7,6 +7,7 @@ import store from '@/store'
 // 引入element-plus的默认的css样式文件
 // import 'element-plus/dist/index.css'
 // 引入重置样式
+
 import 'normalize.css'
 // vant组件
 import { Icon, Swipe, SwipeItem, Toast } from 'vant'
@@ -19,7 +20,18 @@ import 'lib-flexible/flexible'
 
 // vant按需引入
 import { Checkbox, CheckboxGroup } from 'vant'
-import { Stepper, Card, Button, SwipeCell, SubmitBar, Popup } from 'vant'
+import {
+  Stepper,
+  Card,
+  Button,
+  SwipeCell,
+  SubmitBar,
+  Popup,
+  NoticeBar,
+  ActionBar,
+  ActionBarIcon,
+  ActionBarButton
+} from 'vant'
 createApp(App)
   .use(Checkbox)
   .use(CheckboxGroup)
@@ -34,5 +46,9 @@ createApp(App)
   .use(Icon)
   .use(Swipe)
   .use(SwipeItem)
+  .use(NoticeBar)
+  .use(ActionBar)
+  .use(ActionBarIcon)
+  .use(ActionBarButton)
   .use(Toast)
   .mount('#app')

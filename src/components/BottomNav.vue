@@ -12,7 +12,7 @@
       <van-action-bar-icon
         icon="cart-o"
         text="购物车"
-        :badge="cartNum ? cartNum : ''"
+        :badge="iconNum ? iconNum : ''"
       />
     </router-link>
     <router-link class="nav-list-item" :to="{ name: 'user' }">
@@ -24,20 +24,16 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getShopCart } from '@/api/cart.js'
+// import { getShopCart } from '@/api/cart.js'
+import { mapState } from 'vuex'
 export default defineComponent({
   data() {
     return {
       cartList: []
     }
   },
-  created() {
-    getShopCart().then((res) => {
-      this.cartList = res.data
-      // console.log(res.data)
-    })
-  },
   computed: {
+    ...mapState(['iconNum']),
     cartNum() {
       return this.cartList.length
     }

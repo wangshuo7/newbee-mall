@@ -1,7 +1,7 @@
 <template>
   <div id="bigbox">
     <header>
-      <el-icon color="#fff" size="20px" @click="$router.push({ name: 'home' })"
+      <el-icon color="#fff" size="20px" @click="$router.go(-1)"
         ><ArrowLeftBold /></el-icon
       ><input type="text" @focus="$router.push({ name: 'search' })" />
     </header>
@@ -52,8 +52,6 @@
           </div>
         </div>
       </el-scrollbar>
-
-      <BottomNav></BottomNav>
     </div>
   </div>
 </template>
@@ -62,6 +60,7 @@
 import { defineComponent } from 'vue'
 import { getcategoryList } from '@/api/category'
 import { PriceTag, ArrowLeftBold } from '@element-plus/icons-vue'
+import { Toast } from 'vant'
 
 export default defineComponent({
   components: {
@@ -80,6 +79,7 @@ export default defineComponent({
       getcategoryList().then((res) => {
         // console.log(res.data)
         this.catelist = res.data
+        Toast.clear()
       })
     },
     //隐藏切换分类
@@ -93,6 +93,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     this.getcate()
   }
 })

@@ -62,3 +62,12 @@ export function postsaveOrder(data) {
     data
   })
 }
+
+// 添加购物车
+export function addCart(data) {
+  return request({
+    url: '/api/v1/shop-cart',
+    method: 'post',
+    data
+  })
+}

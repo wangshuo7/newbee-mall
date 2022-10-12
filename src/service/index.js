@@ -39,8 +39,9 @@ axios.interceptors.response.use((response) => {
   // Toast.clear()
   response?.data?.resultCode === 200 ? '' : Toast.fail(response?.data?.message)
 
+  console.log(response.data.resultCode)
   // token过期
-  if (response.data?.resultCode === '416') {
+  if (response.data?.resultCode === 416) {
     localStorage.removeItem('token')
     router.push('/login')
   }

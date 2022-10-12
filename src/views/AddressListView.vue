@@ -202,10 +202,12 @@ export default defineComponent({
     }
   },
   async mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     let res =
       this.$route.params.id != (0 || null)
         ? await getAddressList(this.$route.params.id)
         : ''
+    Toast.clear()
     !!res.data &&
       ((this.addressForm = res.data),
       (this.addressForm.defaultFlag =

@@ -5,12 +5,20 @@
       <component :is="Component" />
     </transition>
   </router-view> -->
+
   <router-view></router-view>
+  <BottomNav v-if="$route.path !== '/orders'"></BottomNav>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-export default defineComponent({})
+import BottomNav from '@/components/BottomNav.vue'
+export default defineComponent({
+  name: 'demo',
+  components: {
+    BottomNav
+  }
+})
 </script>
 
 <style lang="scss">
