@@ -32,12 +32,6 @@ export default defineComponent({
       cartList: []
     }
   },
-  // mounted() {
-  //   getShopCart().then((res) => {
-  //     this.cartList = res.data
-  //     // console.log(res.data)
-  //   })
-  // },
   computed: {
     ...mapState(['iconNum']),
     cartNum() {
