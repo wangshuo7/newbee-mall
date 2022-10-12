@@ -86,7 +86,7 @@ export default defineComponent({
   methods: {
     // 后退
     goBack() {
-      this.$router.go(-1)
+      this.$router.replace('/')
     },
     goTo(val) {
       this.$router.push({ path: val })

@@ -148,7 +148,7 @@ export default defineComponent({
       this.$router.push('/cart')
     },
     goAddress() {
-      this.$router.push('/address')
+      this.$router.push('/address?cartItemIds='+ this.$route.query.cartItemIds)
     }
   },
   data() {
@@ -166,19 +166,21 @@ export default defineComponent({
     }).then((res) => {
       this.ordersList = res.data
     }),
-      !this.$route.query.addressId &&
-        getAddressDefault().then((res) => {
-          if (!res.data) {
-            this.$router.replace('/address')
-          } else {
-            this.userInfo = res.data
-          }
-        })
+
+    !this.$route.query.addressId &&
+    getAddressDefault().then((res) => {
+      if (!res.data) {
+        this.$router.replace('/address')
+      } else {
+        this.userInfo = res.data
+      }
+    })
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       if (from.path == '/address') {
         // console.log(vm.$route.query.addressId)
+        !!vm.$route.query.addressId &&
         getAddressList(vm.$route.query.addressId).then((res) => {
           vm.userInfo = res.data
           // console.log(res.data)

@@ -204,7 +204,7 @@ export default defineComponent({
   async mounted() {
     Toast.loading({ message: '加载中...', forbidClick: true })
     let res =
-      this.$route.params.id != 0
+      this.$route.params.id != (0 || null)
         ? await getAddressList(this.$route.params.id)
         : ''
     Toast.clear()
@@ -213,7 +213,6 @@ export default defineComponent({
       (this.addressForm.defaultFlag =
         res.data?.defaultFlag == 1 ? true : false))
 
-    // console.log(this.addressForm)
     Toast({
       message: '修改地址',
       position: 'bottom'

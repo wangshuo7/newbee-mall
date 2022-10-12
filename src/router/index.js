@@ -48,6 +48,12 @@ export const routes = [
     name: 'order',
     component: () => import('@/views/OrderView.vue')
   },
+  // 订单详情
+  {
+    path: '/order-detail/:id',
+    name: 'order-detail',
+    component: () => import('@/views/OrderDetailView.vue')
+  },
   {
     path: '/orders',
     name: 'orders',
