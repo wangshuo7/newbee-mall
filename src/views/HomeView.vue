@@ -212,7 +212,6 @@ export default defineComponent({
     scroll() {
       window.addEventListener('scroll', () => {
         let scrollTop =
-          window.pageYOffset ||
           document.documentElement.scrollTop ||
           document.body.scrollTop
         scrollTop > 100
