@@ -6,7 +6,7 @@
     </transition>
   </router-view> -->
   <router-view></router-view>
-  <BottomNav></BottomNav>
+  <BottomNav v-if="$route.path !== '/orders'"></BottomNav>
 </template>
 
 <script>
