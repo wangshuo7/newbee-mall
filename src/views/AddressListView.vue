@@ -203,7 +203,7 @@ export default defineComponent({
   },
   async mounted() {
     let res =
-      this.$route.params.id != 0
+      this.$route.params.id != (0 || null)
         ? await getAddressList(this.$route.params.id)
         : ''
     !!res.data &&
@@ -211,7 +211,6 @@ export default defineComponent({
       (this.addressForm.defaultFlag =
         res.data?.defaultFlag == 1 ? true : false))
 
-    // console.log(this.addressForm)
     Toast({
       message: '修改地址',
       position: 'bottom'

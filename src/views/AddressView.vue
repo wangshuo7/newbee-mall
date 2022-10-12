@@ -32,11 +32,7 @@
             v-show="!!item.defaultFlag"
             >默认</van-tag
           >
-          <el-button
-            :_id="item.addressId"
-            @click="getaddresslist(item.addressId)"
-            >修改</el-button
-          >
+          <el-button @click="getaddresslist(item.addressId)">修改</el-button>
         </div>
       </div>
     </el-main>
@@ -97,23 +93,25 @@ export default defineComponent({
   methods: {
     getaddresslist(id) {
       this.$router.push(`/addresslist/${id}`)
+      console.log(id)
     },
     toaddressList() {
       this.$router.push(`addresslist/0`)
     },
     chooseAddress(event) {
-      console.log(event.target.getAttribute('_id'))
-      this.$router.replace(
-        this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
-      )
+      !!this.fullPath &&
+        !!event.target.getAttribute('_id') &&
+        this.$router.replace(
+          this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
+        )
     }
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       if (from.path == '/orders') {
         vm.fullPath = `${from.path}?cartItemIds=${from.query.cartItemIds}`
-        // console.log(from)
-        // this.$router.push(from.fullPath)
+      } else {
+        vm.fullPath = ''
       }
     })
   }
