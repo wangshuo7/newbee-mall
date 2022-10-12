@@ -7,7 +7,7 @@
       <i class="iconfont">&#xf0141;</i>
     </header>
     <!-- 地址信息栏 -->
-    <div class="address">
+    <div class="address" @click="goAddress">
       <div>
         <p>{{ userInfo.userName }} {{ userInfo.userPhone }}</p>
         <p>
@@ -24,7 +24,13 @@
           :num="item.goodsCount"
           :price="item.sellingPrice"
           :title="item.goodsName"
-          :thumb="item.goodsCoverImg"
+          :thumb="
+            item.goodsCoverImg.indexOf(
+              'newbee-mall.oss-cn-beijing.aliyuncs.com'
+            ) != -1
+              ? item.goodsCoverImg
+              : 'http://backend-api-01.newbee.ltd' + item.goodsCoverImg
+          "
         />
       </div>
       <div class="kong"></div>
@@ -44,14 +50,38 @@
       >
     </div>
     <div>
-      <van-popup v-model="show" position="top" :style="{ height: '30%' }" />
+      <van-popup
+        v-model:show="show"
+        position="bottom"
+        round
+        :style="{ height: '30%' }"
+        @click-overlay="overlay"
+      >
+        <van-button
+          type="primary"
+          block
+          color="rgba(7,193,96,1)"
+          @click="payType1"
+          >微信支付</van-button
+        >
+        <van-button type="primary" block @click="payType2"
+          >支付宝支付</van-button
+        >
+      </van-popup>
     </div>
   </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import { getShopCartOrders, getAddressDefault } from '@/api/cart'
+import {
+  getShopCartOrders,
+  getAddressDefault,
+  postsaveOrder,
+  paySuccess
+} from '@/api/cart'
+import { getAddressList } from '@/api/address'
+import { Toast } from 'vant'
 
 export default defineComponent({
   computed: {
@@ -63,17 +93,67 @@ export default defineComponent({
       return sum
     }
   },
+
   methods: {
+    /**
+     * 点击微信支付支付宝支付
+     * 发送请求
+     */
+    payType1() {
+      paySuccess({
+        payType: 1,
+        orderNo: this.orderNo
+      }).then(() => {
+        // console.log(res)
+        this.$router.push({ name: 'order' })
+        Toast('微信支付成功')
+      })
+    },
+    payType2() {
+      paySuccess({
+        payType: 2,
+        orderNo: this.orderNo
+      }).then(() => {
+        // console.log(res, this.orderNo)
+        this.$router.push({ name: 'order' })
+        Toast('支付宝支付成功')
+      })
+    },
+    /**
+     * 点击遮罩层 触发事件页面跳转到我的订单
+     */
+    overlay() {
+      this.$router.push({ name: 'order' })
+    },
     showPopup() {
       this.show = true
-      console.log(this.show)
+      let cartIdList = []
+      this.ordersList.forEach((item) => {
+        cartIdList.push(item.cartItemId)
+      })
+      // console.log(cartIdList)
+      /**
+       * 生成订单 发送请求
+       * */
+      postsaveOrder({
+        addressId: this.userInfo.addressId,
+        cartItemIds: cartIdList
+      }).then((res) => {
+        // console.log(res)
+        this.orderNo = res.data
+      })
     },
     toBack() {
-      this.$router.go(-1)
+      this.$router.push('/cart')
+    },
+    goAddress() {
+      this.$router.push('/address')
     }
   },
   data() {
     return {
+      orderNo: null, // 订单号数据
+      flag: false, // 空元素得到显示隐藏
       show: false,
       ordersList: [], // 产品列表
       userInfo: [] // 收件人信息
@@ -83,17 +163,43 @@ export default defineComponent({
     getShopCartOrders({
       cartItemIds: this.$route.query.cartItemIds
     }).then((res) => {
-      console.log(res)
       this.ordersList = res.data
     }),
-      getAddressDefault().then((res) => {
-        this.userInfo = res.data
-      })
+      !this.$route.query.addressId &&
+        getAddressDefault().then((res) => {
+          if (!res.data) {
+            this.$router.replace('/address')
+          } else {
+            this.userInfo = res.data
+          }
+        })
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      if (from.path == '/address') {
+        // console.log(vm.$route.query.addressId)
+        getAddressList(vm.$route.query.addressId).then((res) => {
+          vm.userInfo = res.data
+          // console.log(res.data)
+        })
+        // this.$router.push(from.fullPath)
+      }
+    })
   }
 })
 </script>
 
 <style lang="scss" scoped>
+:deep(.van-popup) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  .van-button {
+    margin-bottom: 15px;
+    border-radius: 10px;
+  }
+}
 .cart-container {
   width: 100%;
   height: 100%;
@@ -143,27 +249,31 @@ export default defineComponent({
   background: #fff;
   .list-item {
     height: 120px;
-    margin-bottom: 15px;
     .van-card {
       background: #fff;
     }
   }
 }
-::v-deep .van-card__header {
+:deep(.van-card__header) {
+  height: 100px;
+  .van-card__content {
+    justify-content: space-around;
+  }
+}
+:deep(.van-image__img) {
   height: 100px;
 }
-::v-deep .van-image__img {
-  height: 100px;
-}
-::v-deep .van-card__price-integer {
+:deep(.van-card__price-integer) {
   color: red;
 }
-::v-deep .van-card__content {
+:deep(.van-card__content) {
   height: 88px;
 }
+
 .kong {
   width: 100%;
   height: 100px;
+  background: rgb(249, 249, 249);
 }
 // 结算
 .pay-wrap {

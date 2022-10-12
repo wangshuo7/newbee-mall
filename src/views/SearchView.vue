@@ -1,12 +1,10 @@
 <template>
   <div class="out">
     <header>
-      <el-icon
-        color="#fff"
-        size="20px"
-        @click="$router.push({ name: 'category' })"
-        ><ArrowLeftBold /></el-icon
-      ><input
+      <el-icon color="#fff" size="20px" @click="$router.go(-1)"
+        ><ArrowLeftBold
+      /></el-icon>
+      <input
         type="text"
         v-model="keyword"
         ref="inputdata"
@@ -81,7 +79,7 @@ export default defineComponent({
         orderBy: '',
         pageNumber: this.pagemun
       }).then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         //因为需要多次获取渲染 所以需要push
         this.searchList.push(...res.data.list)
         //数据请求回来后再开锁
@@ -93,7 +91,7 @@ export default defineComponent({
     //去详情
     todetail(id) {
       getcategorys(id).then(() => {
-        this.$router.push('/details/' + id)
+        this.$router.push('/good/' + id)
       })
     }
   },

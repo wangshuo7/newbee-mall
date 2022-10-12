@@ -1,16 +1,21 @@
 <template>
   <!-- 页面过渡动画 -->
-  <router-view v-slot="{ Component }">
+  <!-- <router-view v-slot="{ Component }">
     <transition name="slide">
       <component :is="Component" />
     </transition>
-  </router-view>
+  </router-view> -->
+
+  <router-view></router-view>
+
+  <BottomNav></BottomNav>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import BottomNav from './components/BottomNav.vue'
+import BottomNav from '@/components/BottomNav.vue'
 export default defineComponent({
+  name: 'demo',
   components: {
     BottomNav
   }

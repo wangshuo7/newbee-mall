@@ -30,12 +30,6 @@ export const routes = [
     name: 'cates',
     component: () => import('@/views/CateContView.vue')
   },
-  //商品详情
-  {
-    path: '/details/:id',
-    name: 'details',
-    component: () => import('@/views/comdetailsView.vue')
-  },
   // 购物车
   {
     path: '/cart',
@@ -54,17 +48,34 @@ export const routes = [
     name: 'order',
     component: () => import('@/views/OrderView.vue')
   },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: () => import('@/views/OrdersView.vue')
+    // 账户管理
+  },
   // 地址
   {
     path: '/address',
     name: 'address',
     component: () => import('@/views/AddressView.vue')
   },
+  {
+    path: '/addresslist/:id',
+    name: 'addresslist',
+    component: () => import('@/views/AddressListView.vue')
+  },
   // 账户管理
   {
     path: '/setting',
     name: 'setting',
     component: () => import('@/views/SettingView.vue')
+  },
+  // 商品细节
+  {
+    path: '/good/:id',
+    name: 'good',
+    component: () => import('@/views/GoodDetailView.vue')
   }
 ]
 
@@ -84,7 +95,7 @@ router.beforeEach((to) => {
       ElMessage('登录状态有效，不需要重复登录了')
       return { name: 'home' }
     }
-  } else if (to.name === 'home') {
+  } else if (to.name == 'user') {
     if (!isLogin()) {
       // 如果用户登录了，清空了token，需要回到登录页面了
       return { name: 'login' }
