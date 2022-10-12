@@ -12,9 +12,9 @@
     <el-menu
       class="el-menu-demo"
       mode="horizontal"
-      background-color="#1baeae"
+      background-color="transparent"
       text-color="#fff"
-      active-text-color="rgb(32 118 198);"
+      active-text-color="#fff"
     >
       <el-menu-item index="1" @click="qiehuan">推荐</el-menu-item>
       <el-menu-item index="3" @click="qiehuan2">新品</el-menu-item>
@@ -90,10 +90,14 @@ export default defineComponent({
 #box {
   position: relative;
 }
+.el-menu {
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+}
 .el-menu--horizontal {
   justify-content: space-around;
+  align-items: center;
   position: fixed;
-  top: 60px;
+  top: 50px;
   width: 100%;
 }
 .el-menu-demo {
@@ -101,18 +105,26 @@ export default defineComponent({
 }
 .el-menu-item {
   border-radius: 35px;
+  height: 30px;
+}
+// .is-active {
+//   border: 0;
+// }
+.el-menu-item:not(.is-disabled):hover {
+  background-color: rgb(254, 166, 227);
+  border: 1px solid orange;
 }
 
 .el-menu--horizontal > .el-menu-item {
   font-size: 20px;
 }
 #all {
-  padding: 130px 0 50px 0;
+  padding: 90px 0 50px 0;
 }
 header {
   padding-left: 15px;
-  height: 60px;
-  background-color: #1baeae;
+  height: 50px;
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
   position: fixed;
   display: flex;
   align-items: center;

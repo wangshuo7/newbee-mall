@@ -109,8 +109,8 @@ export default defineComponent({
 }
 header {
   padding-left: 15px;
-  height: 60px;
-  background-color: #1baeae;
+  height: 50px;
+  background:linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
   position: fixed;
   display: flex;
   align-items: center;

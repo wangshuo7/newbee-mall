@@ -55,13 +55,13 @@
       />
       <!-- <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" /> -->
       <van-action-bar-button
-        color="linear-gradient(90deg, #6bd8d8, #1baeae)"
+        color="linear-gradient(250deg, #ff0844 0%, #ffb199 100%)"
         type="warning"
         @click="handleAddCart"
         text="加入购物车"
       />
       <van-action-bar-button
-        color="linear-gradient(90deg, #0dc3c3, #098888)"
+        color="linear-gradient(250deg, #ff0844 0%, #ffb199 100%)"
         type="danger"
         @click="goToCart"
         text="立即购买"

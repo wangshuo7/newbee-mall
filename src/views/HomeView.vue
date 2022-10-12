@@ -243,12 +243,13 @@ a {
 
   .header-classify,
   .header-user {
-    color: #1baeae;
+    color: #ff0844;
   }
 
   .header-classify .iconfont {
     font-size: 20px;
     line-height: 50px;
+    color: #ff0844;
   }
 
   .header-user .iconfont {
@@ -265,7 +266,7 @@ a {
     align-items: center;
 
     .search-name {
-      color: #1baeae;
+      color: #ff0844;
       font-size: 20px;
       font-weight: 700;
       border-right: 1px solid #666;
@@ -284,7 +285,7 @@ a {
 .header-active {
   width: 100%;
   height: 50px;
-  background-color: #1baeae;
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
   padding: 0 15px;
   display: flex;
   justify-content: space-between;
@@ -317,7 +318,7 @@ a {
     align-items: center;
 
     .search-name {
-      color: #1baeae;
+      color: #e455f4;
       font-size: 20px;
       font-weight: 700;
       border-right: 1px solid #666;
@@ -363,7 +364,7 @@ a {
     background-color: #f9f9f9;
     line-height: 1.33333rem;
     text-align: center;
-    color: #1baeae;
+    color: #e455f4;
     font-size: 0.42667rem;
     font-weight: 500;
   }

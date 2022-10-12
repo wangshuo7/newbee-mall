@@ -44,7 +44,8 @@
       <van-button
         @click="showPopup"
         class="pay-btn"
-        color="#1baeae"
+        color="#ff0844"
+        style="border:0;"
         type="primary"
         >生成订单</van-button
       >

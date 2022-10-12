@@ -60,7 +60,7 @@ export default defineComponent({
     align-items: center;
     &.router-link-active {
       // 表示router-link激活选中时的状态
-      color: #1baeae;
+      color: #f5576c;
     }
     .iconfont {
       font-size: 22px;

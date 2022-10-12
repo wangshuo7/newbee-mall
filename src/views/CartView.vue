@@ -15,7 +15,7 @@
           v-for="item in listData"
           :key="item"
         >
-          <van-checkbox :name="item.cartItemId" checked-color="#1baeae">
+          <van-checkbox :name="item.cartItemId" checked-color="#ff0844">
             <div class="box-content">
               <div class="goods-img">
                 <img
@@ -69,12 +69,12 @@
       <van-checkbox
         v-model="checkedValue"
         @click="checkAll"
-        checked-color="#1baeae"
+        checked-color="#ff0844"
         >全选</van-checkbox
       >
       <van-submit-bar
         :price="totalPrice * 100"
-        button-color="#1baeae"
+        button-color="linear-gradient(to right, #ff0844 0%, #ffb199 100%)"
         button-text="提交订单"
         @submit="onSubmit"
       />
@@ -83,7 +83,7 @@
     <div class="listnull" v-else>
       <van-icon name="smile-o" />
       <div>购物车空空如也</div>
-      <van-button color="#1baeae" type="primary" @click="toHome" block
+      <van-button color="linear-gradient(to right, #ff0844 0%, #ff3199 100%)" type="primary" @click="toHome" block
         >前往首页</van-button
       >
     </div>
