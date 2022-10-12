@@ -51,9 +51,7 @@ export default defineComponent({
   data() {
     return {
       flag: false,
-      // searchList: [],
       pagemun: 1,
-      // isshow: true,
       keyword: ''
     }
   },
