@@ -1,10 +1,7 @@
 <template>
   <div id="box">
     <header>
-      <el-icon
-        color="#fff"
-        size="20px"
-        @click="$router.push({ name: 'category' })"
+      <el-icon color="#fff" size="20px" @click="$router.go(-1)"
         ><ArrowLeftBold /></el-icon
       ><input
         type="text"
@@ -45,7 +42,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getindex, getcategorys } from '@/api/category'
+import { getindex } from '@/api/category'
 import { ArrowLeftBold } from '@element-plus/icons-vue'
 import { Toast } from 'vant'
 
@@ -56,21 +53,10 @@ export default defineComponent({
   data() {
     return {
       hotGoodses: [],
-      flag: true,
-      keyword: ''
+      flag: true
     }
   },
   methods: {
-    // //搜索
-    // find() {
-    //   console.log(this.keyword)
-    //   tosearch({ keyword: this.keyword, orderBy: '', pageNumber: 1 }).then(
-    //     (res) => {
-    //       console.log(res)
-    //     }
-    //   )
-    // },
-
     getcatecon() {
       //首页数据
       getindex().then((res) => {
@@ -82,9 +68,7 @@ export default defineComponent({
     },
     //商品详情
     getdatail(id) {
-      getcategorys(id).then(() => {
-        this.$router.push('/details/' + id)
-      })
+      this.$router.push('/good/' + id)
     },
     qiehuan() {
       this.flag = true
@@ -111,6 +95,9 @@ export default defineComponent({
   position: fixed;
   top: 60px;
   width: 100%;
+}
+.el-menu-demo {
+  height: 50px;
 }
 .el-menu-item {
   border-radius: 35px;

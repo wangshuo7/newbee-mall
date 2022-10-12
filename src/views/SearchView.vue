@@ -50,6 +50,7 @@ export default defineComponent({
   },
   data() {
     return {
+
       flag: false,
       pagemun: 1,
       keyword: ''
@@ -68,6 +69,8 @@ export default defineComponent({
     })
   },
   methods: {
+
+
     ...mapMutations(['pushSearchList', 'deleteSearchList']),
     //搜索
     click1() {
@@ -101,7 +104,7 @@ export default defineComponent({
     }
   },
   //懒加载
-  //当页面滚动值大于元素高度并且开锁 页码加一 发请求 再关锁
+  //当页面滚动值大于元素高度并且开锁状态 页码加一 发请求 再关锁
   mounted() {
     window.addEventListener('scroll', () => {
       let scroll = document.documentElement.scrollTop
