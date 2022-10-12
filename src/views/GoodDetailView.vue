@@ -3,10 +3,12 @@
   <div class="good-detail">
     <van-nav-bar
       title="商品详情"
-      left-text="返回"
-      left-arrow
       @click-left="onClickLeft"
-    />
+    >
+      <template #left>
+        <i class="iconfont">&#xe608;</i>
+      </template>
+    </van-nav-bar>
     <div class="detail-content">
       <div class="imagepreview">
         <img
@@ -53,13 +55,13 @@
       />
       <!-- <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" /> -->
       <van-action-bar-button
-        color="#be99ff"
+        color="linear-gradient(90deg, #6bd8d8, #1baeae)"
         type="warning"
         @click="handleAddCart"
         text="加入购物车"
       />
       <van-action-bar-button
-        color="#7232dd"
+        color="linear-gradient(90deg, #0dc3c3, #098888)"
         type="danger"
         @click="goToCart"
         text="立即购买"
