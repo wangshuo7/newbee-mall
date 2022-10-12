@@ -1,7 +1,7 @@
 <template>
   <div id="bigbox">
     <header>
-      <el-icon color="#fff" size="20px" @click="$router.push({ name: 'home' })"
+      <el-icon color="#fff" size="20px" @click="$router.go(-1)"
         ><ArrowLeftBold /></el-icon
       ><input type="text" @focus="$router.push({ name: 'search' })" />
     </header>
