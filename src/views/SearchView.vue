@@ -50,7 +50,6 @@ export default defineComponent({
   },
   data() {
     return {
-
       flag: false,
       pagemun: 1,
       keyword: ''
@@ -69,8 +68,6 @@ export default defineComponent({
     })
   },
   methods: {
-
-
     ...mapMutations(['pushSearchList', 'deleteSearchList']),
     //搜索
     click1() {
@@ -140,7 +137,7 @@ export default defineComponent({
 header {
   padding-left: 15px;
   height: 50px;
-  background:linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
   position: fixed;
   display: flex;
   align-items: center;
