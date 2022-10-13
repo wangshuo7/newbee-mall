@@ -79,6 +79,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { getOrderData } from '@/api/order.js'
+import { Toast } from 'vant'
 export default defineComponent({
   methods: {
     /**
@@ -100,6 +101,7 @@ export default defineComponent({
           ? this.ordersList.push(...res.data.list)
           : (this.ordersList = res.data.list)
         this.lock = true
+        Toast.clear()
       })
     },
     onRefresh() {
@@ -118,6 +120,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
     window.onscroll = () => {
       let scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop
