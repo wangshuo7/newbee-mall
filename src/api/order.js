@@ -26,3 +26,10 @@ export function paySuccess(data) {
     }
   })
 }
+
+export function canclePay(data) {
+  return request({
+    url: `/api/v1/order/${data}/cancel`,
+    method: 'put',
+  })
+}

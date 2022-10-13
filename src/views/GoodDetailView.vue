@@ -235,9 +235,9 @@ export default defineComponent({
 </style>
 
 <style lang="scss">
-  .good-content {
-    img {
-        width: 100%;
-    }
+.good-content {
+  img {
+    width: 100%;
   }
+}
 </style>

@@ -7,16 +7,15 @@
       <div class="headername">
         <p>我的订单</p>
       </div>
-      <a href="#">
+      <a href="javascript:;">
         <i class="iconfont">&#xf0141;</i>
       </a>
     </div>
     <el-scrollbar>
       <div class="scrollbar-flex-content">
         <van-tabs
-          v-model:active="active"
-          color="rgb(27, 174, 174)"
-          title-active-color="rgb(27, 174, 174)"
+          color="#F45D7A"
+          title-active-color="#F45D7A"
           @change="getListData"
           v-model="status"
         >
@@ -37,47 +36,50 @@
       </div>
     </el-scrollbar>
   </header>
-  <van-pull-refresh
-    v-model="isLoading"
-    success-text="刷新成功"
-    loading-text="加载中..."
-    @refresh="onRefresh"
-    success-duration="300"
-  >
-    <div class="allPaid">
-      <div class="toPaid" v-for="item in ordersList.list" :key="item">
-        <div class="matter">
-          <div class="time">订单时间: {{ item.createTime }}</div>
-          <div>{{ item.orderStatusString }}</div>
+  <div class="xiabox">
+    <van-pull-refresh
+      v-model="isLoading"
+      success-text="刷新成功"
+      loading-text="加载中..."
+      @refresh="onRefresh"
+      success-duration="300"
+    >
+      <div class="allPaid">
+        <div class="toPaid" v-for="item in ordersList" :key="item">
+          <div class="matter">
+            <div class="time">订单时间: {{ item.createTime }}</div>
+            <div>{{ item.orderStatusString }}</div>
+          </div>
+          <div
+            class="commodity"
+            v-for="term in item.newBeeMallOrderItemVOS"
+            :key="term"
+          >
+            <van-card
+              @click="watchDetail(item)"
+              :num="term.goodsCount"
+              :price="term.sellingPrice"
+              desc="全场包邮"
+              :title="term.goodsName"
+              :thumb="
+                term.goodsCoverImg.indexOf('http') >= 0
+                  ? term.goodsCoverImg
+                  : `http://backend-api-01.newbee.ltd${term.goodsCoverImg}`
+              "
+            />
+          </div>
         </div>
-        <div
-          class="commodity"
-          v-for="term in item.newBeeMallOrderItemVOS"
-          :key="term"
-        >
-          <van-card
-            @click="watchDetail(item)"
-            :num="term.goodsCount"
-            :price="term.sellingPrice"
-            desc="全场包邮"
-            :title="term.goodsName"
-            :thumb="
-              term.goodsCoverImg.indexOf('http') >= 0
-                ? term.goodsCoverImg
-                : `http://backend-api-01.newbee.ltd${term.goodsCoverImg}`
-            "
-          />
-        </div>
+        <div class="foot">没有更多了</div>
       </div>
-
-      <div class="foot">没有更多了</div>
-    </div>
-  </van-pull-refresh>
+    </van-pull-refresh>
+  </div>
+  <div class="kong"></div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import { getOrderData } from '@/api/order.js'
+import { Toast } from 'vant'
 export default defineComponent({
   methods: {
     /**
@@ -85,17 +87,21 @@ export default defineComponent({
      * 动态路由跳转
      */
     watchDetail(item) {
-      console.log(item)
       this.$router.push('/order-detail/' + item.orderNo)
     },
     getListData(name) {
-      console.log(name)
+      this.name = name
+      !!name &&
+        ((this.pageNumber = 0), (document.documentElement.scrollTop = 0))
       getOrderData({
-        pageNumber: 1,
-        status: name
+        pageNumber: this.pageNumber,
+        status: this.name
       }).then((res) => {
-        console.log(res.data)
-        this.ordersList = res.data
+        !this.name
+          ? this.ordersList.push(...res.data.list)
+          : (this.ordersList = res.data.list)
+        this.lock = true
+        Toast.clear()
       })
     },
     onRefresh() {
@@ -105,9 +111,31 @@ export default defineComponent({
   data() {
     return {
       status: '',
+      pageNumber: 1,
       isLoading: true,
       // navList: ['全部', '待付款', '待确认', '待发货', '已发货', '交易完成'],
-      ordersList: {}
+      ordersList: [],
+      lock: true,
+      name: ''
+    }
+  },
+  mounted() {
+    Toast.loading({ message: '加载中...', forbidClick: true })
+    window.onscroll = () => {
+      let scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+      // console.log(scrollTop,document.querySelector('.allPaid').clientHeight,window.innerHeight)
+
+      if (
+        this.lock &&
+        scrollTop >
+          document.querySelector('.allPaid')?.clientHeight - window.innerHeight
+      ) {
+        this.pageNumber++
+        this.getListData()
+        this.lock = false
+        // console.log(this. pageNumber)
+      }
     }
   }
 })
@@ -137,7 +165,11 @@ header .order {
   border-bottom: 1px solid #dcdcdc;
   background: #fff;
 }
-
+// .xiabox{
+//   height:100%;
+//   box-sizing: border-box;
+//   padding-bottom: 200px;
+// }
 .allPaid {
   margin-top: 88px;
   background: #f9f9f9;
@@ -176,4 +208,7 @@ header .order {
   font-size: 14px;
   color: #969799;
 }
+// .kong{
+//   height:100px;
+// }
 </style>

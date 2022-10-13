@@ -2,7 +2,8 @@
   <div class="addresslist-container">
     <el-header>
       <el-icon @click="this.$router.go(-1)"><ArrowLeft /></el-icon>
-      <span>新增地址</span>
+      <span v-if="!isShow">新增地址</span>
+      <span v-else>修改地址</span>
       <el-icon><More /></el-icon>
     </el-header>
     <el-main>

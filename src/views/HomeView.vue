@@ -6,9 +6,9 @@
         <i class="iconfont">&#xe611;</i>
       </router-link>
       <div class="search">
-        <span class="search-name">新蜂商城</span>
+        <span class="search-name">顽和商城</span>
         <router-link to="./search" href="#" class="search-title"
-          >山河无恙，人间皆安</router-link
+          >晚星破晓&emsp;未来可期</router-link
         >
       </div>
       <router-link to="./user" href="#" class="header-user">
@@ -118,66 +118,66 @@ export default defineComponent({
       head: {
         class: 'header'
       },
-      bannerList: [],
       // 分类数据
       categoryList: [
         {
-          name: '新蜂超市',
+          name: '顽和家电',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E8%B6%85%E5%B8%82%402x.png',
+            'https://image3.suning.cn/uimg/cms/img/165710989476671143.png?from=mobile',
           categoryId: 100001
         },
         {
-          name: '新蜂服饰',
+          name: '顽和超市',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E6%9C%8D%E9%A5%B0%402x.png',
+            'https://image3.suning.cn/uimg/cms/img/161293951076282456.png?from=mobile',
           categoryId: 100003
         },
         {
           name: '全球购',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E5%85%A8%E7%90%83%E8%B4%AD%402x.png',
+            'https://image3.suning.cn/uimg/cms/img/166001087785136433.png?from=mobile',
           categoryId: 100002
         },
         {
-          name: '新蜂生鲜',
+          name: '手机数码',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E7%94%9F%E9%B2%9C%402x.png',
+            '	https://image1.suning.cn/uimg/cms/img/161293957567317395.png?from=mobile',
           categoryId: 100004
         },
         {
-          name: '新蜂到家',
+          name: '家居家装',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E5%88%B0%E5%AE%B6%402x.png',
+            '	https://image3.suning.cn/uimg/cms/img/165711026680588659.png?from=mobile',
           categoryId: 100005
         },
         {
-          name: '充值缴费',
+          name: '服饰百货',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E5%85%85%E5%80%BC%402x.png',
+            '	https://image1.suning.cn/uimg/cms/img/165717934177245432.png?from=mobile',
           categoryId: 100006
         },
         {
           name: '9.9元拼',
-          imgUrl: 'https://s.yezgea02.com/1604041127880/9.9%402x.png',
+          imgUrl:
+            'https://image1.suning.cn/uimg/cms/img/165717927411065855.png?from=mobile',
           categoryId: 100007
         },
         {
-          name: '领劵',
+          name: '签到有礼',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E9%A2%86%E5%88%B8%402x.png',
+            '	https://image1.suning.cn/uimg/cms/img/161293963977525820.png?from=mobile',
           categoryId: 100008
         },
         {
-          name: '省钱',
+          name: '领券中心',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E7%9C%81%E9%92%B1%402x.png',
+            '	https://image3.suning.cn/uimg/cms/img/161293965567020138.png?from=mobile',
           categoryId: 100009
         },
         {
-          name: '全部',
+          name: '更多频道',
           imgUrl:
-            'https://s.yezgea02.com/1604041127880/%E5%85%A8%E9%83%A8%402x.png',
+            'https://image3.suning.cn/uimg/cms/img/161293968063152286.png?from=mobile',
           categoryId: 100010
         }
       ],
@@ -212,8 +212,7 @@ export default defineComponent({
     scroll() {
       window.addEventListener('scroll', () => {
         let scrollTop =
-          document.documentElement.scrollTop ||
-          document.body.scrollTop
+          document.documentElement.scrollTop || document.body.scrollTop
         scrollTop > 100
           ? (this.head.class = 'header-active')
           : (this.head.class = 'header')
@@ -311,7 +310,7 @@ a {
 
   .search {
     width: 74%;
-    background: #bbe7e7;
+    background: #e7bbe5;
     border-radius: 20px;
     margin: 10px 0;
     display: flex;
@@ -398,7 +397,7 @@ a {
       }
 
       .good-price {
-        color: #1baeae;
+        color: #eb2222;
         text-align: center;
         font-size: 0.37333rem;
       }

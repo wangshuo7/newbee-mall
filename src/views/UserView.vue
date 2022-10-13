@@ -167,7 +167,7 @@ export default defineComponent({
     width: 94%;
     margin: 10px;
     height: 115px;
-  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+    background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
     box-shadow: 0 0 5px 0px linear-gradient(to left, #fbc2eb 0%, #a6c1ee 100%);
     border-radius: 6px;
     margin-top: 90px;
@@ -231,7 +231,7 @@ export default defineComponent({
 .button {
   display: flex;
   justify-content: center;
-  margin-top: 190px;
+  margin-top: 160px;
   .van-button {
     width: 80%;
   }

@@ -9,12 +9,8 @@
       </header>
       <div class="login-Container">
         <!-- logo -->
-        <van-image
-          width="100"
-          height="100"
-          src="../../public/u.png"
-        />
-        <h1>新蜂商城</h1>
+        <van-image width="100" height="100" src="../../public/u.png" />
+        <h1>顽和商城</h1>
         <!-- 登录首页 -->
         <div v-if="type == 'login'" class="login-body login">
           <van-form @submit="onSubmit">
