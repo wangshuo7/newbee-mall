@@ -13,7 +13,7 @@
       </div>
       <van-button
         class="save-btn"
-        color="#1baeae"
+        color="linear-gradient(120deg, #f093fb 0%, #f5576c 100%)"
         type="primary"
         @click="save"
         block

@@ -226,10 +226,16 @@ export default defineComponent({
   height: 100%;
   .el-header {
     display: flex;
+    background-color: #fff;
     justify-content: space-between;
     margin-top: 20px;
     border-bottom: 1px solid #ccc;
-    height: 40px;
+    height: 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
     span {
       font-size: 18px;
     }
@@ -239,12 +245,15 @@ export default defineComponent({
   }
 
   .el-button {
+    background: linear-gradient(to right, #ff0844 0%, #ffb199 100%);
+    border: none;
     margin-left: 6px;
     margin-top: 20px;
     width: 400px;
     height: 50px;
   }
   .el-main {
+    margin-top: 30px;
     section {
       width: 100%;
       height: 50px;

@@ -28,7 +28,8 @@
           <van-tag
             :_id="item.addressId"
             round
-            color="#7232dd"
+            color="#d19005"
+            size="medium"
             v-show="!!item.defaultFlag"
             >默认</van-tag
           >
@@ -165,6 +166,8 @@ export default defineComponent({
     position: absolute;
     width: 330px;
     height: 50px;
+    background: linear-gradient(to right, #ff0844 0%, #ffb199 100%);
+    border: none;
   }
 }
 </style>
