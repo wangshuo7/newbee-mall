@@ -44,7 +44,8 @@
       <van-button
         @click="showPopup"
         class="pay-btn"
-        color="#1baeae"
+        color="#ff0844"
+        style="border:0;"
         type="primary"
         >生成订单</van-button
       >
@@ -78,10 +79,12 @@ import {
   getShopCartOrders,
   getAddressDefault,
   postsaveOrder,
-  paySuccess
+  paySuccess,
+  getShopCart
 } from '@/api/cart'
 import { getAddressList } from '@/api/address'
 import { Toast } from 'vant'
+import {mapMutations} from 'vuex'
 
 export default defineComponent({
   computed: {
@@ -99,12 +102,21 @@ export default defineComponent({
      * 点击微信支付支付宝支付
      * 发送请求
      */
+    ...mapMutations(['changeIconNum']),
+    getCart() {
+      getShopCart().then((res) => {
+        this.changeIconNum(res.data?.length)
+        Toast.clear()
+        // console.log(res)
+      })
+    },
     payType1() {
       paySuccess({
         payType: 1,
         orderNo: this.orderNo
       }).then(() => {
         // console.log(res)
+        this.getCart()
         this.$router.push({ name: 'order' })
         Toast('微信支付成功')
       })
@@ -115,6 +127,7 @@ export default defineComponent({
         orderNo: this.orderNo
       }).then(() => {
         // console.log(res, this.orderNo)
+        this.getCart()
         this.$router.push({ name: 'order' })
         Toast('支付宝支付成功')
       })

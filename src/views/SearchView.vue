@@ -50,7 +50,6 @@ export default defineComponent({
   },
   data() {
     return {
-
       flag: false,
       pagemun: 1,
       keyword: ''
@@ -69,8 +68,6 @@ export default defineComponent({
     })
   },
   methods: {
-
-
     ...mapMutations(['pushSearchList', 'deleteSearchList']),
     //搜索
     click1() {
@@ -139,8 +136,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 header {
   padding-left: 15px;
-  height: 60px;
-  background-color: #1baeae;
+  height: 50px;
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
   position: fixed;
   display: flex;
   align-items: center;
@@ -148,7 +145,7 @@ header {
   width: 100%;
   input {
     margin: 15px;
-    padding: 7px;
+    padding: 7px 20px;
     width: 250px;
     border-radius: 17px;
     border: none;
@@ -202,7 +199,7 @@ header {
   }
 }
 button {
-  color: #1baeae;
+  color: #f5576c;
   border-radius: 0.36667rem;
   width: 50px;
   border: none;

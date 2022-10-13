@@ -1,7 +1,7 @@
 <template>
   <div id="bigbox">
     <header>
-      <el-icon color="#fff" size="20px" @click="$router.go(-1)"
+      <el-icon class="iconcon" color="#fff" size="20px" @click="$router.go(-1)"
         ><ArrowLeftBold /></el-icon
       ><input type="text" @focus="$router.push({ name: 'search' })" />
     </header>
@@ -107,10 +107,19 @@ export default defineComponent({
   height: 100%;
   position: relative;
 }
+.el-menu-item:hover {
+  background-color: #ffecf0;
+}
+i {
+  color: #fb93bc;
+}
+.iconcon {
+  color:#fff;
+}
 header {
   padding-left: 15px;
-  height: 60px;
-  background-color: #1baeae;
+  height: 50px;
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
   position: fixed;
   display: flex;
   align-items: center;

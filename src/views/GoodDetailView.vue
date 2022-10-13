@@ -1,10 +1,7 @@
 <template>
   <!-- <van-notice-bar left-icon="volume-o" :text="detail.goodsIntro" /> -->
   <div class="good-detail">
-    <van-nav-bar
-      title="商品详情"
-      @click-left="onClickLeft"
-    >
+    <van-nav-bar title="商品详情" @click-left="onClickLeft">
       <template #left>
         <i class="iconfont">&#xe608;</i>
       </template>
@@ -55,13 +52,13 @@
       />
       <!-- <van-action-bar-icon icon="cart-o" text="购物车" @click="goTo()" /> -->
       <van-action-bar-button
-        color="linear-gradient(90deg, #6bd8d8, #1baeae)"
+        color="linear-gradient(250deg, #ff0844 0%, #ffb199 100%)"
         type="warning"
         @click="handleAddCart"
         text="加入购物车"
       />
       <van-action-bar-button
-        color="linear-gradient(90deg, #0dc3c3, #098888)"
+        color="linear-gradient(250deg, #ff0844 0%, #ffb199 100%)"
         type="danger"
         @click="goToCart"
         text="立即购买"
@@ -117,8 +114,8 @@ export default defineComponent({
         if (res.resultCode == 500) {
           Toast.success('已经添加到购物车')
         }
+        this.$router.push({ path: '/cart' })
       })
-      this.$router.push({ path: '/cart' })
     },
     // 添加购物车
     handleAddCart() {
@@ -224,12 +221,6 @@ export default defineComponent({
           }
         }
       }
-
-      .good-content {
-        img {
-          width: 100%;
-        }
-      }
     }
   }
 
@@ -241,4 +232,12 @@ export default defineComponent({
     z-index: 9999;
   }
 }
+</style>
+
+<style lang="scss">
+  .good-content {
+    img {
+        width: 100%;
+    }
+  }
 </style>

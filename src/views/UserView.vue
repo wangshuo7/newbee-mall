@@ -29,13 +29,17 @@
         <span>地址管理</span>
         <van-icon name="arrow" />
       </li>
+      <li @click="goTo('about')">
+        <span>关于我们</span>
+        <van-icon name="arrow" />
+      </li>
     </ul>
     <div class="button">
       <van-button
         round
         block
         type="info"
-        color="linear-gradient(to right, #4bb0ff, #6149f6)"
+        color="linear-gradient(120deg, #f093fb 0%, #f5576c 100%)"
         @click="dialog"
         >退出登录</van-button
       >
@@ -163,8 +167,8 @@ export default defineComponent({
     width: 94%;
     margin: 10px;
     height: 115px;
-    background: linear-gradient(90deg, #1baeae, #78c6c6);
-    box-shadow: 0 2px 5px #269090;
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+    box-shadow: 0 0 5px 0px linear-gradient(to left, #fbc2eb 0%, #a6c1ee 100%);
     border-radius: 6px;
     margin-top: 90px;
     .info {
@@ -227,7 +231,7 @@ export default defineComponent({
 .button {
   display: flex;
   justify-content: center;
-  margin-top: 190px;
+  margin-top: 160px;
   .van-button {
     width: 80%;
   }

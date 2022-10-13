@@ -10,8 +10,10 @@
     </router-link>
     <router-link class="nav-list-item" :to="{ name: 'cart' }">
       <van-action-bar-icon
+        :class="cartIconColor"
         icon="cart-o"
         text="购物车"
+        :color="`#${cartIconColor}`"
         :badge="iconNum ? iconNum : ''"
       />
     </router-link>
@@ -24,7 +26,6 @@
 
 <script>
 import { defineComponent } from 'vue'
-// import { getShopCart } from '@/api/cart.js'
 import { mapState } from 'vuex'
 export default defineComponent({
   data() {
@@ -33,7 +34,7 @@ export default defineComponent({
     }
   },
   computed: {
-    ...mapState(['iconNum']),
+    ...mapState(['iconNum', 'cartIconColor']),
     cartNum() {
       return this.cartList.length
     }
@@ -41,6 +42,12 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
+.f5576c {
+  color: #f5576c;
+}
+// .van-action-bar-icon {
+//   color: #000;
+// }
 .bottom-nav {
   width: 100%;
   background-color: #fff;
@@ -60,7 +67,7 @@ export default defineComponent({
     align-items: center;
     &.router-link-active {
       // 表示router-link激活选中时的状态
-      color: #1baeae;
+      color: #f5576c;
     }
     .iconfont {
       font-size: 22px;

@@ -3,8 +3,12 @@ import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 const store = createStore({
   state: {
+    // 购物车角标
     iconNum: 0,
-    searchList: []
+    // 搜索缓存
+    searchList: [],
+    // 购物车icon颜色
+    cartIconColor: '000'
   },
   mutations: {
     changeIconNum(state, payload) {
@@ -15,13 +19,20 @@ const store = createStore({
     },
     deleteSearchList(state) {
       state.searchList = []
+    },
+    changeCartIconColor(state, payload) {
+      state.cartIconColor = payload
     }
   },
   actions: {},
   plugins: [
     createPersistedState({
-      reducer: () => {
-        return {}
+      reducer: (state) => {
+        return {
+          iconNum: state.iconNum,
+          searchList: state.searchList,
+          cartIconColor: state.cartIconColor
+        }
       }
     })
   ]

@@ -20,7 +20,7 @@
 
           <br />
           <span class="span2" :_id="item.addressId"
-            >{{ item.cityName }} {{ item.provinceName }}
+            >{{ item.provinceName }} {{ item.cityName }}
             {{ item.regionName }}</span
           >
         </div>
@@ -28,7 +28,8 @@
           <van-tag
             :_id="item.addressId"
             round
-            color="#7232dd"
+            color="#d19005"
+            size="medium"
             v-show="!!item.defaultFlag"
             >默认</van-tag
           >
@@ -101,7 +102,8 @@ export default defineComponent({
     },
     chooseAddress(event) {
       !!this.fullPath &&
-        !!event.target.getAttribute('_id') && this.$router.replace(
+        !!event.target.getAttribute('_id') &&
+        this.$router.replace(
           this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
         )
     }
@@ -112,7 +114,7 @@ export default defineComponent({
         vm.fullPath = `${from.path}?cartItemIds=${from.query.cartItemIds}`
       } else if (vm.$route.query.cartItemIds) {
         vm.fullPath = `/orders?cartItemIds=${vm.$route.query.cartItemIds}`
-      }else {
+      } else {
         vm.fullPath = ''
       }
     })
@@ -165,6 +167,8 @@ export default defineComponent({
     position: absolute;
     width: 330px;
     height: 50px;
+    background: linear-gradient(to right, #ff0844 0%, #ffb199 100%);
+    border: none;
   }
 }
 </style>

@@ -12,9 +12,9 @@
         <van-image
           width="100"
           height="100"
-          src="//s.weituibao.com/1582958061265/mlogo.png"
+          src="../../public/u.png"
         />
-        <h1>新蜂商城</h1>
+        <h1>顽和商城</h1>
         <!-- 登录首页 -->
         <div v-if="type == 'login'" class="login-body login">
           <van-form @submit="onSubmit">
@@ -48,14 +48,14 @@
                 round
                 block
                 type="info"
-                color="#1baeae"
+                color="linear-gradient(to right,#f2b314,#face5d)"
                 native-type="submit"
                 >登录</van-button
               >
               <van-checkbox
                 icon-size="16px"
                 v-model="checked"
-                checked-color="#1baeae"
+                checked-color="#f2b314"
                 >您已阅读并同意<a
                   style="color: #3e3e3e; text-decoration: none"
                   href="javascript:;"
@@ -107,7 +107,7 @@
                 round
                 block
                 type="info"
-                color="#1baeae"
+                color="linear-gradient(to right,#f2b314,#face5d)"
                 native-type="submit"
                 >注册</van-button
               >
@@ -267,12 +267,12 @@ export default defineComponent({
   }
   h1 {
     font-size: 30px;
-    font-family: 'Times New Roman', Times, serif;
-    color: #1baeae;
+    font-family: sans-serif;
+    color: #f2b314;
     text-align: center;
     font-weight: 900;
     position: relative;
-    top: -30px;
+    top: 0px;
   }
   .login-body {
     padding: 0 20px;
