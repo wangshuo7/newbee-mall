@@ -7,7 +7,7 @@
   </router-view> -->
 
   <router-view></router-view>
-  <BottomNav v-if="$route.path !== '/orders'"></BottomNav>
+  <BottomNav v-if="!/\/orders?/.test($route.path)"></BottomNav>
 </template>
 
 <script>

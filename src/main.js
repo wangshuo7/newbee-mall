@@ -30,7 +30,8 @@ import {
   NoticeBar,
   ActionBar,
   ActionBarIcon,
-  ActionBarButton
+  ActionBarButton,
+  Dialog 
 } from 'vant'
 createApp(App)
   .use(Checkbox)
@@ -51,4 +52,5 @@ createApp(App)
   .use(ActionBarIcon)
   .use(ActionBarButton)
   .use(Toast)
+  .use(Dialog)
   .mount('#app')

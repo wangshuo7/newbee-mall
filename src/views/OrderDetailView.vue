@@ -8,7 +8,7 @@
         <div class="headername">
           <p>订单详情</p>
         </div>
-        <a href="#">
+        <a href="javascript:;">
           <i class="iconfont">&#xf0141;</i>
         </a>
       </div>
@@ -27,9 +27,9 @@
           <label>下单时间：</label>
           <span>{{ detailDate.createTime }}</span>
         </div>
-        <div v-if="flag">
-          <button class="btn1" @click="toPay">去支付</button>
-          <button class="btn2">取消订单</button>
+        <div>
+          <button class="btn1" @click="toPay" v-if="flag">去支付</button>
+          <button class="btn2" @click="cancle" v-if="flag2">取消订单</button>
         </div>
       </div>
       <div class="middlebox">
@@ -79,7 +79,8 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { getOrderDetailData,paySuccess } from '@/api/order.js'
+import { getOrderDetailData,paySuccess,canclePay } from '@/api/order.js'
+import { Dialog } from 'vant'
 export default defineComponent({
   methods: {
     overlay() {
@@ -89,20 +90,49 @@ export default defineComponent({
       this.show = true
     },
     payType1() {
-      console.log(this.detailDate.orderNo)
+      // console.log(this.detailDate.orderNo) 
       paySuccess({
         payType: 1,
         orderNo: this.detailDate.orderNo
-      }).then((res) => {
-        console.log(res)
+      }).then(() => {
+        // console.log(res)
         this.$router.go(0)
       })
-    }
+    },
+    payType2() {
+      console.log(this.detailDate.orderNo)
+      paySuccess({
+        payType: 2,
+        orderNo: this.detailDate.orderNo
+      }).then(() => {
+        // console.log(res)
+        this.$router.go(0)
+      })
+    },
+    cancle(){
+      Dialog.confirm({
+      message:
+        '确认取消订单?',
+      confirmButtonColor:'red',
+      })
+        .then(() => {
+          let orderNo = this.$route.params.id
+          canclePay(orderNo).then(()=>{
+            // console.log(res)
+            this.flag2=false
+            this.$router.go(0)
+          })
+        })
+        .catch(() => {
+
+        });
+    },
   },
   data() {
     return {
       overlayhide: null,
       flag: null, // 判断支付按钮的显示与隐藏
+      flag2:null,
       detailDate: [], // 详情页数据
       show: false
     }
@@ -112,12 +142,17 @@ export default defineComponent({
     let orderNo = this.$route.params.id
 
     getOrderDetailData(orderNo).then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       this.detailDate = res.data
       if (res.data.orderStatus === 0) {
         this.flag = true
+        this.flag2 = true
+      } else if(res.data.orderStatus === 1){
+        this.flag = false
+        this.flag2 = true
       } else {
         this.flag = false
+        this.flag2 = false
       }
     })
   }
