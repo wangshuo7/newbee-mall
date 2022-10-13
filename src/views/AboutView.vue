@@ -13,7 +13,7 @@
           loop
           autoplay
           muted
-          src="@/assets/ikun2.mp4"
+          src="https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/25/25/799212525/799212525-1-208.mp4?e=ig8euxZM2rNcNbhzhbdVhwdlhzhghwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1665663082&gen=playurlv2&os=cosbv&oi=1866715013&trid=2e56c135d2344513abb2943470886b36T&mid=0&platform=html5&upsig=8715e09f82ec78de82f4d073506f8bcb&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&bvc=vod&nettype=0&bw=332522&orderid=0,1&logo=80000000"
           class="ikun"
         ></video>
       </div>
