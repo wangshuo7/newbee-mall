@@ -107,10 +107,16 @@ export default defineComponent({
   height: 100%;
   position: relative;
 }
+.el-menu-item:hover {
+  background-color: #ffecf0;
+}
+i {
+  color: #fb93bc;
+}
 header {
   padding-left: 15px;
   height: 50px;
-  background:linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
   position: fixed;
   display: flex;
   align-items: center;

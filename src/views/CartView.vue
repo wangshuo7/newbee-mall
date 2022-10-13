@@ -126,9 +126,13 @@ export default defineComponent({
   mounted() {
     Toast.loading({ message: '加载中...', forbidClick: true })
     this.getShopCartFunc()
+    this.changeCartIconColor('f5576c')
+  },
+  beforeUnmount() {
+    this.changeCartIconColor('000')
   },
   methods: {
-    ...mapMutations(['changeIconNum']),
+    ...mapMutations(['changeIconNum', 'changeCartIconColor']),
     onSubmit() {
       let cartItemIds = ''
       // console.log(JSON.stringify(this.checked))
