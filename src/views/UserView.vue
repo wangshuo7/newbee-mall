@@ -29,6 +29,10 @@
         <span>地址管理</span>
         <van-icon name="arrow" />
       </li>
+      <li @click="goTo('about')">
+        <span>关于我们</span>
+        <van-icon name="arrow" />
+      </li>
     </ul>
     <div class="button">
       <van-button

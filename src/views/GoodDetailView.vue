@@ -221,12 +221,6 @@ export default defineComponent({
           }
         }
       }
-
-      .good-content {
-        img {
-          width: 100%;
-        }
-      }
     }
   }
 
@@ -238,4 +232,12 @@ export default defineComponent({
     z-index: 9999;
   }
 }
+</style>
+
+<style lang="scss">
+  .good-content {
+    img {
+        width: 100%;
+    }
+  }
 </style>

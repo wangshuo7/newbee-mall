@@ -82,6 +82,12 @@ export const routes = [
     path: '/good/:id',
     name: 'good',
     component: () => import('@/views/GoodDetailView.vue')
+  },
+  // 关于我们
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('@/views/AboutView.vue')
   }
 ]
 
