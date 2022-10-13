@@ -208,7 +208,8 @@ header .order {
     .btn1 {
       width: 100%;
       height: 42px;
-      background: rgb(27, 174, 174);
+      background: rgb(233, 158, 18);
+      color: #fff;
       border-radius: 3px;
       border: none;
       margin-bottom: 10px;
