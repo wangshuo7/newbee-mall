@@ -1,7 +1,7 @@
 <template>
   <div id="bigbox">
     <header>
-      <el-icon color="#fff" size="20px" @click="$router.go(-1)"
+      <el-icon class="iconcon" color="#fff" size="20px" @click="$router.go(-1)"
         ><ArrowLeftBold /></el-icon
       ><input type="text" @focus="$router.push({ name: 'search' })" />
     </header>
@@ -112,6 +112,9 @@ export default defineComponent({
 }
 i {
   color: #fb93bc;
+}
+.iconcon {
+  color:#fff;
 }
 header {
   padding-left: 15px;

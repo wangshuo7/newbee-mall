@@ -231,7 +231,7 @@ export default defineComponent({
 .button {
   display: flex;
   justify-content: center;
-  margin-top: 190px;
+  margin-top: 160px;
   .van-button {
     width: 80%;
   }
