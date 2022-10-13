@@ -20,7 +20,7 @@
 
           <br />
           <span class="span2" :_id="item.addressId"
-            >{{ item.cityName }} {{ item.provinceName }}
+            >{{ item.provinceName }} {{ item.cityName }}
             {{ item.regionName }}</span
           >
         </div>
@@ -102,7 +102,8 @@ export default defineComponent({
     },
     chooseAddress(event) {
       !!this.fullPath &&
-        !!event.target.getAttribute('_id') && this.$router.replace(
+        !!event.target.getAttribute('_id') &&
+        this.$router.replace(
           this.fullPath + '&' + `addressId=${event.target.getAttribute('_id')}`
         )
     }
@@ -113,7 +114,7 @@ export default defineComponent({
         vm.fullPath = `${from.path}?cartItemIds=${from.query.cartItemIds}`
       } else if (vm.$route.query.cartItemIds) {
         vm.fullPath = `/orders?cartItemIds=${vm.$route.query.cartItemIds}`
-      }else {
+      } else {
         vm.fullPath = ''
       }
     })

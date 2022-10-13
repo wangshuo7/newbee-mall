@@ -83,7 +83,11 @@
     <div class="listnull" v-else>
       <van-icon name="smile-o" />
       <div>购物车空空如也</div>
-      <van-button color="linear-gradient(to right, #ff0844 0%, #ff3199 100%)" type="primary" @click="toHome" block
+      <van-button
+        color="linear-gradient(to right, #ff0844 0%, #ff3199 100%)"
+        type="primary"
+        @click="toHome"
+        block
         >前往首页</van-button
       >
     </div>
