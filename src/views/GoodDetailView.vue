@@ -1,10 +1,7 @@
 <template>
   <!-- <van-notice-bar left-icon="volume-o" :text="detail.goodsIntro" /> -->
   <div class="good-detail">
-    <van-nav-bar
-      title="商品详情"
-      @click-left="onClickLeft"
-    >
+    <van-nav-bar title="商品详情" @click-left="onClickLeft">
       <template #left>
         <i class="iconfont">&#xe608;</i>
       </template>
@@ -117,8 +114,8 @@ export default defineComponent({
         if (res.resultCode == 500) {
           Toast.success('已经添加到购物车')
         }
+        this.$router.push({ path: '/cart' })
       })
-      this.$router.push({ path: '/cart' })
     },
     // 添加购物车
     handleAddCart() {
