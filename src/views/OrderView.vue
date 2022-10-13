@@ -14,8 +14,8 @@
     <el-scrollbar>
       <div class="scrollbar-flex-content">
         <van-tabs
-          color="rgb(27, 174, 174)"
-          title-active-color="rgb(27, 174, 174)"
+          color="#F45D7A"
+          title-active-color="#F45D7A"
           @change="getListData"
           v-model="status"
         >
