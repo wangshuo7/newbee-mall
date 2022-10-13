@@ -38,11 +38,12 @@
   </header>
   <div class="xiabox">
     <van-pull-refresh
-    v-model="isLoading"
-    success-text="刷新成功"
-    loading-text="加载中..."
-    @refresh="onRefresh"
-    success-duration="300">
+      v-model="isLoading"
+      success-text="刷新成功"
+      loading-text="加载中..."
+      @refresh="onRefresh"
+      success-duration="300"
+    >
       <div class="allPaid">
         <div class="toPaid" v-for="item in ordersList" :key="item">
           <div class="matter">
@@ -89,13 +90,16 @@ export default defineComponent({
     },
     getListData(name) {
       this.name = name
-      !!name && (this.pageNumber = 0, document.documentElement.scrollTop = 0)
+      !!name &&
+        ((this.pageNumber = 0), (document.documentElement.scrollTop = 0))
       getOrderData({
-        pageNumber: this. pageNumber,
+        pageNumber: this.pageNumber,
         status: this.name
       }).then((res) => {
-        !this.name ? this.ordersList.push(...res.data.list) : (this.ordersList = res.data.list)
-        this.lock=true
+        !this.name
+          ? this.ordersList.push(...res.data.list)
+          : (this.ordersList = res.data.list)
+        this.lock = true
       })
     },
     onRefresh() {
@@ -105,25 +109,29 @@ export default defineComponent({
   data() {
     return {
       status: '',
-      pageNumber:1,
+      pageNumber: 1,
       isLoading: true,
       // navList: ['全部', '待付款', '待确认', '待发货', '已发货', '交易完成'],
       ordersList: [],
-      lock:true,
+      lock: true,
       name: ''
     }
   },
-  mounted(){
-    window.onscroll = ()=>{
-      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+  mounted() {
+    window.onscroll = () => {
+      let scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
       // console.log(scrollTop,document.querySelector('.allPaid').clientHeight,window.innerHeight)
-     
-      if(this.lock && scrollTop>document.querySelector('.allPaid')?.clientHeight-window.innerHeight){
-        this. pageNumber++
-        this.getListData()
-        this.lock=false
-        // console.log(this. pageNumber)
 
+      if (
+        this.lock &&
+        scrollTop >
+          document.querySelector('.allPaid')?.clientHeight - window.innerHeight
+      ) {
+        this.pageNumber++
+        this.getListData()
+        this.lock = false
+        // console.log(this. pageNumber)
       }
     }
   }
