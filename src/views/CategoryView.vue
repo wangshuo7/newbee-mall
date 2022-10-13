@@ -114,7 +114,7 @@ i {
   color: #fb93bc;
 }
 .iconcon {
-  color:#fff;
+  color: #fff;
 }
 header {
   padding-left: 15px;

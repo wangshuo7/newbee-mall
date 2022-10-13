@@ -45,7 +45,7 @@
         @click="showPopup"
         class="pay-btn"
         color="#ff0844"
-        style="border:0;"
+        style="border: 0"
         type="primary"
         >生成订单</van-button
       >
@@ -84,7 +84,7 @@ import {
 } from '@/api/cart'
 import { getAddressList } from '@/api/address'
 import { Toast } from 'vant'
-import {mapMutations} from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default defineComponent({
   computed: {
@@ -160,7 +160,7 @@ export default defineComponent({
       this.$router.push('/cart')
     },
     goAddress() {
-      this.$router.push('/address?cartItemIds='+ this.$route.query.cartItemIds)
+      this.$router.push('/address?cartItemIds=' + this.$route.query.cartItemIds)
     }
   },
   data() {
@@ -178,25 +178,24 @@ export default defineComponent({
     }).then((res) => {
       this.ordersList = res.data
     }),
-
-    !this.$route.query.addressId &&
-    getAddressDefault().then((res) => {
-      if (!res.data) {
-        this.$router.replace('/address')
-      } else {
-        this.userInfo = res.data
-      }
-    })
+      !this.$route.query.addressId &&
+        getAddressDefault().then((res) => {
+          if (!res.data) {
+            this.$router.replace('/address')
+          } else {
+            this.userInfo = res.data
+          }
+        })
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       if (from.path == '/address') {
         // console.log(vm.$route.query.addressId)
         !!vm.$route.query.addressId &&
-        getAddressList(vm.$route.query.addressId).then((res) => {
-          vm.userInfo = res.data
-          // console.log(res.data)
-        })
+          getAddressList(vm.$route.query.addressId).then((res) => {
+            vm.userInfo = res.data
+            // console.log(res.data)
+          })
         // this.$router.push(from.fullPath)
       }
     })

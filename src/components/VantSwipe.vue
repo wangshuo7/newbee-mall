@@ -19,7 +19,7 @@ export default defineComponent({
         'https://image3.suning.cn/uimg/cms/img/164429932589856143.jpg'
       ]
     }
-  },
+  }
   // created() {
   //   getHomeData().then((res) => {
   //     this.bannerList = res.data.carousels

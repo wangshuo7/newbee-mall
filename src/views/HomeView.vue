@@ -158,7 +158,8 @@ export default defineComponent({
         },
         {
           name: '9.9元拼',
-          imgUrl: 'https://image1.suning.cn/uimg/cms/img/165717927411065855.png?from=mobile',
+          imgUrl:
+            'https://image1.suning.cn/uimg/cms/img/165717927411065855.png?from=mobile',
           categoryId: 100007
         },
         {
@@ -211,8 +212,7 @@ export default defineComponent({
     scroll() {
       window.addEventListener('scroll', () => {
         let scrollTop =
-          document.documentElement.scrollTop ||
-          document.body.scrollTop
+          document.documentElement.scrollTop || document.body.scrollTop
         scrollTop > 100
           ? (this.head.class = 'header-active')
           : (this.head.class = 'header')
