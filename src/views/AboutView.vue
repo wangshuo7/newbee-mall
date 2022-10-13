@@ -1,12 +1,22 @@
 <template>
+  <header class="header">
+    <el-icon color="#fff" size="20px" @click="$router.go(-1)"
+      ><ArrowLeftBold
+    /></el-icon>
+    <h3>关于我们</h3>
+  </header>
   <div class="about">
-    <h1>关于我们</h1>
     <div class="about-body">
-      <img
-        class="intro-img"
-        src="https://s.yezgea02.com/1604046067055/WechatIMG30231.jpeg"
-        alt=""
-      />
+      <div class="video-container">
+        <video
+          controls
+          loop
+          autoplay
+          muted
+          src="@/assets/ikun2.mp4"
+          class="ikun"
+        ></video>
+      </div>
       <van-divider
         :style="{
           color: '#e455f4',
@@ -16,7 +26,7 @@
         }"
         >简介
       </van-divider>
-      <div>
+      <div class="newbee">
         newbee-mall 项目是一套电商系统，包括 newbee-mall 商城系统及
         newbee-mall-admin 商城后台管理系统，基于 Spring Boot 2.X
         及相关技术栈开发。
@@ -32,7 +42,49 @@
         }"
         >开源地址
       </van-divider>
-      <div>
+      <span class="reply-content root-reply" data-v-669ccb70=""
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你太美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你实在太美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你是太美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你太美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        实在是太美鸡你<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你 实在是太美鸡你&nbsp; 美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你&nbsp; 实在是太美鸡美&nbsp;&nbsp; 太美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你&nbsp;&nbsp;&nbsp;&nbsp;
+        实在是太美鸡美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        太美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp;
+        鸡你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        实在是太美鸡美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        太美<br />&nbsp; 鸡你&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你实在是美太美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 美蓝球球<br />鸡
+        鸡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你实在是太美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        篮球篮球球<br />鸡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你太美裆鸡太啊&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        蓝篮球<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你太美裆裆鸡美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡你美裆&nbsp;&nbsp;&nbsp; 裆鸡美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡太美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 鸡太美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡美&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡美<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡太&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        鸡太<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        金
+        猴&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        金猴<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        皮
+        鞋&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        皮鞋金猴<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        金光&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        金光 大道<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        大道<br /><br /><br /><br /><br
+      /></span>
+      <!-- <div>
         <div>
           掘金小册配套学习文档：<a
             target="_blank"
@@ -69,27 +121,61 @@
             >http://vue-app.newbee.ltd</a
           >
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { ArrowLeftBold } from '@element-plus/icons-vue'
+export default {
+  components: {
+    ArrowLeftBold
+  }
+}
 </script>
 
 <style lang="scss" scoped>
+.reply-content {
+  color: #999;
+  font-size: 16px;
+}
+.video-container {
+  overflow: hidden;
+  border-radius: 15px;
+  margin-top: 60px;
+  box-shadow: 0 2px 5px 1px rgba(250, 93, 176, 0.5);
+}
+.ikun {
+  width: 100%;
+  transform: translateX(-1px);
+  display: block;
+}
+.header {
+  width: 100%;
+  padding-left: 15px;
+  height: 50px;
+  background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  z-index: 999999999;
+  h3 {
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+  }
+}
 .about {
   box-sizing: border-box;
   padding: 20px;
-  h1 {
-    text-align: center;
-    color: #ff0844;
-  }
   .intro-img {
     width: 100%;
   }
-
+  .newbee {
+    color: #999;
+    font-size: 14px;
+  }
   .about-body {
     font-size: 16px;
 
